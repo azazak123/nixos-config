@@ -95,8 +95,11 @@
     vim
     neofetch
     cpufrequtils
-    jetbrains-mono
     htop
+  ];
+
+  fonts.fonts = with pkgs; [
+    nerdfonts
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
