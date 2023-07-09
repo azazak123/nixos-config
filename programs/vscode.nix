@@ -86,6 +86,7 @@
     "terminal.integrated.defaultProfile.linux" = "fish";
     "[jsonc]"."editor.defaultFormatter" = "vscode.json-language-features";
     "files.autoSave" = "afterDelay";
+    "window.titleBarStyle" = "custom";
   };
 }
 
