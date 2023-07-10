@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, vscodeExt, ... }:
+{ pkgs, pkgsUnstable, vscodeExt, hyprland, ... }:
 
 {
   users.users.azazak123 = {
@@ -11,15 +11,24 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.azazak123 = { pkgs, ... }: {
+    imports = [
+      hyprland.homeManagerModules.default
+    ];
+
     home.username = "azazak123";
     home.homeDirectory = "/home/azazak123";
 
     home.packages = with pkgs; [
       distrobox
       gammastep
+      brightnessctl
     ];
 
     programs.home-manager.enable = true;
+
+    wayland.windowManager.hyprland = import ../programs/hyprland.nix;
+    
+    programs.wofi.enable = true;
 
     programs.git = {
       enable = true;

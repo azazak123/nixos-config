@@ -12,9 +12,12 @@
 
     # VS Code extensions
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, nixpkgsUnstable, nix-vscode-extensions, home-manager }:
+  outputs = { self, nixpkgs, nixpkgsUnstable, hyprland, nix-vscode-extensions, home-manager }:
 
     let
       system = "x86_64-linux";
@@ -31,8 +34,9 @@
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit pkgs; inherit pkgsUnstable; inherit vscodeExt; };
+        specialArgs = { inherit pkgs; inherit pkgsUnstable; inherit vscodeExt; inherit hyprland; };
         modules = [
+          hyprland.nixosModules.default
           ./modules/configuration.nix
           home-manager.nixosModules.home-manager
           ./modules/home.nix
