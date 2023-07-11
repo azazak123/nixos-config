@@ -21,7 +21,6 @@
     home.packages = with pkgs; [
       distrobox
       gammastep
-      brightnessctl
     ];
 
     programs.home-manager.enable = true;

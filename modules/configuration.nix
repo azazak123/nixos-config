@@ -108,6 +108,7 @@
     cpufrequtils
     htop
     pavucontrol
+    brightnessctl
   ];
 
   fonts.fonts = with pkgs; [
