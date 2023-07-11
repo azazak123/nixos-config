@@ -27,7 +27,7 @@
     programs.home-manager.enable = true;
 
     wayland.windowManager.hyprland = import ../programs/hyprland.nix;
-    
+
     programs.wofi.enable = true;
 
     programs.git = {
@@ -52,7 +52,25 @@
     programs.alacritty = import ../programs/alacritty.nix;
 
     # Services
+    # Enable warm light
     systemd.user.services.gammastep = import ../services/gammastep.nix { inherit pkgs; };
+
+    # Enable taking screenshots
+    # services.flameshot.enable = true;
+
+    # Enable notifications
+    services.twmn = {
+      enable = true;
+      text = {
+        font = {
+          size = 18;
+          family = "JetBrainsMono Nerd Font";
+        };
+        color = "white";
+        maxLength = 80;
+      };
+      window.height = 30;
+    };
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
