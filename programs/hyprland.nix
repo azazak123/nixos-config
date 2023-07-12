@@ -49,6 +49,7 @@
     bind = $mainMod, F, fullscreen, 1
     bind = $mainMod, P, pseudo, # dwindle
     bind = $mainMod, J, togglesplit, # dwindle
+    bind = CTRL, P, exec, grim -g "$(slurp)" - | wl-copy
 
     # Move focus with mainMod + arrow keys
     bind = $mainMod, left, movefocus, l

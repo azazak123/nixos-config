@@ -22,6 +22,11 @@
       distrobox
       gammastep
       polkit_gnome
+
+      # Tools for taking screenshots
+      grim
+      slurp
+      wl-clipboard
     ];
 
     programs.home-manager.enable = true;
