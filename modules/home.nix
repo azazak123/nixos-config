@@ -21,6 +21,7 @@
     home.packages = with pkgs; [
       distrobox
       gammastep
+      polkit_gnome
     ];
 
     programs.home-manager.enable = true;
@@ -54,8 +55,9 @@
     # Enable warm light
     systemd.user.services.gammastep = import ../services/gammastep.nix { inherit pkgs; };
 
-    # Enable taking screenshots
-    # services.flameshot.enable = true;
+    # Start Authentication Agent
+    systemd.user.services.polkit-gnome-authentication-agent-1 =
+      import ../services/gnome-authentication-agent.nix { inherit pkgs; };
 
     # Enable notifications
     services.twmn = {
