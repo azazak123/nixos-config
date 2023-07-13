@@ -22,6 +22,7 @@
       distrobox
       gammastep
       polkit_gnome
+      wlogout
 
       # Tools for taking screenshots
       grim
