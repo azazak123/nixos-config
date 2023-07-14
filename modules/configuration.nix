@@ -114,6 +114,7 @@
 
   fonts.fonts = with pkgs; [
     nerdfonts
+    emojione
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

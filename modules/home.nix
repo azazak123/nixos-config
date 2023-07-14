@@ -36,6 +36,9 @@
 
     programs.wofi.enable = true;
 
+    programs.waybar = import ../programs/waybar.nix { inherit pkgs; inherit hyprland; };
+    systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
+
     programs.git = {
       enable = true;
       userName = "Volodymyr Antonov";
@@ -76,7 +79,12 @@
         color = "white";
         maxLength = 80;
       };
-      window.height = 30;
+      window = {
+        height = 30;
+        alwaysOnTop = true;
+        color = "#2b303b";
+        offset.y = 30;
+      };
     };
 
     # This value determines the Home Manager release that your
