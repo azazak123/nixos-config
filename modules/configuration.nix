@@ -110,12 +110,20 @@
     htop
     pavucontrol
     brightnessctl
+    gnome.simple-scan
   ];
 
   fonts.fonts = with pkgs; [
     nerdfonts
     emojione
   ];
+
+  # Printers and scanners
+  hardware.sane = {
+    enable = true;
+    extraBackends = [ pkgs.sane-airscan ];
+  };
+  services.ipp-usb.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
