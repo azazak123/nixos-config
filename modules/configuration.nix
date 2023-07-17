@@ -70,11 +70,24 @@
   # Enable flatpak
   services.flatpak.enable = true;
 
-  # Enable blueman
+  # Enable bluetooth
   services.blueman.enable = true;
 
   # Enable podman
   virtualisation.podman.enable = true;
+
+  # Enable sound
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
+  };
+
+  security.rtkit.enable = true;
+  security.polkit.enable = true;
 
   nix = {
     settings = {
@@ -95,10 +108,13 @@
     neofetch
     cpufrequtils
     htop
+    pavucontrol
+    brightnessctl
   ];
 
   fonts.fonts = with pkgs; [
     nerdfonts
+    emojione
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

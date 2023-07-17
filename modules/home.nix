@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, vscodeExt, ... }:
+{ pkgs, pkgsUnstable, vscodeExt, hyprland, ... }:
 
 {
   users.users.azazak123 = {
@@ -11,15 +11,33 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.azazak123 = { pkgs, ... }: {
+    imports = [
+      hyprland.homeManagerModules.default
+    ];
+
     home.username = "azazak123";
     home.homeDirectory = "/home/azazak123";
 
     home.packages = with pkgs; [
       distrobox
       gammastep
+      polkit_gnome
+      wlogout
+
+      # Tools for taking screenshots
+      grim
+      slurp
+      wl-clipboard
     ];
 
     programs.home-manager.enable = true;
+
+    wayland.windowManager.hyprland = import ../programs/hyprland.nix;
+
+    programs.wofi.enable = true;
+
+    programs.waybar = import ../programs/waybar.nix { inherit pkgs; inherit hyprland; };
+    systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
     programs.git = {
       enable = true;
@@ -43,7 +61,31 @@
     programs.alacritty = import ../programs/alacritty.nix;
 
     # Services
+    # Enable warm light
     systemd.user.services.gammastep = import ../services/gammastep.nix { inherit pkgs; };
+
+    # Start Authentication Agent
+    systemd.user.services.polkit-gnome-authentication-agent-1 =
+      import ../services/gnome-authentication-agent.nix { inherit pkgs; };
+
+    # Enable notifications
+    services.twmn = {
+      enable = true;
+      text = {
+        font = {
+          size = 18;
+          family = "JetBrainsMono Nerd Font";
+        };
+        color = "white";
+        maxLength = 80;
+      };
+      window = {
+        height = 30;
+        alwaysOnTop = true;
+        color = "#2b303b";
+        offset.y = 30;
+      };
+    };
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
