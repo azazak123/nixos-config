@@ -78,7 +78,6 @@
   userSettings = {
     "extensions.autoUpdate" = false;
     "extensions.autoCheckUpdates" = false;
-    "window.zoomLevel" = 1.2;
     "editor.fontSize" = 18;
     "editor.formatOnSave" = true;
     "workbench.colorTheme" = "Palenight Theme";
@@ -87,6 +86,7 @@
     "[jsonc]"."editor.defaultFormatter" = "vscode.json-language-features";
     "files.autoSave" = "afterDelay";
     "window.titleBarStyle" = "custom";
+    "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
   };
 }
 
