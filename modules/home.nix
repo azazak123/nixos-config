@@ -45,6 +45,14 @@
       userEmail = "azazaka2002@gmail.com";
     };
 
+    programs.gh =
+      {
+        enable = true;
+        settings = {
+          git_protocol = "ssh";
+        };
+      };
+
     programs.vscode = import ../programs/vscode.nix {
       inherit pkgs;
       inherit pkgsUnstable;
