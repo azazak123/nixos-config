@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -90,10 +90,21 @@
   security.polkit.enable = true;
 
   nix = {
+    # Use the same nixpkgs for nix flake commands
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+
+    # Use the same nixpkgs for nix non flake commands
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+
     settings = {
+      # Enable flakes
       experimental-features = [ "nix-command" "flakes" ];
+
+      # Deduplicate and optimize nix store
       auto-optimise-store = true;
     };
+
+    # Enable auto garbage collecting
     gc = {
       automatic = true;
       dates = "weekly";
