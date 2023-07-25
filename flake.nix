@@ -33,8 +33,8 @@
     in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit pkgs; inherit pkgsUnstable; inherit vscodeExt; inherit hyprland; inherit inputs; };
+        inherit system pkgs;
+        specialArgs = { inherit pkgsUnstable vscodeExt hyprland inputs; };
         modules = [
           hyprland.nixosModules.default
           ./modules/configuration.nix
