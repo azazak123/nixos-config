@@ -1,8 +1,8 @@
-{ pkgs, pkgsUnstable, vscodeExt }:
+{ pkgs, pkgs-unstable, vscodeExt }:
 
 {
   enable = true;
-  extensions = with pkgsUnstable.vscode-extensions; [
+  extensions = with pkgs-unstable.vscode-extensions; [
     vadimcn.vscode-lldb
     esbenp.prettier-vscode
     ms-azuretools.vscode-docker
