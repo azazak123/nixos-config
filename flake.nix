@@ -7,14 +7,23 @@
     nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager =
+      {
+        url = "github:nix-community/home-manager/release-23.05";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
 
     # VS Code extensions
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgsUnstable";
+    };
 
     # Hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgsUnstable, hyprland, nix-vscode-extensions, home-manager }@inputs:
