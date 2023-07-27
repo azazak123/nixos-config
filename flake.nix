@@ -4,7 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager =
@@ -16,7 +16,7 @@
     # VS Code extensions
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgsUnstable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # Hyprland
@@ -26,7 +26,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgsUnstable, hyprland, nix-vscode-extensions, home-manager }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, hyprland, nix-vscode-extensions, home-manager }@inputs:
 
     let
       system = "x86_64-linux";
@@ -34,7 +34,7 @@
         inherit system;
         config.allowUnfree = true;
       };
-      pkgsUnstable = import nixpkgsUnstable {
+      pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
@@ -43,7 +43,7 @@
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgsUnstable vscodeExt hyprland inputs; };
+        specialArgs = { inherit pkgs-unstable vscodeExt hyprland inputs; };
         modules = [
           hyprland.nixosModules.default
           ./modules/configuration.nix

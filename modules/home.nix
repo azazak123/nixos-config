@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, vscodeExt, hyprland, ... }:
+{ pkgs-unstable, vscodeExt, hyprland, ... }:
 
 {
   users.users.azazak123 = {
@@ -46,9 +46,7 @@
     };
 
     programs.vscode = import ../programs/vscode.nix {
-      inherit pkgs;
-      inherit pkgsUnstable;
-      inherit vscodeExt;
+      inherit pkgs pkgs-unstable vscodeExt;
     };
 
     programs.helix.enable = true;
