@@ -36,6 +36,12 @@
       gnome.gnome-boxes
       telegram-desktop
       fluffychat
+
+      # Office
+      libreoffice
+      hunspell
+      hunspellDicts.uk_UA
+      hunspellDicts.en_US
     ];
 
     programs.home-manager.enable = true;
