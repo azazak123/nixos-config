@@ -28,6 +28,14 @@
       grim
       slurp
       wl-clipboard
+
+      # Programs
+      discord
+      teams-for-linux
+      spotify
+      gnome.gnome-boxes
+      telegram-desktop
+      fluffychat
     ];
 
     programs.home-manager.enable = true;
