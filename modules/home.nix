@@ -55,8 +55,11 @@
 
     programs.wofi.enable = true;
 
-    programs.waybar = import ../programs/waybar.nix { inherit pkgs; inherit hyprland; };
-    systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
+    programs.waybar = import ../programs/waybar.nix {
+      inherit pkgs hyprland;
+    };
+    systemd.user.services.waybar.Service.Environment =
+      "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
     # Programming
     programs.git = {
@@ -80,7 +83,9 @@
 
     # Services
     # Enable warm light
-    systemd.user.services.gammastep = import ../services/gammastep.nix { inherit pkgs; };
+    systemd.user.services.gammastep = import ../services/gammastep.nix {
+      inherit pkgs;
+    };
 
     # Enable per-window-layout
     systemd.user.services.hyprland-per-window-layout =
