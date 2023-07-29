@@ -42,7 +42,9 @@
       hunspell
       hunspellDicts.uk_UA
       hunspellDicts.en_US
-    ];
+    ] ++ (with pkgs-unstable; [
+      hyprland-per-window-layout
+    ]);
 
     programs.home-manager.enable = true;
 
@@ -79,6 +81,12 @@
     # Services
     # Enable warm light
     systemd.user.services.gammastep = import ../services/gammastep.nix { inherit pkgs; };
+
+    # Enable per-window-layout
+    systemd.user.services.hyprland-per-window-layout =
+      import ../services/hyprland-per-window-layout.nix {
+        inherit pkgs pkgs-unstable;
+      };
 
     # Start Authentication Agent
     systemd.user.services.polkit-gnome-authentication-agent-1 =
