@@ -28,10 +28,27 @@
       grim
       slurp
       wl-clipboard
+
+      # Programs
+      discord
+      teams-for-linux
+      spotify
+      gnome.gnome-boxes
+      telegram-desktop
+      fluffychat
+
+      # Office
+      libreoffice
+      hunspell
+      hunspellDicts.uk_UA
+      hunspellDicts.en_US
     ];
 
     programs.home-manager.enable = true;
 
+    programs.firefox.enable = true;
+
+    # Wayland
     wayland.windowManager.hyprland = import ../programs/hyprland.nix;
 
     programs.wofi.enable = true;
@@ -39,6 +56,7 @@
     programs.waybar = import ../programs/waybar.nix { inherit pkgs; inherit hyprland; };
     systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
+    # Programming
     programs.git = {
       enable = true;
       userName = "Volodymyr Antonov";
