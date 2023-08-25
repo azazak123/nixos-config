@@ -86,7 +86,9 @@
     "[jsonc]"."editor.defaultFormatter" = "vscode.json-language-features";
     "files.autoSave" = "afterDelay";
     "window.titleBarStyle" = "custom";
-    "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
+    "editor.rulers" = [ 80 ];
+    "editor.fontFamily" =
+      "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
   };
 }
 
