@@ -14,6 +14,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" "pcie_port_pm=force" "amdgpu.msi=0" "amd_pstate=passive" ];
+  boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
     {
