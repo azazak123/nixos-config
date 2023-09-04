@@ -14,23 +14,24 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" "pcie_port_pm=force" "amdgpu.msi=0" "amd_pstate=passive" ];
+  boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/6aaf3793-4e78-42d4-9763-8ba8e9990951";
+      device = "/dev/disk/by-label/nixos-root";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/092E-8EFE";
+      device = "/dev/disk/by-label/LINUX-BOOT";
       fsType = "vfat";
     };
 
   fileSystems."/home" =
     {
-      device = "/dev/disk/by-uuid/13dbdc2b-3697-44dc-9897-e33cdb1ac4b0";
+      device = "/dev/disk/by-label/nixos-home";
       fsType = "btrfs";
     };
 
