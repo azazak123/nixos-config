@@ -36,6 +36,7 @@
       gnome.gnome-boxes
       telegram-desktop
       fluffychat
+      zoom-us
 
       # Office
       libreoffice
