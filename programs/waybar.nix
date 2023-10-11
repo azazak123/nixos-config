@@ -1,9 +1,11 @@
-{ pkgs, hyprland }:
+{ pkgs }:
 
 {
   enable = true;
+  package = pkgs.waybar.overrideAttrs (oldAttrs: {
+    mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+  });
   systemd.enable = true;
-  package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.waybar-hyprland;
   settings = {
     mainBar = {
       layer = "top";
