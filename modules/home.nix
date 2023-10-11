@@ -16,6 +16,7 @@
     ];
 
     home.sessionVariables.NIXOS_OZONE_WL = "1";
+    home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
 
     home.username = "azazak123";
     home.homeDirectory = "/home/azazak123";
@@ -100,6 +101,12 @@
     # Start Authentication Agent
     systemd.user.services.polkit-gnome-authentication-agent-1 =
       import ../services/gnome-authentication-agent.nix { inherit pkgs; };
+
+    # Enable ssh agent
+    services.gnome-keyring = {
+      enable = true;
+      components = [ "ssh" ];
+    };
 
     # Enable notifications
     services.twmn = {
