@@ -15,6 +15,8 @@
       hyprland.homeManagerModules.default
     ];
 
+    home.sessionVariables.NIXOS_OZONE_WL = "1";
+
     home.username = "azazak123";
     home.homeDirectory = "/home/azazak123";
 
