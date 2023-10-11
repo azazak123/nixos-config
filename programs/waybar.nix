@@ -1,10 +1,8 @@
-{ pkgs }:
+{ pkgs-unstable }:
 
 {
   enable = true;
-  package = pkgs.waybar.overrideAttrs (oldAttrs: {
-    mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-  });
+  package = pkgs-unstable.waybar;
   systemd.enable = true;
   settings = {
     mainBar = {
@@ -13,12 +11,12 @@
       spacing = 10;
 
       # Choose the order of the modules
-      modules-left = [ "wlr/workspaces" ];
+      modules-left = [ "hyprland/workspaces" ];
       modules-center = [ "hyprland/window" ];
       modules-right = [ "pulseaudio" "cpu" "memory" "temperature" "backlight" "battery" "clock" "tray" ];
 
       # Modules configuration
-      "wlr/workspaces" = {
+      "hyprland/workspaces" = {
         on-click = "activate";
         on-scroll-up = "hyprctl dispatch workspace e-1";
         on-scroll-down = "hyprctl dispatch workspace e+1";
