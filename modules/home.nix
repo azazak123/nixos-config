@@ -58,7 +58,7 @@
     programs.wofi.enable = true;
 
     programs.waybar = import ../programs/waybar.nix {
-      inherit pkgs;
+      inherit pkgs-unstable;
     };
     systemd.user.services.waybar.Service.Environment =
       "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
