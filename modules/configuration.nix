@@ -19,6 +19,9 @@
     useOSProber = true;
   };
 
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Desktop environment
   services.xserver = {
     enable = true;
