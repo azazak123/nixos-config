@@ -13,7 +13,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" "pcie_port_pm=force" "amdgpu.msi=0" "amd_pstate=passive" ];
+  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
   boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
@@ -38,6 +38,8 @@
   swapDevices = [ ];
 
   hardware.bluetooth.enable = true;
+
+  services.tlp = import ../programs/tlp.nix;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
