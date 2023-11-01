@@ -33,6 +33,11 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        overlays = [
+          (final: prev: {
+            tlp = pkgs-unstable.tlp;
+          })
+        ];
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
