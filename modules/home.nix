@@ -4,7 +4,7 @@
   users.users.azazak123 = {
     isNormalUser = true;
     description = "Volodymyr Antonov";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "dialout" ];
   };
 
   home-manager.useGlobalPkgs = true;
