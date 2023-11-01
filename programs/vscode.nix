@@ -30,7 +30,6 @@
     ms-dotnettools.csharp
     mads-hartmann.bash-ide-vscode
     llvm-vs-code-extensions.vscode-clangd
-    ms-vscode.cpptools
     ms-vscode.cmake-tools
     haskell.haskell
     justusadam.language-haskell
