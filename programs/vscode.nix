@@ -24,7 +24,6 @@
 
     ms-python.vscode-pylance
     ms-python.python
-    ms-pyright.pyright
 
     ms-toolsai.jupyter
     ms-dotnettools.csharp
@@ -88,6 +87,11 @@
     "editor.rulers" = [ 80 ];
     "editor.fontFamily" =
       "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
+    "python.analysis.inlayHints.functionReturnTypes" = true;
+    "python.analysis.inlayHints.variableTypes" = true;
+    "python.analysis.typeCheckingMode" = "strict";
+    "python.linting.pylintEnabled" = true;
+    "python.linting.flake8Enabled" = true;
   };
 }
 
