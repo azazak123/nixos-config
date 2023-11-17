@@ -50,7 +50,6 @@
         inherit system pkgs;
         specialArgs = { inherit pkgs-unstable vscodeExt hyprland inputs; };
         modules = [
-          hyprland.nixosModules.default
           ./modules/configuration.nix
           home-manager.nixosModules.home-manager
           ./modules/home.nix
