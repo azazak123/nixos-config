@@ -80,7 +80,10 @@
   services.blueman.enable = true;
 
   # Enable podman
-  virtualisation.podman.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
 
   # Enable sound
   services.pipewire = {

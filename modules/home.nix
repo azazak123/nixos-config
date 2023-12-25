@@ -47,6 +47,8 @@
       hunspellDicts.uk_UA
       hunspellDicts.en_US
       libsForQt5.okular
+
+      podman-compose
     ] ++ (with pkgs-unstable; [
       hyprland-per-window-layout
     ]);
