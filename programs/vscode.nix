@@ -73,6 +73,7 @@
 
     bamboo.idris2-lsp
     pgourlain.erlang
+    csharpier.csharpier-vscode
   ]);
 
   userSettings = {
