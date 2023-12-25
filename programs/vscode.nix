@@ -81,7 +81,6 @@
     "workbench.colorTheme" = "Palenight Theme";
     "workbench.iconTheme" = "material-icon-theme";
     "terminal.integrated.defaultProfile.linux" = "fish";
-    "[jsonc]"."editor.defaultFormatter" = "vscode.json-language-features";
     "files.autoSave" = "afterDelay";
     "window.titleBarStyle" = "custom";
     "editor.rulers" = [ 80 ];
@@ -92,6 +91,18 @@
     "python.analysis.typeCheckingMode" = "strict";
     "python.linting.pylintEnabled" = true;
     "python.linting.flake8Enabled" = true;
+
+    # Formatters
+    "[jsonc]"."editor.defaultFormatter" = "vscode.json-language-features";
+    "[csharp]"."editor.defaultFormatter" = "csharpier.csharpier-vscode";
+    "[html]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[json]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[typescriptreact]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "sqltools.format" = {
+      "linesBetweenQueries" = "preserve";
+      "reservedWordCase" = "upper";
+    };
   };
 }
 
