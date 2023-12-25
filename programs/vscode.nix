@@ -39,6 +39,8 @@
     redhat.vscode-yaml
     tamasfe.even-better-toml
     ocamllabs.ocaml-platform
+    graphql.vscode-graphql-syntax
+    graphql.vscode-graphql
 
     github.vscode-pull-request-github
     mhutchie.git-graph
