@@ -57,10 +57,10 @@
     bind = $mainMod, X, exec, wlogout
 
     # Move focus with mainMod + arrow keys
-    bind = $mainMod, left, movefocus, l
-    bind = $mainMod, right, movefocus, r
-    bind = $mainMod, up, movefocus, u
-    bind = $mainMod, down, movefocus, d
+    bind = ALT, left, movefocus, l
+    bind = ALT, right, movefocus, r
+    bind = ALT, down, movefocus, d
+    bind = ALT, up, movefocus, u
 
     # Switch workspaces with mainMod + [0-9]
     bind = $mainMod, 1, workspace, 1
