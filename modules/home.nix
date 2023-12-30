@@ -32,7 +32,6 @@
 
       # Programs
       discord
-      teams-for-linux
       spotify
       gnome.gnome-boxes
       telegram-desktop
@@ -49,6 +48,9 @@
       podman-compose
     ] ++ (with pkgs-unstable; [
       hyprland-per-window-layout
+
+      # https://github.com/IsmaelMartinez/teams-for-linux/issues/1001
+      teams-for-linux
     ]);
 
     programs.home-manager.enable = true;
