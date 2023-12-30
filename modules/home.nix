@@ -11,8 +11,10 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.azazak123 = { pkgs, ... }: {
-    home.sessionVariables.NIXOS_OZONE_WL = "1";
-    home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+    systemd.user.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+    };
 
     home.username = "azazak123";
     home.homeDirectory = "/home/azazak123";
