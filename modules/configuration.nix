@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, config, pkgs, inputs, hyprland, ... }:
+{ lib, config, pkgs, inputs, pkgs-unstable, ... }:
 
 {
   imports =
@@ -38,7 +38,7 @@
 
   programs.hyprland = {
     enable = true;
-    package = hyprland.packages.${pkgs.system}.hyprland;
+    package = pkgs-unstable.hyprland;
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -140,7 +140,7 @@
     gnome.simple-scan
   ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     nerdfonts
     emojione
   ];
@@ -152,12 +152,6 @@
   };
   services.ipp-usb.enable = true;
   services.printing.enable = true;
-
-  # Cache
-  nix.settings = {
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

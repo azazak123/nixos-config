@@ -1,4 +1,4 @@
-{ pkgs-unstable, vscodeExt, hyprland, ... }:
+{ pkgs-unstable, vscodeExt, ... }:
 
 {
   users.users.azazak123 = {
@@ -11,10 +11,6 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.azazak123 = { pkgs, ... }: {
-    imports = [
-      hyprland.homeManagerModules.default
-    ];
-
     home.sessionVariables.NIXOS_OZONE_WL = "1";
     home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
 
@@ -58,7 +54,7 @@
     programs.firefox.enable = true;
 
     # Wayland
-    wayland.windowManager.hyprland = import ../programs/hyprland.nix;
+    wayland.windowManager.hyprland = import ../programs/hyprland.nix { inherit (pkgs-unstable) hyprland; };
 
     programs.wofi.enable = true;
 

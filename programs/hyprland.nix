@@ -1,5 +1,7 @@
+{ hyprland }:
 {
   enable = true;
+  package = hyprland;
   extraConfig = ''
     monitor = eDP-1, 1920x1080, 0x0, 1.15
         
@@ -47,7 +49,7 @@
     bind = $mainMod, M, exit, 
     bind = $mainMod_SHIFT, 36, exec, thunar
     bind = $mainMod, V, togglefloating, 
-    bind = CTRL_SHIFT, A, exec, wofi --show drun
+    bind = CTRL_SHIFT, A, exec, wofi --normal-window --show drun
     bind = $mainMod, F, fullscreen, 1
     bind = $mainMod, P, pseudo, # dwindle
     bind = $mainMod, J, togglesplit, # dwindle
