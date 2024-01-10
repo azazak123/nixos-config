@@ -36,6 +36,8 @@
     xkbOptions = "grp:alt_shift_toggle";
   };
 
+  environment.xfce.excludePackages = with pkgs.xfce;[ xfce4-notifyd ];
+
   programs.hyprland = {
     enable = true;
     package = pkgs-unstable.hyprland;
