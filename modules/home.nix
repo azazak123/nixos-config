@@ -14,6 +14,7 @@
     systemd.user.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+      XDG_SESSION_TYPE = "wayland";
     };
 
     home.username = "azazak123";
@@ -111,23 +112,7 @@
     };
 
     # Enable notifications
-    services.twmn = {
-      enable = true;
-      text = {
-        font = {
-          size = 18;
-          family = "JetBrainsMono Nerd Font";
-        };
-        color = "white";
-        maxLength = 80;
-      };
-      window = {
-        height = 30;
-        alwaysOnTop = true;
-        color = "#2b303b";
-        offset.y = 30;
-      };
-    };
+    services.dunst = import ../services/dunst.nix;
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
