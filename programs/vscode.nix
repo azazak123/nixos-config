@@ -74,6 +74,8 @@
     bamboo.idris2-lsp
     pgourlain.erlang
     csharpier.csharpier-vscode
+    vue.volar
+    vue.vscode-typescript-vue-plugin
   ]);
 
   userSettings = {
@@ -102,6 +104,7 @@
     "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
     "[json]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
     "[typescriptreact]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[vue]"."editor.defaultFormatter" = "vue.volar";
     "sqltools.format" = {
       "linesBetweenQueries" = "preserve";
       "reservedWordCase" = "upper";
