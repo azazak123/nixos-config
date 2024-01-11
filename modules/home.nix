@@ -61,7 +61,7 @@
     # Wayland
     wayland.windowManager.hyprland = import ../programs/hyprland.nix { inherit (pkgs-unstable) hyprland; };
 
-    programs.wofi.enable = true;
+    programs.fuzzel = import ../programs/fuzzel.nix;
 
     programs.waybar = import ../programs/waybar.nix {
       inherit pkgs-unstable;

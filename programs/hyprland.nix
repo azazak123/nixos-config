@@ -49,7 +49,7 @@
     bind = $mainMod, M, exit, 
     bind = $mainMod_SHIFT, 36, exec, thunar
     bind = $mainMod, V, togglefloating, 
-    bind = CTRL_SHIFT, A, exec, wofi --normal-window --show drun
+    bind = CTRL_SHIFT, A, exec, fuzzel
     bind = $mainMod, F, fullscreen, 1
     bind = $mainMod, P, pseudo, # dwindle
     bind = $mainMod, J, togglesplit, # dwindle
