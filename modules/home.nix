@@ -21,20 +21,17 @@
     home.homeDirectory = "/home/azazak123";
 
     home.packages = with pkgs; [
-      distrobox
-      gammastep
-      polkit_gnome
+      # Wayland
       wlogout
+      wl-clipboard
+      wtype
 
-      # Tools for taking screenshots
+      # Screenshots
       grim
       slurp
-      wl-clipboard
 
-      # Programs
+      # Communication
       discord
-      spotify
-      gnome.gnome-boxes
       telegram-desktop
       fluffychat
       zoom-us
@@ -46,7 +43,15 @@
       hunspellDicts.en_US
       libsForQt5.okular
 
+      # Music
+      spotify
+
+      # Other
       podman-compose
+      distrobox
+      gammastep
+      polkit_gnome
+      gnome.gnome-boxes
     ] ++ (with pkgs-unstable; [
       hyprland-per-window-layout
 
