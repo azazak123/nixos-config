@@ -25,6 +25,7 @@
       wlogout
       wl-clipboard
       wtype
+      wl-clip-persist
 
       # Screenshots
       grim
@@ -118,6 +119,13 @@
 
     # Enable notifications
     services.dunst = import ../services/dunst.nix;
+
+    # Enable clipboard persistence
+    systemd.user.services.wl-clip-persist =
+      import ../services/wl-clip-persist.nix {
+        inherit pkgs;
+      };
+
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
