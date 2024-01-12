@@ -48,13 +48,16 @@
     bind = $mainMod, Q, killactive, 
     bind = $mainMod, M, exit, 
     bind = $mainMod_SHIFT, 36, exec, thunar
-    bind = $mainMod, V, togglefloating, 
-    bind = CTRL_SHIFT, A, exec, fuzzel
+    bind = $mainMod, V, togglefloating,
     bind = $mainMod, F, fullscreen, 1
     bind = $mainMod, P, pseudo, # dwindle
     bind = $mainMod, J, togglesplit, # dwindle
     bind = CTRL, P, exec, grim -g "$(slurp)" - | wl-copy
     bind = $mainMod, X, exec, wlogout
+
+    # Dmenu
+    bind = CTRL_SHIFT, A, exec, fuzzel
+    bind = CTRL_SHIFT, S, exec, clipman pick --tool=CUSTOM --tool-args="fuzzel -d" && wtype -M ctrl v -m ctrl
 
     # Move focus with mainMod + arrow keys
     bind = ALT, a, movefocus, l

@@ -120,6 +120,10 @@
     # Enable notifications
     services.dunst = import ../services/dunst.nix;
 
+
+    # Enable clipboard manager
+    services.clipman.enable = true;
+
     # Enable clipboard persistence
     systemd.user.services.wl-clip-persist =
       import ../services/wl-clip-persist.nix {
