@@ -58,6 +58,7 @@
     # Dmenu
     bind = CTRL_SHIFT, A, exec, fuzzel
     bind = CTRL_SHIFT, S, exec, clipman pick --tool=CUSTOM --tool-args="fuzzel -d" && wtype -M ctrl v -m ctrl
+    bind = CTRL_SHIFT, E, exec, BEMOJI_PICKER_CMD="fuzzel -d" bemoji -t
 
     # Move focus with mainMod + arrow keys
     bind = ALT, a, movefocus, l

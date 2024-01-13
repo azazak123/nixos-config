@@ -144,7 +144,7 @@
 
   fonts.packages = with pkgs; [
     nerdfonts
-    emojione
+    noto-fonts-emoji
   ];
 
   # Printers and scanners

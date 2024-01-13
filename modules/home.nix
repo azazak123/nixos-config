@@ -53,6 +53,7 @@
       gammastep
       polkit_gnome
       gnome.gnome-boxes
+      bemoji
     ] ++ (with pkgs-unstable; [
       hyprland-per-window-layout
 
