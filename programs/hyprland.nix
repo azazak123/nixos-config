@@ -12,6 +12,10 @@
       vrr = 1;
     };
 
+    xwayland = {
+      force_zero_scaling = true;
+    };
+
     input = {
       kb_layout = "us, ua";
       kb_options = "grp:lalt_lshift_toggle";
