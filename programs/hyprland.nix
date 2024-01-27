@@ -2,113 +2,119 @@
 {
   enable = true;
   package = hyprland;
-  extraConfig = ''
-    monitor = eDP-1, 1920x1080, 0x0, 1.15
-        
-    input {
-        kb_layout = us, ua
-        kb_options = grp:lalt_lshift_toggle 
-    }
+  settings = {
+    monitor = [
+      "eDP-1, 1920x1080, 0x0, 1.15"
+    ];
 
-    general {
-        gaps_out = 8
-        border_size = 2
-        col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-        col.inactive_border = rgba(595959aa)
-    }
+    input = {
+      kb_layout = "us, ua";
+      kb_options = "grp:lalt_lshift_toggle";
+    };
 
-    decoration {
-        rounding = 5
-        blur {
-            enabled = true
-            size = 3
-            passes = 1
-            new_optimizations = on
-        }
+    general = {
+      gaps_out = 8;
+      border_size = 2;
+      "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+      "col.inactive_border" = "rgba(595959aa)";
+    };
 
-        drop_shadow = false
-        shadow_range = 4
-        shadow_render_power = 3
-        col.shadow = rgba(1a1a1aee)
-    }
+    decoration = {
+      rounding = 5;
+      blur = {
+        enabled = true;
+        size = 3;
+        passes = 1;
+        new_optimizations = "on";
+      };
 
-    animations {
-        enabled = false 
-    }
+      drop_shadow = false;
+      shadow_range = 4;
+      shadow_render_power = 3;
+      "col.shadow" = "rgba(1a1a1aee)";
+    };
 
-    dwindle {
-        pseudotile = yes
-        preserve_split = yes
-    }
+    animations = {
+      enabled = false;
+    };
 
-    # Binds
-    $mainMod = SUPER
+    dwindle = {
+      pseudotile = "yes";
+      preserve_split = "yes";
+    };
 
-    bind = $mainMod, 36, exec, alacritty
-    bind = $mainMod, Q, killactive, 
-    bind = $mainMod, M, exit, 
-    bind = $mainMod_SHIFT, 36, exec, thunar
-    bind = $mainMod, V, togglefloating,
-    bind = $mainMod, F, fullscreen, 1
-    bind = $mainMod, P, pseudo, # dwindle
-    bind = $mainMod, J, togglesplit, # dwindle
-    bind = CTRL, P, exec, grim -g "$(slurp)" - | wl-copy
-    bind = $mainMod, X, exec, wlogout
+    "$mainMod" = "SUPER";
 
-    # Dmenu
-    bind = CTRL_SHIFT, A, exec, fuzzel
-    bind = CTRL_SHIFT, S, exec, clipman pick --tool=CUSTOM --tool-args="fuzzel -d" && wtype -M ctrl v -m ctrl
-    bind = CTRL_SHIFT, E, exec, BEMOJI_PICKER_CMD="fuzzel -d" bemoji -t
+    bindm = [
+      # Move/resize windows with mainMod + LMB/RMB and dragging
+      "$mainMod, mouse:272, movewindow"
+      "$mainMod, mouse:273, resizewindow"
+    ];
 
-    # Move focus with mainMod + arrow keys
-    bind = ALT, a, movefocus, l
-    bind = ALT, d, movefocus, r
-    bind = ALT, s, movefocus, d
-    bind = ALT, w, movefocus, u
+    bind = [
+      "$mainMod, 36, exec, alacritty"
+      "$mainMod, Q, killactive"
+      "$mainMod, M, exit"
+      "$mainMod_SHIFT, 36, exec, thunar"
+      "$mainMod, V, togglefloating"
+      "$mainMod, F, fullscreen, 1"
+      "$mainMod, P, pseudo" # dwindle
+      "$mainMod, J, togglesplit" # dwindle
+      "CTRL, P, exec, grim -g '$(slurp) - | wl-copy'"
+      "$mainMod, X, exec, wlogout"
 
-    # Switch workspaces with mainMod + [0-9]
-    bind = $mainMod, 1, workspace, 1
-    bind = $mainMod, 2, workspace, 2
-    bind = $mainMod, 3, workspace, 3
-    bind = $mainMod, 4, workspace, 4
-    bind = $mainMod, 5, workspace, 5
-    bind = $mainMod, 6, workspace, 6
-    bind = $mainMod, 7, workspace, 7
-    bind = $mainMod, 8, workspace, 8
-    bind = $mainMod, 9, workspace, 9
-    bind = $mainMod, 0, workspace, 10
+      # Dmenu
+      "CTRL_SHIFT, A, exec, fuzzel"
+      "CTRL_SHIFT, S, exec, clipman pick --tool=CUSTOM --tool-args=fuzzel -d && wtype -M ctrl v -m ctrl"
+      "CTRL_SHIFT, E, exec, BEMOJI_PICKER_CMD=fuzzel -d bemoji -t"
 
-    # Move active window to a workspace with mainMod + SHIFT + [0-9]
-    bind = $mainMod SHIFT, 1, movetoworkspace, 1
-    bind = $mainMod SHIFT, 2, movetoworkspace, 2
-    bind = $mainMod SHIFT, 3, movetoworkspace, 3
-    bind = $mainMod SHIFT, 4, movetoworkspace, 4
-    bind = $mainMod SHIFT, 5, movetoworkspace, 5
-    bind = $mainMod SHIFT, 6, movetoworkspace, 6
-    bind = $mainMod SHIFT, 7, movetoworkspace, 7
-    bind = $mainMod SHIFT, 8, movetoworkspace, 8
-    bind = $mainMod SHIFT, 9, movetoworkspace, 9
-    bind = $mainMod SHIFT, 0, movetoworkspace, 10
+      # Move focus with mainMod + arrow keys
+      "ALT, a, movefocus, l"
+      "ALT, d, movefocus, r"
+      "ALT, s, movefocus, d"
+      "ALT, w, movefocus, u"
 
-    # Move through existing workspaces
-    bind = $mainMod, d, workspace, e+1
-    bind = $mainMod, a, workspace, e-1
+      # Switch workspaces with mainMod + [0-9]
+      "$mainMod, 1, workspace, 1"
+      "$mainMod, 2, workspace, 2"
+      "$mainMod, 3, workspace, 3"
+      "$mainMod, 4, workspace, 4"
+      "$mainMod, 5, workspace, 5"
+      "$mainMod, 6, workspace, 6"
+      "$mainMod, 7, workspace, 7"
+      "$mainMod, 8, workspace, 8"
+      "$mainMod, 9, workspace, 9"
+      "$mainMod, 0, workspace, 10"
 
-    # Scroll through existing workspaces with mainMod + scroll
-    bind = $mainMod, mouse_down, workspace, e+1
-    bind = $mainMod, mouse_up, workspace, e-1
+      # Move active window to a workspace with mainMod + SHIFT + [0-9]
+      "$mainMod SHIFT, 1, movetoworkspace, 1"
+      "$mainMod SHIFT, 2, movetoworkspace, 2"
+      "$mainMod SHIFT, 3, movetoworkspace, 3"
+      "$mainMod SHIFT, 4, movetoworkspace, 4"
+      "$mainMod SHIFT, 5, movetoworkspace, 5"
+      "$mainMod SHIFT, 6, movetoworkspace, 6"
+      "$mainMod SHIFT, 7, movetoworkspace, 7"
+      "$mainMod SHIFT, 8, movetoworkspace, 8"
+      "$mainMod SHIFT, 9, movetoworkspace, 9"
+      "$mainMod SHIFT, 0, movetoworkspace, 10"
 
-    # Move/resize windows with mainMod + LMB/RMB and dragging
-    bindm = $mainMod, mouse:272, movewindow
-    bindm = $mainMod, mouse:273, resizewindow
+      # Move through existing workspaces
+      "$mainMod, d, workspace, e+1"
+      "$mainMod, a, workspace, e-1"
 
-    # Brightness
-    bind = , 232, exec, brightnessctl s 5%-
-    bind = , 233, exec, brightnessctl s 5%+
+      # Scroll through existing workspaces with mainMod + scroll
+      "$mainMod, mouse_down, workspace, e+1"
+      "$mainMod, mouse_up, workspace, e-1"
 
-    # Window rules
-    windowrule = workspace 1,^(firefox)$
-    windowrule = workspace 6,^(Alacritty)$
-    windowrule = workspace 8,^(org.telegram.desktop)$
-  '';
+      # Brightness
+      ", 232, exec, brightnessctl s 5%-"
+      ", 233, exec, brightnessctl s 5%+"
+    ];
+
+    windowrule = [
+      "workspace 1,^(firefox)$"
+      "workspace 6,^(Alacritty)$"
+      "workspace 8,^(org.telegram.desktop)$"
+    ];
+  };
 }
