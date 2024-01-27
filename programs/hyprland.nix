@@ -69,7 +69,7 @@
       "$mainMod, F, fullscreen, 1"
       "$mainMod, P, pseudo" # dwindle
       "$mainMod, J, togglesplit" # dwindle
-      "CTRL, P, exec, grim -g '$(slurp) - | wl-copy'"
+      "CTRL, P, exec, grimblast copy area"
       "$mainMod, X, exec, wlogout"
 
       # Dmenu

@@ -28,8 +28,7 @@
       wl-clip-persist
 
       # Screenshots
-      grim
-      slurp
+      grimblast
 
       # Communication
       discord
