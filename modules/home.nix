@@ -97,8 +97,14 @@
 
     # Services
     # Enable warm light
-    systemd.user.services.gammastep = import ../services/gammastep.nix {
-      inherit pkgs;
+    services.gammastep = {
+      enable = true;
+      latitude = 50.0;
+      longitude = 30.0;
+      temperature = {
+        day = 4000;
+        night = 4000;
+      };
     };
 
     # Enable per-window-layout
