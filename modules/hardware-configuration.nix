@@ -13,7 +13,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+  boot.kernelParams = [ ];
   boot.supportedFilesystems = [ "ntfs" ];
   boot.extraModprobeConfig = ''
     options iwlwifi 11n_disable=8
