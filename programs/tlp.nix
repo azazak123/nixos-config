@@ -1,7 +1,7 @@
 {
   enable = true;
   settings = {
-    RUNTIME_PM_ON_AC = "auto";
+    RUNTIME_PM_ON_AC = "on";
 
     CPU_DRIVER_OPMODE_ON_AC = "active";
     CPU_DRIVER_OPMODE_ON_BAT = "active";
