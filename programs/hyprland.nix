@@ -120,6 +120,12 @@
       ", 233, exec, brightnessctl s 5%+"
     ];
 
+    workspace = [
+      "1, monitor:HDMI-A-1, default:true"
+      "6, monitor:HDMI-A-1"
+      "8, monitor:eDP-1"
+    ];
+
     windowrule = [
       "workspace 1,^(firefox)$"
       "workspace 6,^(Alacritty)$"
