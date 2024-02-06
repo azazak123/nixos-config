@@ -4,7 +4,7 @@
   package = hyprland;
   settings = {
     monitor = [
-      "eDP-1, 1920x1080, 1920x0, 1.15"
+      "eDP-1, 1920x1080, 1920x0, 1.20"
       "HDMI-A-1, 1920x1080@100, 0x0, 1"
     ];
 
