@@ -48,7 +48,6 @@
 
       # Other
       podman-compose
-      distrobox
       polkit_gnome
       gnome.gnome-boxes
       bemoji
