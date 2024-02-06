@@ -32,6 +32,7 @@
 
       # Communication
       discord
+      teams-for-linux
       telegram-desktop
       fluffychat
       zoom-us
@@ -56,9 +57,6 @@
       bemoji
     ] ++ (with pkgs-unstable; [
       hyprland-per-window-layout
-
-      # https://github.com/IsmaelMartinez/teams-for-linux/issues/1001
-      teams-for-linux
     ]);
 
     programs.home-manager.enable = true;
