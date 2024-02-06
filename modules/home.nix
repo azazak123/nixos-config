@@ -46,8 +46,11 @@
       # Music
       spotify
 
-      # Other
+      #Code
+      lapce
       podman-compose
+
+      # Other
       polkit_gnome
       gnome.gnome-boxes
       bemoji
