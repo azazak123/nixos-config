@@ -66,7 +66,7 @@
     programs.firefox.enable = true;
 
     # Wayland
-    wayland.windowManager.hyprland = import ../programs/hyprland.nix { inherit (pkgs-unstable) hyprland; };
+    wayland.windowManager.hyprland = import ../programs/hyprland.nix { inherit (pkgs) hyprland; };
 
     programs.fuzzel = import ../programs/fuzzel.nix;
 

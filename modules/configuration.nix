@@ -40,7 +40,7 @@
 
   programs.hyprland = {
     enable = true;
-    package = pkgs-unstable.hyprland;
+    package = pkgs.hyprland;
   };
 
   networking.hostName = "nixos"; # Define your hostname.
