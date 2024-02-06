@@ -2,6 +2,7 @@
 
 {
   enable = true;
+  package = pkgs-unstable.vscode;
   extensions = with pkgs-unstable.vscode-extensions; [
     vadimcn.vscode-lldb
     esbenp.prettier-vscode
