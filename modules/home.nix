@@ -49,7 +49,6 @@
       # Other
       podman-compose
       distrobox
-      gammastep
       polkit_gnome
       gnome.gnome-boxes
       bemoji
