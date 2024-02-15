@@ -14,7 +14,6 @@
     streetsidesoftware.code-spell-checker
     serayuzgur.crates
     pkief.material-icon-theme
-    oderwat.indent-rainbow
     naumovs.color-highlight
     ms-vsliveshare.vsliveshare
     ms-vscode.hexeditor
