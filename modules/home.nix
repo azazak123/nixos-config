@@ -38,6 +38,7 @@
       zoom-us
 
       # Office
+      wpsoffice
       libreoffice
       hunspell
       hunspellDicts.uk_UA
