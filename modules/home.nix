@@ -48,7 +48,6 @@
       spotify
 
       #Code
-      lapce
       podman-compose
 
       # Other
@@ -57,6 +56,8 @@
       bemoji
     ] ++ (with pkgs-unstable; [
       hyprland-per-window-layout
+
+      lapce
     ]);
 
     programs.home-manager.enable = true;
