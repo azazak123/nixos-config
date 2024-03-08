@@ -146,6 +146,7 @@
   fonts.packages = with pkgs; [
     nerdfonts
     noto-fonts-emoji
+    corefonts
   ];
 
   # Printers and scanners
