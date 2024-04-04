@@ -2,8 +2,6 @@
   enable = true;
   settings = {
     colors = {
-      name = "Cloud";
-      author = "";
       primary = {
         background = "#000000";
         foreground = "#ffffff";
@@ -63,7 +61,5 @@
     shell = {
       program = "fish";
     };
-
-    theme = "Cloud";
   };
 }

@@ -31,9 +31,11 @@
     displayManager.gdm.enable = true;
 
     # Configure keymap in X11
-    layout = "us,ua";
-    xkbVariant = ",";
-    xkbOptions = "grp:alt_shift_toggle";
+    xkb = {
+      layout = "us,ua";
+      variant = ",";
+      options = "grp:alt_shift_toggle";
+    };
   };
 
   environment.xfce.excludePackages = with pkgs.xfce;[ xfce4-notifyd ];
@@ -101,7 +103,7 @@
   # Enable avahi
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     openFirewall = true;
   };
 

@@ -54,7 +54,6 @@
     whizkydee.material-palenight-theme
     aaron-bond.better-comments
     eww-yuck.yuck
-    znck.grammarly
     cschlosser.doxdocgen
     hbenl.vscode-test-explorer
     ms-vscode.test-adapter-converter
