@@ -73,6 +73,7 @@
     visualstudioexptteam.vscodeintellicode
 
     bamboo.idris2-lsp
+    amauryrabouan.new-vsc-prolog
     pgourlain.erlang
     csharpier.csharpier-vscode
     vue.volar
