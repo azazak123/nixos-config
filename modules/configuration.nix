@@ -121,6 +121,9 @@
 
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
+
+      trusted-public-keys = [ "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=" ];
+      trusted-substituters = [ "https://devenv.cachix.org" ];
     };
 
     # Enable auto garbage collecting
