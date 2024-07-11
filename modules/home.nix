@@ -47,6 +47,7 @@
 
       # Music
       spotify
+      spotube
 
       #Code
       podman-compose
