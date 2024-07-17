@@ -49,6 +49,9 @@
       spotify
       spotube
 
+      # Games
+      dolphin-emu
+
       #Code
       podman-compose
 
