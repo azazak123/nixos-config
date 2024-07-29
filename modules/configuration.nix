@@ -74,6 +74,9 @@
   };
 
   # Services
+  # Enable supergfxd
+  services.supergfxd.enable = true;
+
   # Enable automatic login for the user.
   services.getty.autologinUser = "azazak123";
 
