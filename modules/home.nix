@@ -45,9 +45,10 @@
       hunspellDicts.en_US
       libsForQt5.okular
 
-      # Music
+      # Media
       spotify
       spotube
+      mpv
 
       # Games
       dolphin-emu
