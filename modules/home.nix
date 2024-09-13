@@ -60,6 +60,7 @@
       polkit_gnome
       gnome.gnome-boxes
       bemoji
+      distrobox
     ] ++ (with pkgs-unstable; [
       hyprland-per-window-layout
 
@@ -151,7 +152,6 @@
       enable = true;
       tray.enable = true;
     };
-
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
