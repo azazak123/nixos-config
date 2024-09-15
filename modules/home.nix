@@ -34,6 +34,7 @@
       discord
       teams-for-linux
       telegram-desktop
+      element-desktop
       zoom-us
 
       # Office
