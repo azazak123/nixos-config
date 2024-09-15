@@ -18,9 +18,12 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    # Doom emacs
+    nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-vscode-extensions, home-manager }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-vscode-extensions, home-manager, nix-doom-emacs-unstraightened, }@inputs:
 
     let
       system = "x86_64-linux";

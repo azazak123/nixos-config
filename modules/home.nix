@@ -1,4 +1,4 @@
-{ pkgs-unstable, vscodeExt, ... }:
+{ pkgs-unstable, vscodeExt, inputs, ... }:
 
 {
   users.users.azazak123 = {
@@ -11,6 +11,8 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.azazak123 = { pkgs, ... }: {
+    imports = [ inputs.nix-doom-emacs-unstraightened.hmModule ];
+
     systemd.user.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
@@ -21,50 +23,50 @@
     home.homeDirectory = "/home/azazak123";
 
     home.packages = with pkgs; [
-      # Wayland
-      wlogout
-      wl-clipboard
-      wtype
-      wl-clip-persist
+        # Wayland
+        wlogout
+        wl-clipboard
+        wtype
+        wl-clip-persist
 
-      # Screenshots
-      grimblast
+        # Screenshots
+        grimblast
 
-      # Communication
-      discord
-      teams-for-linux
-      telegram-desktop
-      element-desktop
-      zoom-us
+        # Communication
+        discord
+        teams-for-linux
+        telegram-desktop
+        element-desktop
+        zoom-us
 
-      # Office
-      libreoffice
-      hunspell
-      hunspellDicts.uk_UA
-      hunspellDicts.en_US
-      libsForQt5.okular
+        # Office
+        libreoffice
+        hunspell
+        hunspellDicts.uk_UA
+        hunspellDicts.en_US
+        libsForQt5.okular
 
-      # Media
-      spotify
-      spotube
-      mpv
+        # Media
+        spotify
+        spotube
+        mpv
 
-      # Games
-      dolphin-emu
+        # Games
+        dolphin-emu
 
-      #Code
-      podman-compose
+        #Code
+        podman-compose
 
-      # Other
-      polkit_gnome
-      gnome.gnome-boxes
-      bemoji
-      distrobox
-    ] ++ (with pkgs-unstable; [
-      hyprland-per-window-layout
+        # Other
+        polkit_gnome
+        gnome.gnome-boxes
+        bemoji
+        distrobox
+      ] ++ (with pkgs-unstable; [
+        hyprland-per-window-layout
 
-      lapce
-    ]);
+        lapce
+      ]);
 
     programs.home-manager.enable = true;
 
@@ -90,6 +92,12 @@
 
     programs.vscode = import ../programs/vscode.nix {
       inherit pkgs pkgs-unstable vscodeExt;
+    };
+
+    services.emacs.enable = true;
+    programs.doom-emacs = {
+      enable = true;
+      doomDir = ../configs/doom.d;
     };
 
     programs.helix.enable = true;
@@ -131,7 +139,6 @@
 
     # Enable notifications
     services.dunst = import ../services/dunst.nix;
-
 
     # Enable clipboard manager
     services.clipman.enable = true;
