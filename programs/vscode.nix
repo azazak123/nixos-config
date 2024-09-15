@@ -1,83 +1,155 @@
 { pkgs, pkgs-unstable, vscodeExt }:
 
+let
+  lib = pkgs.lib;
+  hasAttrByPath = lib.attrsets.hasAttrByPath;
+  getAttrFromPath = lib.attrsets.getAttrFromPath;
+in
 {
   enable = true;
   package = pkgs-unstable.vscode;
-  extensions = with pkgs-unstable.vscode-extensions; [
-    vadimcn.vscode-lldb
-    esbenp.prettier-vscode
-    ms-azuretools.vscode-docker
-    mkhl.direnv
-    wakatime.vscode-wakatime
-    vscodevim.vim
-    usernamehw.errorlens
-    streetsidesoftware.code-spell-checker
-    serayuzgur.crates
-    pkief.material-icon-theme
-    naumovs.color-highlight
-    ms-vsliveshare.vsliveshare
-    ms-vscode.hexeditor
-    ms-vscode-remote.remote-ssh
-    grapecity.gc-excelviewer
-    editorconfig.editorconfig
-    dbaeumer.vscode-eslint
+  extensions =
+    let
+      get-extensions = { extensions, exceptions ? [ ] }: map
+        (ext:
+          let path = lib.splitString "." ext; in
+          if hasAttrByPath
+            path
+            pkgs-unstable.vscode-extensions
+          && !(builtins.elem ext exceptions)
+          then
+            getAttrFromPath
+              path
+              pkgs-unstable.vscode-extensions else
+            getAttrFromPath
+              path
+              vscodeExt.vscode-marketplace)
+        extensions;
 
-    ms-python.vscode-pylance
-    ms-python.python
+      theme-extensions = get-extensions {
+        extensions = [
+          "pkief.material-icon-theme"
+          "whizkydee.material-palenight-theme"
+        ];
+      };
 
-    ms-toolsai.jupyter
-    ms-dotnettools.csharp
-    mads-hartmann.bash-ide-vscode
-    llvm-vs-code-extensions.vscode-clangd
-    twxs.cmake
-    ms-vscode.cmake-tools
-    haskell.haskell
-    justusadam.language-haskell
-    jnoortheen.nix-ide
-    golang.go
-    elmtooling.elm-ls-vscode
-    rust-lang.rust-analyzer
-    redhat.vscode-yaml
-    tamasfe.even-better-toml
-    ocamllabs.ocaml-platform
-    graphql.vscode-graphql-syntax
-    graphql.vscode-graphql
+      visual-extensions = get-extensions {
+        extensions = [
+          "aaron-bond.better-comments"
+          "usernamehw.errorlens"
+          "naumovs.color-highlight"
+        ];
+      };
 
-    github.vscode-pull-request-github
-    mhutchie.git-graph
-    eamodio.gitlens
+      rust-extensions = get-extensions {
+        extensions = [
+          "rust-lang.rust-analyzer"
+          "odiriuss.rust-macro-expand"
+          "lorenzopirro.rust-flash-snippets"
+          "jscearcy.rust-doc-viewer"
+        ];
+      };
 
-    yzhang.markdown-all-in-one
-    shd101wyy.markdown-preview-enhanced
-    davidanson.vscode-markdownlint
-  ] ++ (with vscodeExt.vscode-marketplace; [
-    whizkydee.material-palenight-theme
-    aaron-bond.better-comments
-    eww-yuck.yuck
-    cschlosser.doxdocgen
-    hbenl.vscode-test-explorer
-    ms-vscode.test-adapter-converter
+      c-extensions = get-extensions {
+        extensions = [
+          "llvm-vs-code-extensions.vscode-clangd"
+          "twxs.cmake"
+          "ms-vscode.cmake-tools"
+        ];
+      };
 
-    mtxr.sqltools
-    mtxr.sqltools-driver-pg
+      js-extensions = get-extensions {
+        extensions = [
+          "vue.volar"
+          "dbaeumer.vscode-eslint"
+          "esbenp.prettier-vscode"
+        ];
+      };
 
-    odiriuss.rust-macro-expand
-    lorenzopirro.rust-flash-snippets
-    jscearcy.rust-doc-viewer
+      csharp-extensions = get-extensions {
+        extensions = [
+          "csharpier.csharpier-vscode"
+          "ms-dotnettools.csharp"
+        ];
+      };
 
-    ms-vscode.remote-explorer
-    ms-vscode-remote.remote-ssh-edit
-    ms-vscode-remote.remote-containers
-    visualstudioexptteam.intellicode-api-usage-examples
-    visualstudioexptteam.vscodeintellicode
+      haskell-extensions = get-extensions {
+        extensions = [
+          "haskell.haskell"
+          "justusadam.language-haskell"
+        ];
+      };
 
-    bamboo.idris2-lsp
-    amauryrabouan.new-vsc-prolog
-    pgourlain.erlang
-    csharpier.csharpier-vscode
-    vue.volar
-    vue.vscode-typescript-vue-plugin
-  ]);
+      sql-extensions = get-extensions {
+        extensions = [
+          "mtxr.sqltools"
+          "mtxr.sqltools-driver-pg"
+        ];
+      };
+
+      python-extensions = get-extensions {
+        extensions = [
+          "ms-python.python"
+          "ms-python.vscode-pylance"
+        ];
+        exceptions = [ "ms-python.python" ]; # hash mismatch
+      };
+
+      other-languages-extensions = get-extensions {
+        extensions = [
+          "bamboo.idris2-lsp"
+          "amauryrabouan.new-vsc-prolog"
+          "pgourlain.erlang"
+          "elmtooling.elm-ls-vscode"
+          "redhat.vscode-yaml"
+          "tamasfe.even-better-toml"
+          "ocamllabs.ocaml-platform"
+          "golang.go"
+          "jnoortheen.nix-ide"
+          "ms-toolsai.jupyter"
+          "mads-hartmann.bash-ide-vscode"
+          "graphql.vscode-graphql-syntax"
+          "graphql.vscode-graphql"
+        ];
+      };
+
+      git-extensions = get-extensions {
+        extensions = [
+          "mhutchie.git-graph"
+        ];
+      };
+
+      other-extensions = get-extensions {
+        extensions = [
+          "mkhl.direnv"
+          "wakatime.vscode-wakatime"
+          "streetsidesoftware.code-spell-checker"
+          "fill-labs.dependi"
+          "ms-vsliveshare.vsliveshare"
+          "ms-vscode.hexeditor"
+          "grapecity.gc-excelviewer"
+          "editorconfig.editorconfig"
+          "vadimcn.vscode-lldb"
+          "cschlosser.doxdocgen"
+          "visualstudioexptteam.intellicode-api-usage-examples"
+          "visualstudioexptteam.vscodeintellicode"
+        ];
+      };
+    in
+    pkgs.lib.concatLists [
+      theme-extensions
+      visual-extensions
+      rust-extensions
+      c-extensions
+      js-extensions
+      csharp-extensions
+      haskell-extensions
+      sql-extensions
+      python-extensions
+      other-languages-extensions
+      git-extensions
+      other-extensions
+    ];
 
   userSettings = {
     "extensions.autoUpdate" = false;
