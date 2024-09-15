@@ -34,7 +34,6 @@
       discord
       teams-for-linux
       telegram-desktop
-      fluffychat
       zoom-us
 
       # Office
