@@ -78,10 +78,10 @@
       "CTRL_SHIFT, E, exec, BEMOJI_PICKER_CMD=fuzzel -d bemoji -t"
 
       # Move focus with mainMod + arrow keys
-      "ALT, a, movefocus, l"
-      "ALT, d, movefocus, r"
-      "ALT, s, movefocus, d"
-      "ALT, w, movefocus, u"
+      "$mainMod&ALT, a, movefocus, l"
+      "$mainMod&ALT, d, movefocus, r"
+      "$mainMod&ALT, s, movefocus, d"
+      "$mainMod&ALT, w, movefocus, u"
 
       # Switch workspaces with mainMod + [0-9]
       "$mainMod, 1, workspace, 1"
