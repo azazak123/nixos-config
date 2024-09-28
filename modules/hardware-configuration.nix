@@ -46,6 +46,11 @@
     fsType = "btrfs";
   };
 
+  fileSystems."/mnt/storage" = {
+    device = "/dev/disk/by-label/storage";
+    fsType = "ntfs";
+  };
+
   swapDevices = [ ];
 
   hardware.bluetooth.enable = true;
