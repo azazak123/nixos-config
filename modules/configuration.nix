@@ -2,14 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, config, pkgs, inputs, pkgs-unstable, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  pkgs-unstable,
+  ...
+}:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.grub = {
@@ -38,7 +44,7 @@
     };
   };
 
-  environment.xfce.excludePackages = with pkgs.xfce;[ xfce4-notifyd ];
+  environment.xfce.excludePackages = with pkgs.xfce; [ xfce4-notifyd ];
 
   programs.hyprland = {
     enable = true;
@@ -122,7 +128,10 @@
 
     settings = {
       # Enable flakes
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
       # Deduplicate and optimize nix store
       auto-optimise-store = true;

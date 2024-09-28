@@ -1,4 +1,8 @@
-{ pkgs, pkgs-unstable, vscodeExt }:
+{
+  pkgs,
+  pkgs-unstable,
+  vscodeExt,
+}:
 
 let
   lib = pkgs.lib;
@@ -10,21 +14,21 @@ in
   package = pkgs-unstable.vscode;
   extensions =
     let
-      get-extensions = { extensions, exceptions ? [ ] }: map
-        (ext:
-          let path = lib.splitString "." ext; in
-          if hasAttrByPath
-            path
-            pkgs-unstable.vscode-extensions
-          && !(builtins.elem ext exceptions)
-          then
-            getAttrFromPath
-              path
-              pkgs-unstable.vscode-extensions else
-            getAttrFromPath
-              path
-              vscodeExt.vscode-marketplace)
-        extensions;
+      get-extensions =
+        {
+          extensions,
+          exceptions ? [ ],
+        }:
+        map (
+          ext:
+          let
+            path = lib.splitString "." ext;
+          in
+          if hasAttrByPath path pkgs-unstable.vscode-extensions && !(builtins.elem ext exceptions) then
+            getAttrFromPath path pkgs-unstable.vscode-extensions
+          else
+            getAttrFromPath path vscodeExt.vscode-marketplace
+        ) extensions;
 
       theme-extensions = get-extensions {
         extensions = [
@@ -113,11 +117,7 @@ in
         ];
       };
 
-      git-extensions = get-extensions {
-        extensions = [
-          "mhutchie.git-graph"
-        ];
-      };
+      git-extensions = get-extensions { extensions = [ "mhutchie.git-graph" ]; };
 
       other-extensions = get-extensions {
         extensions = [
@@ -162,8 +162,7 @@ in
     "files.autoSave" = "afterDelay";
     "window.titleBarStyle" = "custom";
     "editor.rulers" = [ 80 ];
-    "editor.fontFamily" =
-      "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
+    "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
     "python.analysis.inlayHints.functionReturnTypes" = true;
     "python.analysis.inlayHints.variableTypes" = true;
     "python.analysis.typeCheckingMode" = "strict";
@@ -184,4 +183,3 @@ in
     };
   };
 }
-

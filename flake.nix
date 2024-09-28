@@ -55,11 +55,11 @@
 
       devShell.${system} = pkgs.mkShell {
         buildInputs = with pkgs; [
-          nixpkgs-fmt
+          nixfmt-rfc-style
           nil
         ];
       };
 
-      formatter.${system} = pkgs.nixpkgs-fmt;
+      formatter.${system} = pkgs.nixfmt-rfc-style;
     };
 }

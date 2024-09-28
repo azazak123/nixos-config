@@ -13,7 +13,16 @@
       # Choose the order of the modules
       modules-left = [ "hyprland/workspaces" ];
       modules-center = [ "hyprland/window" ];
-      modules-right = [ "pulseaudio" "cpu" "memory" "temperature" "backlight" "battery" "clock" "tray" ];
+      modules-right = [
+        "pulseaudio"
+        "cpu"
+        "memory"
+        "temperature"
+        "backlight"
+        "battery"
+        "clock"
+        "tray"
+      ];
 
       # Modules configuration
       "hyprland/workspaces" = {
@@ -52,7 +61,17 @@
 
       backlight = {
         format = "{percent}% {icon}";
-        format-icons = [ "" "" "" "" "" "" "" "" "" ];
+        format-icons = [
+          ""
+          ""
+          ""
+          ""
+          ""
+          ""
+          ""
+          ""
+          ""
+        ];
       };
 
       battery = {
@@ -64,7 +83,13 @@
         format-charging = "{capacity}% 󱐋";
         format-plugged = "{capacity}% ";
         format-alt = "{time} {icon}";
-        format-icons = [ "" "" "" "" "" ];
+        format-icons = [
+          ""
+          ""
+          ""
+          ""
+          ""
+        ];
       };
 
       network = {
@@ -85,7 +110,11 @@
         format-source-muted = "";
         format-icons = {
           headphone = "";
-          default = [ "" "" "" ];
+          default = [
+            ""
+            ""
+            ""
+          ];
         };
         on-click = "pavucontrol";
       };

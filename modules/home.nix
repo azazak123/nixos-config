@@ -1,16 +1,30 @@
-{ pkgs-unstable, vscodeExt, inputs, ... }:
+{
+  pkgs-unstable,
+  vscodeExt,
+  inputs,
+  ...
+}:
 
 {
   users.users.azazak123 = {
     isNormalUser = true;
     description = "Volodymyr Antonov";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "dialout" "podman" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "scanner"
+      "lp"
+      "dialout"
+      "podman"
+    ];
   };
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-  home-manager.users.azazak123 = { pkgs, ... }: {
+  home-manager.users.azazak123 =
+    { pkgs, ... }:
+    {
       imports = [ inputs.nix-doom-emacs-unstraightened.hmModule ];
 
       systemd.user.sessionVariables = {
@@ -22,7 +36,9 @@
       home.username = "azazak123";
       home.homeDirectory = "/home/azazak123";
 
-    home.packages = with pkgs; [
+      home.packages =
+        with pkgs;
+        [
           # Wayland
           wlogout
           wl-clipboard
@@ -62,7 +78,8 @@
           gnome.gnome-boxes
           bemoji
           distrobox
-      ] ++ (with pkgs-unstable; [
+        ]
+        ++ (with pkgs-unstable; [
           hyprland-per-window-layout
 
           lapce
@@ -77,11 +94,8 @@
 
       programs.fuzzel = import ../programs/fuzzel.nix;
 
-    programs.waybar = import ../programs/waybar.nix {
-      inherit pkgs-unstable;
-    };
-    systemd.user.services.waybar.Service.Environment =
-      "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
+      programs.waybar = import ../programs/waybar.nix { inherit pkgs-unstable; };
+      systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
       # Programming
       programs.git = {
@@ -90,9 +104,7 @@
         userEmail = "azazaka2002@gmail.com";
       };
 
-    programs.vscode = import ../programs/vscode.nix {
-      inherit pkgs pkgs-unstable vscodeExt;
-    };
+      programs.vscode = import ../programs/vscode.nix { inherit pkgs pkgs-unstable vscodeExt; };
 
       services.emacs.enable = true;
       programs.doom-emacs = {
@@ -123,13 +135,13 @@
 
       # Enable per-window-layout
       systemd.user.services.hyprland-per-window-layout =
-      import ../services/hyprland-per-window-layout.nix {
-        inherit pkgs pkgs-unstable;
-      };
+        import ../services/hyprland-per-window-layout.nix
+          { inherit pkgs pkgs-unstable; };
 
       # Start Authentication Agent
       systemd.user.services.polkit-gnome-authentication-agent-1 =
-      import ../services/gnome-authentication-agent.nix { inherit pkgs; };
+        import ../services/gnome-authentication-agent.nix
+          { inherit pkgs; };
 
       # Enable ssh agent
       services.gnome-keyring = {
@@ -144,10 +156,7 @@
       services.clipman.enable = true;
 
       # Enable clipboard persistence
-    systemd.user.services.wl-clip-persist =
-      import ../services/wl-clip-persist.nix {
-        inherit pkgs;
-      };
+      systemd.user.services.wl-clip-persist = import ../services/wl-clip-persist.nix { inherit pkgs; };
 
       services.nextcloud-client = {
         enable = true;
