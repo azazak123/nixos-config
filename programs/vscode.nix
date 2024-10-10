@@ -168,6 +168,19 @@ in
     "python.analysis.typeCheckingMode" = "strict";
     "python.linting.pylintEnabled" = true;
     "python.linting.flake8Enabled" = true;
+    "nix.serverPath" = "nil";
+    "nix.serverSettings" = {
+      "nil" = {
+        "formatting" = {
+          "command" = [
+            "nix"
+            "fmt"
+            "--"
+            "-"
+          ];
+        };
+      };
+    };
 
     # Formatters
     "[jsonc]"."editor.defaultFormatter" = "vscode.json-language-features";
@@ -181,5 +194,11 @@ in
       "linesBetweenQueries" = "preserve";
       "reservedWordCase" = "upper";
     };
+    "nix.formatterPath" = [
+      "nix"
+      "fmt"
+      "--"
+      "-"
+    ];
   };
 }
