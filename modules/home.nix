@@ -147,7 +147,10 @@
       # Enable ssh agent
       services.gnome-keyring = {
         enable = true;
-        components = [ "ssh" ];
+        components = [
+          "ssh"
+          "secrets"
+        ];
       };
 
       # Enable notifications
