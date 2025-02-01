@@ -76,7 +76,7 @@
 
           # Other
           polkit_gnome
-          gnome.gnome-boxes
+          gnome-boxes
           bemoji
           distrobox
         ]

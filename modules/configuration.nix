@@ -157,7 +157,7 @@
     htop
     pavucontrol
     brightnessctl
-    gnome.simple-scan
+    simple-scan
   ];
 
   fonts.packages = with pkgs; [

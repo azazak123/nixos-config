@@ -52,13 +52,13 @@
       size = 15;
     };
 
-    live_config_reload = true;
+    general.live_config_reload = true;
 
     window = {
       opacity = 0.5;
     };
 
-    shell = {
+    terminal.shell = {
       program = "fish";
     };
   };

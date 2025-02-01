@@ -3,15 +3,14 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home manager
-    home-manager =
-      {
-        url = "github:nix-community/home-manager/release-24.05";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # VS Code extensions
     nix-vscode-extensions = {
@@ -23,7 +22,15 @@
     nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-vscode-extensions, home-manager, nix-doom-emacs-unstraightened, }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      nix-vscode-extensions,
+      home-manager,
+      nix-doom-emacs-unstraightened,
+    }@inputs:
 
     let
       system = "x86_64-linux";
