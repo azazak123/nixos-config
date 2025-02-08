@@ -36,6 +36,15 @@
       home.username = "azazak123";
       home.homeDirectory = "/home/azazak123";
 
+      home.pointerCursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Original-Ice";
+        size = 36;
+        gtk.enable = true;
+      };
+
+      gtk.enable = true;
+
       home.packages =
         with pkgs;
         [
