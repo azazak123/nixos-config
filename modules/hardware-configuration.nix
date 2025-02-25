@@ -23,7 +23,9 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ ];
+  boot.kernelParams = [
+    "amd_pstate=guided"
+  ];
   boot.supportedFilesystems = [ "ntfs" ];
   boot.extraModprobeConfig = ''
     options iwlwifi 11n_disable=8
