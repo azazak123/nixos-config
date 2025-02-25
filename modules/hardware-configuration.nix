@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -27,10 +26,6 @@
     "amd_pstate=guided"
   ];
   boot.supportedFilesystems = [ "ntfs" ];
-  boot.extraModprobeConfig = ''
-    options iwlwifi 11n_disable=8
-    options iwlwifi disable_11ax=Y
-  '';
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos-root";
