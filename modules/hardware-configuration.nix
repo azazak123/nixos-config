@@ -35,7 +35,11 @@
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos-root";
     fsType = "btrfs";
-    options = [ "subvol=@" ];
+    options = [
+      "subvol=@"
+      "compress=lzo"
+      "noatime"
+    ];
   };
 
   fileSystems."/boot" = {
@@ -46,6 +50,7 @@
   fileSystems."/home" = {
     device = "/dev/disk/by-label/nixos-home";
     fsType = "btrfs";
+    options = [ "compress=lzo" ];
   };
 
   fileSystems."/mnt/storage" = {
