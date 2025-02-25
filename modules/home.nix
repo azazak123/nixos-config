@@ -75,7 +75,6 @@
           spotify
           spotube
           mpv
-          delfin
 
           # Games
           dolphin-emu
@@ -93,6 +92,8 @@
           hyprland-per-window-layout
 
           lapce
+
+          delfin
         ]);
 
       programs.home-manager.enable = true;
