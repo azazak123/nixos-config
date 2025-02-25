@@ -5,6 +5,12 @@
   ...
 }:
 
+let
+  programs = ../../programs;
+  services = ../../services;
+  configs = ../../configs;
+in
+
 {
   users.users.azazak123 = {
     isNormalUser = true;
@@ -101,11 +107,11 @@
       programs.firefox.enable = true;
 
       # Wayland
-      wayland.windowManager.hyprland = import ../programs/hyprland.nix { inherit (pkgs) hyprland; };
+      wayland.windowManager.hyprland = import /${programs}/hyprland.nix { inherit (pkgs) hyprland; };
 
-      programs.fuzzel = import ../programs/fuzzel.nix;
+      programs.fuzzel = import /${programs}/fuzzel.nix;
 
-      programs.waybar = import ../programs/waybar.nix { inherit pkgs-unstable; };
+      programs.waybar = import /${programs}/waybar.nix { inherit pkgs-unstable; };
       systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
       # Programming
@@ -115,12 +121,12 @@
         userEmail = "azazaka2002@gmail.com";
       };
 
-      programs.vscode = import ../programs/vscode.nix { inherit pkgs pkgs-unstable vscodeExt; };
+      programs.vscode = import /${programs}/vscode.nix { inherit pkgs pkgs-unstable vscodeExt; };
 
       services.emacs.enable = true;
       programs.doom-emacs = {
         enable = true;
-        doomDir = ../configs/doom.d;
+        doomDir = /${configs}/doom.d;
       };
 
       programs.helix.enable = true;
@@ -130,7 +136,7 @@
       programs.direnv.enable = true;
       programs.direnv.nix-direnv.enable = true;
 
-      programs.alacritty = import ../programs/alacritty.nix;
+      programs.alacritty = import /${programs}/alacritty.nix;
 
       # Services
       # Enable warm light
@@ -146,12 +152,12 @@
 
       # Enable per-window-layout
       systemd.user.services.hyprland-per-window-layout =
-        import ../services/hyprland-per-window-layout.nix
+        import /${services}/hyprland-per-window-layout.nix
           { inherit pkgs pkgs-unstable; };
 
       # Start Authentication Agent
       systemd.user.services.polkit-gnome-authentication-agent-1 =
-        import ../services/gnome-authentication-agent.nix
+        import /${services}/gnome-authentication-agent.nix
           { inherit pkgs; };
 
       # Enable ssh agent
@@ -164,13 +170,13 @@
       };
 
       # Enable notifications
-      services.dunst = import ../services/dunst.nix;
+      services.dunst = import /${services}/dunst.nix;
 
       # Enable clipboard manager
       services.clipman.enable = true;
 
       # Enable clipboard persistence
-      systemd.user.services.wl-clip-persist = import ../services/wl-clip-persist.nix { inherit pkgs; };
+      systemd.user.services.wl-clip-persist = import /${services}/wl-clip-persist.nix { inherit pkgs; };
 
       services.nextcloud-client = {
         enable = true;

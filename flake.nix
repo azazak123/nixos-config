@@ -50,13 +50,12 @@
       vscodeExt = nix-vscode-extensions.extensions.${system};
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.tomo = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
         modules = [
-          ./modules/configuration.nix
           home-manager.nixosModules.home-manager
-          ./modules/home.nix
+          ./hosts/tomo/configuration.nix
         ];
       };
 
