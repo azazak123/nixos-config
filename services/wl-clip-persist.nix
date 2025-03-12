@@ -3,7 +3,7 @@
 {
   Service = {
     ExecStart = ''
-      ${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard both
+      ${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard regular
     '';
   };
   Install = {
