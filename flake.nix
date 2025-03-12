@@ -59,6 +59,33 @@
         ];
       };
 
+      nixosConfigurations.osaka-jellyfin = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./hosts/osaka/jellyfin.nix
+        ];
+      };
+
+      nixosConfigurations.osaka-nginx = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./hosts/osaka/nginx.nix
+        ];
+      };
+
+      nixosConfigurations.osaka-servarr = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./hosts/osaka/servarr.nix
+        ];
+      };
+
       devShell.${system} = pkgs.mkShell {
         buildInputs = with pkgs; [
           nixfmt-rfc-style
