@@ -172,5 +172,7 @@ in
 
   programs.fish.enable = true;
 
+  programs.git.enable = true;
+
   system.stateVersion = "24.05";
 }

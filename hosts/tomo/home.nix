@@ -115,11 +115,7 @@ in
       systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
       # Programming
-      programs.git = {
-        enable = true;
-        userName = "Volodymyr Antonov";
-        userEmail = "azazaka2002@gmail.com";
-      };
+      programs.git = import /${programs}/git.nix;
 
       programs.vscode = import /${programs}/vscode.nix { inherit pkgs pkgs-unstable vscodeExt; };
 
