@@ -1,5 +1,4 @@
 {
-  pkgs,
   modulesPath,
   inputs,
   lib,
@@ -8,6 +7,14 @@
 }:
 
 let
+  pkgs = import inputs.nixpkgs {
+    system = "x86_64-linux";
+    overlays = [
+      (_: super: {
+        intel-vaapi-driver = super.intel-vaapi-driver.override { enableHybridCodec = true; };
+      })
+    ];
+  };
   programs = ../../programs;
 in
 
@@ -59,9 +66,6 @@ in
     members = [ "jellyfin" ];
   };
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  };
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
