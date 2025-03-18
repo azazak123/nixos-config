@@ -48,10 +48,12 @@
       cpu = {
         format = "CPU:{usage}%";
         tooltip = false;
+        interval = 1;
       };
 
       memory = {
         format = "RAM:{}%";
+        interval = 1;
       };
 
       temperature = {
