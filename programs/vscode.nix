@@ -133,6 +133,7 @@ in
           "cschlosser.doxdocgen"
           "visualstudioexptteam.intellicode-api-usage-examples"
           "visualstudioexptteam.vscodeintellicode"
+          "codeium.codeium"
         ];
       };
     in
@@ -162,7 +163,8 @@ in
     "files.autoSave" = "afterDelay";
     "window.titleBarStyle" = "custom";
     "editor.rulers" = [ 80 ];
-    "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
+    "editor.fontFamily" =
+      "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
     "python.analysis.inlayHints.functionReturnTypes" = true;
     "python.analysis.inlayHints.variableTypes" = true;
     "python.analysis.typeCheckingMode" = "strict";
