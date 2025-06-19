@@ -86,6 +86,15 @@
         ];
       };
 
+      nixosConfigurations.osaka-navidrome = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./hosts/osaka/navidrome.nix
+        ];
+      };
+
       devShell.${system} = pkgs.mkShell {
         buildInputs = with pkgs; [
           nixfmt-rfc-style
