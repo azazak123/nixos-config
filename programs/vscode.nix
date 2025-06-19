@@ -114,6 +114,7 @@ in
           "mads-hartmann.bash-ide-vscode"
           "graphql.vscode-graphql-syntax"
           "graphql.vscode-graphql"
+          "betterthantomorrow.calva"
         ];
       };
 
