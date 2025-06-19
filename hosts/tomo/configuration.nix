@@ -104,6 +104,8 @@ in
     dockerCompat = true;
     dockerSocket.enable = true;
   };
+  # https://github.com/NixOS/nixpkgs/issues/414135
+  security.lsm = lib.mkForce [ ];
 
   # Enable sound
   services.pipewire = {
@@ -140,7 +142,7 @@ in
   ];
 
   fonts.packages = with pkgs; [
-    nerdfonts
+    nerd-fonts.jetbrains-mono
     noto-fonts-emoji
     corefonts
   ];
