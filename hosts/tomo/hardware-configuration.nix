@@ -34,6 +34,7 @@
       "subvol=@"
       "compress=lzo"
       "noatime"
+      "discard=async"
     ];
   };
 
@@ -45,7 +46,10 @@
   fileSystems."/home" = {
     device = "/dev/disk/by-label/nixos-home";
     fsType = "btrfs";
-    options = [ "compress=lzo" ];
+    options = [
+      "compress=lzo"
+      "discard=async"
+    ];
   };
 
   fileSystems."/mnt/storage" = {
@@ -53,7 +57,7 @@
     fsType = "ntfs";
   };
 
-  swapDevices = [ ];
+  swapDevices = [ { label = "nixos-swap"; } ];
 
   hardware.bluetooth.enable = true;
 
