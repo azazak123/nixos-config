@@ -5,7 +5,8 @@
   settings = {
     monitor = [
       "eDP-1, 1920x1080, 1920x0, 1.20"
-      "HDMI-A-1, 1920x1080@100, 0x0, 1"
+      "desc:ASR CL25FF 000000000000, highrr, 0x0, 1"
+      ", preferred, auto, 1"
     ];
 
     misc = {
