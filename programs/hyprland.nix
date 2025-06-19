@@ -115,6 +115,10 @@
       "$mainMod, mouse_down, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
 
+      # Move workspace to monitor with CTRL + number
+      "CTRL, 1, movecurrentworkspacetomonitor, 0"
+      "CTRL, 2, movecurrentworkspacetomonitor, 1"
+
       # Brightness
       ", 232, exec, brightnessctl s 5%-"
       ", 233, exec, brightnessctl s 5%+"
