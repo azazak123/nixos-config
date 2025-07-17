@@ -59,6 +59,15 @@
         ];
       };
 
+      nixosConfigurations.yomi = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./hosts/yomi/configuration.nix
+        ];
+      };
+
       nixosConfigurations.osaka-jellyfin = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
