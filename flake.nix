@@ -59,6 +59,15 @@
         ];
       };
 
+      nixosConfigurations.sakaki = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./hosts/sakaki/configuration.nix
+        ];
+      };
+      
       nixosConfigurations.yomi = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
