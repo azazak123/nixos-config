@@ -69,6 +69,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/mnt/mediatank/downloads" = {
+    device = "mediatank/downloads";
+    fsType = "zfs";
+  };
+  
   fileSystems."/mnt/datavault/vault" = {
     device = "datavault/vault";
     fsType = "zfs";

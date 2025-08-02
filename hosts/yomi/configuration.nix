@@ -120,6 +120,26 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD"; # Or "i965" if using older driver
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };      # Same here
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+      # intel-vaapi-driver # For older processors. LIBVA_DRIVER_NAME=i965
+      libva-vdpau-driver # Previously vaapiVdpau
+      # intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
+      # OpenCL support for intel CPUs before 12th gen
+      # see: https://github.com/NixOS/nixpkgs/issues/356535
+      intel-compute-runtime-legacy1 
+      # vpl-gpu-rt # QSV on 11th gen or newer
+      intel-media-sdk # QSV up to 11th gen
+      intel-ocl # OpenCL support
+    ];
+  };
+
+  users.groups.multimedia = {};
+
   networking = {
     firewall = {
       enable = true;
@@ -255,6 +275,50 @@ in
         dates = [ "Sun 20:00:00" ];
       };
     };
+
+    sonarr = {
+      enable = true;
+      group = "multimedia";
+      openFirewall = true;
+    };
+    
+    radarr = {
+      enable = true;
+      group = "multimedia";
+      openFirewall = true;
+    };
+
+    prowlarr = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    transmission = {
+      enable = true;
+      openFirewall = true;
+      group = "multimedia";
+      settings = {
+        download-dir = "/mnt/mediatank/downloads/transmission/downloaded";
+        incomplete-dir = "/mnt/mediatank/downloads/transmission/.incomplete";
+        umask = 2;
+      };
+    };
+
+    jellyfin = {
+      enable = true;
+      group = "multimedia";
+      openFirewall = true;
+    };
+  
+    jellyseerr = {
+      enable = true;
+      openFirewall = true;
+    };
+  };
+
+   systemd.services.transmission.serviceConfig = {
+    Restart = "always";
+    RestartSec = 30;
   };
 
   systemd.tmpfiles.rules = [
@@ -266,6 +330,13 @@ in
     
     "d /mnt/mediatank/tmp 0777 nobody nogroup -"
     "z /mnt/mediatank/tmp/* 0777 nobody nogroup -"
+
+    "d /mnt/mediatank/downloads/transmission 0775 transmission multimedia - -"
+    "d /mnt/mediatank/downloads/transmission/downloaded 0775 transmission multimedia - -"
+    "d /mnt/mediatank/downloads/transmission/.incomplete 0775 transmission multimedia - -"
+    
+    "d /mnt/mediatank/media/arr/shows 0775 sonarr multimedia - -"
+    "d /mnt/mediatank/media/arr/movies 0775 radarr multimedia - -"
   ];
 
   programs = {
