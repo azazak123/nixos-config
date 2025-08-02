@@ -260,8 +260,12 @@ in
   systemd.tmpfiles.rules = [
     "d /mnt/datavault/photo/immich 0755 immich immich -"
     "d /mnt/datavault/data/seafile 0755 seafile seafile - -"
+    
     "d /mnt/datavault/vault 0777 nobody nogroup -"
+    "z /mnt/datavault/vault/* 0777 nobody nogroup -"
+    
     "d /mnt/mediatank/tmp 0777 nobody nogroup -"
+    "z /mnt/mediatank/tmp/* 0777 nobody nogroup -"
   ];
 
   programs = {
