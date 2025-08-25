@@ -112,13 +112,17 @@ in
 
       programs.firefox.enable = true;
 
+      programs.floorp = {
+        enable = true;
+      };
+
       # Wayland
       wayland.windowManager.hyprland = import /${programs}/hyprland.nix { inherit (pkgs) hyprland; };
 
       programs.fuzzel = import /${programs}/fuzzel.nix;
 
       programs.waybar = import /${programs}/waybar.nix { inherit pkgs-unstable; };
-      
+
       # Programming
       programs.git = import /${programs}/git.nix;
       programs.gh.enable = true;
