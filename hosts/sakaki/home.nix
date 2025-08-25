@@ -121,6 +121,7 @@ in
       
       # Programming
       programs.git = import /${programs}/git.nix;
+      programs.gh.enable = true;
 
       programs.vscode = import /${programs}/vscode.nix { inherit pkgs pkgs-unstable vscodeExt; };
 
