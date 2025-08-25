@@ -115,6 +115,7 @@ in
           "graphql.vscode-graphql-syntax"
           "graphql.vscode-graphql"
           "betterthantomorrow.calva"
+          "leathong.openscad-language-support"
         ];
       };
 

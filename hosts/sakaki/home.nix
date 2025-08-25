@@ -99,6 +99,7 @@ in
           gnome-boxes
           bemoji
           distrobox
+          openscad-unstable
         ]
         ++ (with pkgs-unstable; [
           hyprland-per-window-layout
