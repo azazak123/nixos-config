@@ -69,9 +69,10 @@
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/sakaki/configuration.nix
+          madness.nixosModules.madness
         ];
       };
-      
+
       nixosConfigurations.yomi = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
