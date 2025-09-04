@@ -343,6 +343,10 @@ in
         global = {
           "guest account" = "nobody";
           "map to guest" = "Bad User";
+          "create mask" = "0664";
+          "directory mask" = "0775";
+          "force create mode" = "0664";
+          "force directory mode" = "0775";
         };
 
         tmp = {
@@ -449,34 +453,34 @@ in
       group = "multimedia";
       openFirewall = true;
     };
-  
+
     jellyseerr = {
       enable = true;
       openFirewall = true;
     };
   };
 
-   systemd.services.transmission.serviceConfig = {
+  systemd.services.transmission.serviceConfig = {
     Restart = "always";
     RestartSec = 30;
   };
 
   systemd.tmpfiles.rules = [
-    "d /mnt/datavault/photo/immich 0755 immich immich -"
-    "d /mnt/datavault/data/seafile 0755 seafile seafile - -"
-    
-    "d /mnt/datavault/vault 0777 nobody nogroup -"
-    "z /mnt/datavault/vault/* 0777 nobody nogroup -"
-    
-    "d /mnt/mediatank/tmp 0777 nobody nogroup -"
-    "z /mnt/mediatank/tmp/* 0777 nobody nogroup -"
+    "Z /mnt/datavault/photo/immich 0755 immich immich -"
+    "Z /mnt/datavault/data/seafile 0755 seafile seafile - -"
 
-    "d /mnt/mediatank/downloads/transmission 0775 transmission multimedia - -"
-    "d /mnt/mediatank/downloads/transmission/downloaded 0775 transmission multimedia - -"
-    "d /mnt/mediatank/downloads/transmission/.incomplete 0775 transmission multimedia - -"
-    
-    "d /mnt/mediatank/media/arr/shows 0775 sonarr multimedia - -"
-    "d /mnt/mediatank/media/arr/movies 0775 radarr multimedia - -"
+    "Z /mnt/datavault/vault 0777 nobody nogroup -"
+    # "Z /mnt/datavault/vault/* 0777 nobody nogroup -"
+
+    "Z /mnt/mediatank/tmp 0777 nobody nogroup -"
+    # "Z /mnt/mediatank/tmp/* 0777 nobody nogroup -"
+
+    "Z /mnt/mediatank/downloads/transmission 0775 transmission multimedia - -"
+    # "Z /mnt/mediatank/downloads/transmission/downloaded 0775 transmission multimedia - -"
+    # "Z /mnt/mediatank/downloads/transmission/.incomplete 0775 transmission multimedia - -"
+
+    "Z /mnt/mediatank/media/arr/shows 0775 sonarr multimedia - -"
+    "Z /mnt/mediatank/media/arr/movies 0775 radarr multimedia - -"
   ];
 
   programs = {
