@@ -121,7 +121,9 @@ in
   # networking.firewall.enable = false;
 
   systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD"; # Or "i965" if using older driver
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };      # Same here
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  }; # Same here
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -131,14 +133,14 @@ in
       # intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
       # OpenCL support for intel CPUs before 12th gen
       # see: https://github.com/NixOS/nixpkgs/issues/356535
-      intel-compute-runtime-legacy1 
+      intel-compute-runtime-legacy1
       # vpl-gpu-rt # QSV on 11th gen or newer
       intel-media-sdk # QSV up to 11th gen
       intel-ocl # OpenCL support
     ];
   };
 
-  users.groups.multimedia = {};
+  users.groups.multimedia = { };
 
   networking = {
     firewall = {
@@ -425,7 +427,7 @@ in
       group = "multimedia";
       openFirewall = true;
     };
-    
+
     radarr = {
       enable = true;
       group = "multimedia";
