@@ -146,13 +146,144 @@ in
       allowedTCPPorts = [
         8000
         8082
+        80
+        443
       ];
+    };
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "azazaka2002@gmail.com";
+
+    certs."azazak123.dedyn.io" = {
+      domain = "*.azazak123.dedyn.io";
+      extraDomainNames = [ "azazak123.dedyn.io" ];
+
+      # DNS-01 challenge using desec.io
+      dnsProvider = "desec";
+      dnsPropagationCheck = true;
+
+      # Environment file containing DESEC_TOKEN
+      environmentFile = "/etc/nixos/secrets/acme-desec-env";
+
+      # Group that can read the certificate
+      group = "nginx";
     };
   };
 
   services = {
     nginx = {
       enable = true;
+
+      appendHttpConfig = ''
+        map $http_upgrade $connection_upgrade {
+          default upgrade;
+          "" close;
+        }
+      '';
+
+      virtualHosts = {
+        "azazak123.dedyn.io" = {
+          forceSSL = true;
+          useACMEHost = "azazak123.dedyn.io";
+
+          locations."/" = {
+            return = "301 https://seafile.azazak123.dedyn.io$request_uri";
+          };
+        };
+
+        "jellyfin.azazak123.dedyn.io" = {
+          forceSSL = true;
+          useACMEHost = "azazak123.dedyn.io";
+
+          locations."/" = {
+            extraConfig = ''
+              proxy_pass http://127.0.0.1:8096;
+              proxy_redirect off;
+              proxy_set_header  Host $host;
+              proxy_set_header  X-Real-IP $remote_addr;
+              proxy_set_header  X-Forwarded-Proto https;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header   X-Forwarded-Proto $scheme;
+              client_max_body_size 0;
+              # WebSocket support for Jellyfin
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection $connection_upgrade;
+            '';
+          };
+        };
+
+        "jellyseer.azazak123.dedyn.io" = {
+          forceSSL = true;
+          useACMEHost = "azazak123.dedyn.io";
+
+          locations."/" = {
+            extraConfig = ''
+              proxy_pass http://127.0.0.1:5055;
+              proxy_redirect off;
+              proxy_set_header  Host $host;
+              proxy_set_header  X-Real-IP $remote_addr;
+              proxy_set_header  X-Forwarded-Proto https;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header   X-Forwarded-Proto $scheme;
+              client_max_body_size 0;
+            '';
+          };
+
+        };
+        "immich.azazak123.dedyn.io" = {
+          forceSSL = true;
+          useACMEHost = "azazak123.dedyn.io";
+
+          locations."/" = {
+            extraConfig = ''
+              proxy_pass http://127.0.0.1:2283;
+              proxy_redirect off;
+              proxy_set_header  Host $host;
+              proxy_set_header  X-Real-IP $remote_addr;
+              proxy_set_header  X-Forwarded-Proto https;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header   X-Forwarded-Proto $scheme;
+              client_max_body_size 0;
+            '';
+          };
+        };
+        
+        "seafile.azazak123.dedyn.io" = {
+          forceSSL = true;
+          useACMEHost = "azazak123.dedyn.io";
+
+          locations."/" = {
+            proxyPass = "http://unix:/run/seahub/gunicorn.sock";
+            extraConfig = ''
+              proxy_set_header   Host $host;
+              proxy_set_header   X-Real-IP $remote_addr;
+              proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header   X-Forwarded-Host $server_name;
+              proxy_set_header   X-Forwarded-Proto $scheme;
+              proxy_read_timeout  1200s;
+              client_max_body_size 0;
+            '';
+          };
+
+          locations."/seafhttp/" = {
+            proxyPass = "http://unix:/run/seafile/server.sock";
+            extraConfig = ''
+              rewrite ^/seafhttp(.*)$ $1 break;
+              proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header   Host $host;
+              proxy_connect_timeout  36000s;
+              proxy_read_timeout  36000s;
+              proxy_send_timeout  36000s;
+              send_timeout  36000s;
+              client_max_body_size 0;
+            '';
+          };
+        };
+      };
+
       virtualHosts."_" = {
         listen = [
           {
@@ -189,6 +320,15 @@ in
           };
         };
       };
+    };
+
+    ddclient = {
+      enable = true;
+      username = "azazak123.dedyn.io";
+      server = "update.dedyn.io";
+      domains = [
+        "azazak123.dedyn.io"
+      ];
     };
 
     # Network shares
@@ -261,13 +401,13 @@ in
       adminEmail = "azazaka2002@gmail.com";
       initialAdminPassword = "changeme";
 
-      ccnetSettings.General.SERVICE_URL = "http://192.168.0.106:8082"; # додай http://
+      ccnetSettings.General.SERVICE_URL = "https://seafile.azazak123.dedyn.io";
       seafileSettings.fileserver.host = "unix:/run/seafile/server.sock";
 
       seahubExtraConf = ''
-        CSRF_TRUSTED_ORIGINS = [ "http://192.168.0.106:8082" ];
+        CSRF_TRUSTED_ORIGINS = [ "http://192.168.0.106:8082", "seafile.azazak123.dedyn.io" ]
       '';
-      
+
       dataDir = "/mnt/datavault/data/seafile";
 
       gc = {
