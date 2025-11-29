@@ -12,6 +12,7 @@
 
 let
   programs = ../../programs;
+  services = ../../services;
 in
 
 {
@@ -40,7 +41,6 @@ in
     desktopManager = {
       xfce.enable = true;
     };
-    displayManager.gdm.enable = true;
 
     # Configure keymap in X11
     xkb = {
@@ -49,6 +49,11 @@ in
       options = "grp:alt_shift_toggle";
     };
   };
+
+  services.greetd = import /${services}/greetd.nix { inherit pkgs config; };
+  systemd.tmpfiles.rules = [
+    "d /var/cache/tuigreet 0755 greeter greeter -"
+  ];
 
   environment.xfce.excludePackages = with pkgs.xfce; [ xfce4-notifyd ];
 
