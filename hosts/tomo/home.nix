@@ -158,6 +158,7 @@ in
           { inherit pkgs pkgs-unstable; };
 
       # Start Authentication Agent
+      services.ssh-agent.enable = true;
       systemd.user.services.polkit-gnome-authentication-agent-1 =
         import /${services}/gnome-authentication-agent.nix
           { inherit pkgs; };
