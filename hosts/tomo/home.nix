@@ -82,6 +82,7 @@ in
           hunspellDicts.uk_UA
           hunspellDicts.en_US
           libsForQt5.okular
+          onlyoffice-desktopeditors
 
           # Media
           spotify
