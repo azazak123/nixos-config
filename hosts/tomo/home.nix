@@ -122,7 +122,6 @@ in
       programs.fuzzel = import /${programs}/fuzzel.nix;
 
       programs.waybar = import /${programs}/waybar.nix { inherit pkgs-unstable; };
-      # systemd.user.services.waybar.Service.Environment = "PATH=/run/wrappers/bin:${pkgs.hyprland}/bin";
 
       # Programming
       programs.git = import /${programs}/git.nix;
