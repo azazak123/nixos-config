@@ -100,6 +100,9 @@ in
           gnome-boxes
           bemoji
           distrobox
+
+          # 3D Printing
+          orca-slicer
         ]
         ++ (with pkgs-unstable; [
           hyprland-per-window-layout
