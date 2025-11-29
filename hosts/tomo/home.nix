@@ -67,7 +67,7 @@ in
           wl-clip-persist
 
           # Screenshots
-          grimblast
+          hyprshot
 
           # Communication
           discord
