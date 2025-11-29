@@ -131,7 +131,7 @@ in
         doomDir = /${configs}/doom.d;
       };
 
-      programs.helix.enable = true;
+      programs.helix = import /${programs}/helix.nix;
 
       programs.fish.enable = true;
 
