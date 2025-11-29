@@ -32,9 +32,12 @@
     fsType = "btrfs";
     options = [
       "subvol=@"
-      "compress=lzo"
+      "compress=zstd:1"
       "noatime"
       "discard=async"
+      "space_cache=v2"
+      "ssd"
+      "commit=120"
     ];
   };
 
@@ -47,8 +50,12 @@
     device = "/dev/disk/by-label/nixos-home";
     fsType = "btrfs";
     options = [
-      "compress=lzo"
+      "compress=zstd:1"
+      "noatime"
       "discard=async"
+      "space_cache=v2"
+      "ssd"
+      "commit=120"
     ];
   };
 
