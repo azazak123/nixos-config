@@ -100,9 +100,6 @@ in
   # Enable flatpak
   services.flatpak.enable = true;
 
-  # Enable bluetooth
-  services.blueman.enable = true;
-
   # Enable podman
   virtualisation.podman = {
     enable = true;
@@ -144,6 +141,7 @@ in
     pavucontrol
     brightnessctl
     simple-scan
+    bluetui
   ];
 
   fonts.packages = with pkgs; [
