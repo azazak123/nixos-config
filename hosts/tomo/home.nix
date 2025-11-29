@@ -181,11 +181,6 @@ in
       # Enable clipboard persistence
       systemd.user.services.wl-clip-persist = import /${services}/wl-clip-persist.nix { inherit pkgs; };
 
-      services.nextcloud-client = {
-        enable = true;
-        startInBackground = true;
-      };
-
       services.syncthing = {
         enable = true;
         tray = {
