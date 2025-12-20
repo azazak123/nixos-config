@@ -163,7 +163,7 @@ in
     neofetch
     cpufrequtils
     htop
-    pavucontrol
+    ncpamixer
     brightnessctl
     simple-scan
     bluetui
