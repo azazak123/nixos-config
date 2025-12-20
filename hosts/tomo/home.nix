@@ -122,6 +122,7 @@ in
       programs.fuzzel = import /${programs}/fuzzel.nix;
 
       programs.yazi.enable = true;
+      programs.zellij = import /${programs}/zellij.nix;
       programs.waybar = import /${programs}/waybar.nix { inherit pkgs-unstable; };
 
       # Programming
