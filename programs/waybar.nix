@@ -14,6 +14,7 @@
       modules-left = [ "hyprland/workspaces" ];
       modules-center = [ "hyprland/window" ];
       modules-right = [
+        "bluetooth"
         "pulseaudio"
         "cpu"
         "memory"
@@ -34,6 +35,17 @@
       "hyprland/window" = {
         max-length = 75;
         separate-outputs = true;
+      };
+
+      bluetooth = {
+        format = " {status}";
+        format-disabled = "󰂲 Off";
+        format-connected = " {device_alias}";
+        format-connected-battery = " {device_alias} {device_battery_percentage}%";
+        tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+        tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+        tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+        on-click = "blueman-manager"; 
       };
 
       tray = {
@@ -137,7 +149,7 @@
         color: #FFFFFF;
     }
 
-    #window, #tray, #clock, #battery, #backlight, #temperature, #memory, #cpu, #network, #pulseaudio, #mpd {
+    #window, #tray, #clock, #battery, #backlight, #temperature, #memory, #cpu, #network, #pulseaudio, #mpd, #bluetooth {
         padding: 0 10px;
     }
 
