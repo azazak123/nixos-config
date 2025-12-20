@@ -55,6 +55,7 @@ in
     "d /var/cache/tuigreet 0755 greeter greeter -"
   ];
 
+  madness.enable = true;
   environment.xfce.excludePackages = with pkgs.xfce; [ xfce4-notifyd ];
 
   programs.hyprland = {

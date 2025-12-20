@@ -20,6 +20,8 @@
 
     # Doom emacs
     nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
+
+    madness.url = "github:antithesishq/madness";
   };
 
   outputs =
@@ -56,6 +58,7 @@
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/tomo/configuration.nix
+          madness.nixosModules.madness
         ];
       };
 
