@@ -133,7 +133,6 @@
 
     windowrule = [
       "workspace 1, class:(firefox)"
-      "workspace 6, class:(Alacritty)"
       "workspace 8, class:(org.telegram.desktop)"
       "stayfocused, class:(zoom), initialTitle:(menu window)"
     ];
