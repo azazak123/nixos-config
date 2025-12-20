@@ -70,7 +70,7 @@
       "$mainMod, F, fullscreen, 1"
       "$mainMod, P, pseudo" # dwindle
       "$mainMod, J, togglesplit" # dwindle
-      "CTRL, P, exec, hyprshot -m region --clipboard-only"
+      "$mainMod SHIFT, S, exec, hyprshot -m region --clipboard-only"
       "$mainMod, X, exec, wlogout"
 
       # Dmenu
