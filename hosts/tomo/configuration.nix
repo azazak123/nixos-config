@@ -56,6 +56,33 @@ in
   ];
 
   madness.enable = true;
+
+  console = {
+    earlySetup = true;
+
+    font = "ter-v32n";
+    packages = with pkgs; [ terminus_font ];
+
+    colors = [
+      "292D3E" 
+      "F07178" 
+      "C3E88D" 
+      "FFCB6B" 
+      "82AAFF" 
+      "C792EA" 
+      "89DDFF" 
+      "A6ACCD" 
+      "444267" 
+      "F07178" 
+      "C3E88D" 
+      "FFCB6B" 
+      "82AAFF" 
+      "C792EA" 
+      "89DDFF" 
+      "FFFFFF" 
+    ];
+  };
+
   environment.xfce.excludePackages = with pkgs.xfce; [ xfce4-notifyd ];
 
   programs.hyprland = {
