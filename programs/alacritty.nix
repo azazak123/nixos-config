@@ -3,32 +3,40 @@
   settings = {
     colors = {
       primary = {
-        background = "#000000";
-        foreground = "#ffffff";
+        background = "#292D3E"; 
+        foreground = "#A6ACCD"; 
       };
+
       cursor = {
-        text = "#000000";
-        cursor = "#ffffff";
+        text = "#292D3E";
+        cursor = "#82AAFF"; 
       };
+
+      selection = {
+        text = "#292D3E";
+        background = "#82AAFF";
+      };
+
       normal = {
-        black = "#222827";
-        red = "#d5a8e3";
-        green = "#9c75dd";
-        yellow = "#9898ae";
-        blue = "#654a96";
-        magenta = "#625566";
-        cyan = "#a9d1df";
-        white = "#e6ebe5";
+        black = "#292D3E";
+        red = "#F07178";
+        green = "#C3E88D";
+        yellow = "#FFCB6B";
+        blue = "#82AAFF";
+        magenta = "#C792EA";
+        cyan = "#89DDFF";
+        white = "#A6ACCD";
       };
+
       bright = {
-        black = "#5d6f74";
-        red = "#cd749c";
-        green = "#63b0b0";
-        yellow = "#c0c0dd";
-        blue = "#5786bc";
-        magenta = "#3f3442";
-        cyan = "#849da2";
-        white = "#d9d6cf";
+        black = "#444267"; 
+        red = "#F07178";
+        green = "#C3E88D";
+        yellow = "#FFCB6B";
+        blue = "#82AAFF";
+        magenta = "#C792EA";
+        cyan = "#89DDFF";
+        white = "#FFFFFF";
       };
     };
 
@@ -55,7 +63,14 @@
     general.live_config_reload = true;
 
     window = {
-      opacity = 0.5;
+      opacity = 0.95;
+
+      padding = {
+        x = 10;
+        y = 10;
+      };
+
+      decorations = "None";
     };
 
     terminal.shell = {
