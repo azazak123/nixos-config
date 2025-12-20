@@ -167,6 +167,7 @@ in
     brightnessctl
     simple-scan
     bluetui
+    ncdu
   ];
 
   fonts.packages = with pkgs; [
