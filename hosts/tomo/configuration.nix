@@ -168,6 +168,7 @@ in
     simple-scan
     bluetui
     ncdu
+    yazi
   ];
 
   fonts.packages = with pkgs; [
