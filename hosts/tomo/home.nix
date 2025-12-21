@@ -127,6 +127,7 @@ in
 
       # Programming
       programs.git = import /${programs}/git.nix;
+      programs.gitui = import /${programs}/gitui.nix;
 
       programs.vscode = import /${programs}/vscode.nix { inherit pkgs pkgs-unstable vscodeExt; };
 
