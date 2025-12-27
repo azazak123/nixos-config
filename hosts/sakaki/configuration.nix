@@ -12,8 +12,45 @@
 
 let
   programs = ../../programs;
-in
+  rtl8851bu = config.boot.kernelPackages.callPackage (
+    {
+      stdenv,
+      lib,
+      fetchFromGitHub,
+      kernel,
+      bc,
+    }:
+    stdenv.mkDerivation rec {
+      pname = "rtl8851bu";
+      version = "v1.19.10";
 
+      src = fetchFromGitHub {
+        owner = "fofajardo";
+        repo = "rtl8851bu";
+        rev = "1f1a14492fdac757c64a7efb7846be6374984d09"; # Фіксована версія для стабільності
+        sha256 = "sha256-DohgeyAz3Op7Al5rHHMs4ZAQuTVJxOFRLx6BqzYwE7I=";
+      };
+
+      nativeBuildInputs = [ bc ];
+      hardeningDisable = [ "pic" ];
+
+      makeFlags = [
+        "ARCH=x86_64"
+        "KSRC=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
+        "INSTALL_MOD_PATH=$(out)"
+      ];
+
+      prePatch = ''
+        substituteInPlace Makefile --replace "-Werror" ""
+      '';
+
+      installPhase = ''
+        mkdir -p $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/net/wireless/realtek/rtl8851bu
+        install -m 644 8851bu.ko $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/net/wireless/realtek/rtl8851bu
+      '';
+    }
+  ) { };
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -22,6 +59,16 @@ in
     # User configuration
     ./home.nix
   ];
+
+  hardware.usb-modeswitch.enable = true;
+  boot.kernelModules = [
+    "8851bu"
+  ];
+  boot.extraModulePackages = [ rtl8851bu ];
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="1a2b", RUN+="${pkgs.usb-modeswitch}/bin/usb_modeswitch -K -v 0bda -p 1a2b"
+  '';
+  hardware.bluetooth.enable = true;
 
   # Bootloader.
   boot.loader.grub = {
