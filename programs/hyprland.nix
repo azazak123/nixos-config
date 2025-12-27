@@ -68,6 +68,7 @@
       "$mainMod_SHIFT, 36, exec, thunar"
       "$mainMod, V, togglefloating"
       "$mainMod, F, fullscreen, 1"
+      "$mainMod CTRL, F, fullscreen, 2"
       "$mainMod, P, pseudo" # dwindle
       "$mainMod, J, togglesplit" # dwindle
       "$mainMod SHIFT, S, exec, hyprshot -m region --clipboard-only"
