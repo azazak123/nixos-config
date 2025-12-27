@@ -3,12 +3,12 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,6 +32,7 @@
       nix-vscode-extensions,
       home-manager,
       nix-doom-emacs-unstraightened,
+      madness,
     }@inputs:
 
     let
@@ -117,9 +118,9 @@
       };
 
       devShell.${system} = pkgs.mkShell {
-        buildInputs = with pkgs; [
+        packages = with pkgs; [
           nixfmt-rfc-style
-          nil
+          nixd
         ];
       };
 

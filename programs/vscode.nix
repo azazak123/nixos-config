@@ -12,7 +12,7 @@ in
 {
   enable = true;
   package = pkgs-unstable.vscode;
-  extensions =
+  profiles.default.extensions =
     let
       get-extensions =
         {
@@ -153,7 +153,7 @@ in
       other-extensions
     ];
 
-  userSettings = {
+  profiles.default.userSettings = {
     "extensions.autoUpdate" = false;
     "extensions.autoCheckUpdates" = false;
     "editor.fontSize" = 18;

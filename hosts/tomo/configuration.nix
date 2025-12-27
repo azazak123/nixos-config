@@ -173,7 +173,7 @@ in
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     corefonts
   ];
 

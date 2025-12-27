@@ -53,7 +53,7 @@ in
 
       nix.gc = {
         automatic = true;
-        frequency = "weekly";
+        dates = "weekly";
         options = "--delete-older-than 30d";
       };
 
@@ -81,7 +81,7 @@ in
           hunspell
           hunspellDicts.uk_UA
           hunspellDicts.en_US
-          libsForQt5.okular
+          kdePackages.okular
 
           # Media
           spotify
