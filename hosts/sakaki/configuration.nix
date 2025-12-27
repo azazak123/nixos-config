@@ -84,7 +84,6 @@ in
     desktopManager = {
       xfce.enable = true;
     };
-    displayManager.gdm.enable = true;
 
     # Configure keymap in X11
     xkb = {
@@ -93,6 +92,7 @@ in
       options = "grp:alt_shift_toggle";
     };
   };
+  services.displayManager.gdm.enable = true;
 
   environment.xfce.excludePackages = with pkgs.xfce; [ xfce4-notifyd ];
 
