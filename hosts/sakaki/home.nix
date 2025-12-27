@@ -82,6 +82,7 @@ in
           hunspellDicts.uk_UA
           hunspellDicts.en_US
           kdePackages.okular
+          obsidian
 
           # Media
           spotify
