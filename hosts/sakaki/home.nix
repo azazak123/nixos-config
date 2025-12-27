@@ -83,6 +83,7 @@ in
           hunspellDicts.en_US
           kdePackages.okular
           obsidian
+          onlyoffice-desktopeditors
           orca-slicer
 
           # Media
