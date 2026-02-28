@@ -4,12 +4,13 @@
   settings = {
     theme = "material_palenight";
     editor = {
-    line-number = "relative";
+      line-number = "relative";
       cursor-shape = {
         normal = "block";      
         insert = "bar";        
         select = "underline";  
       };
+      whitespace.render.newline = "all";
     };
     keys = {
       normal = {
