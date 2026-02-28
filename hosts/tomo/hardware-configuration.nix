@@ -20,8 +20,8 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [ "kvm-amd" "msi-ec" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.msi-ec ];
   boot.kernelParams = [
     "amd_pstate=guided"
   ];
