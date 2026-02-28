@@ -193,7 +193,7 @@ in
           useACMEHost = "azazak123.dedyn.io";
 
           locations."/" = {
-            return = "301 https://seafile.azazak123.dedyn.io$request_uri";
+            return = "301 https://filebrowser.azazak123.dedyn.io$request_uri";
           };
         };
 
@@ -235,8 +235,8 @@ in
               client_max_body_size 0;
             '';
           };
-
         };
+
         "immich.azazak123.dedyn.io" = {
           forceSSL = true;
           useACMEHost = "azazak123.dedyn.io";
@@ -254,75 +254,29 @@ in
             '';
           };
         };
-        
-        "seafile.azazak123.dedyn.io" = {
           forceSSL = true;
           useACMEHost = "azazak123.dedyn.io";
 
           locations."/" = {
-            proxyPass = "http://unix:/run/seahub/gunicorn.sock";
             extraConfig = ''
-              proxy_set_header   Host $host;
-              proxy_set_header   X-Real-IP $remote_addr;
-              proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header   X-Forwarded-Host $server_name;
               proxy_set_header   X-Forwarded-Proto $scheme;
-              proxy_read_timeout  1200s;
-              client_max_body_size 0;
-            '';
-          };
-
-          locations."/seafhttp/" = {
-            proxyPass = "http://unix:/run/seafile/server.sock";
-            extraConfig = ''
-              rewrite ^/seafhttp(.*)$ $1 break;
-              proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header   Host $host;
-              proxy_connect_timeout  36000s;
-              proxy_read_timeout  36000s;
-              proxy_send_timeout  36000s;
-              send_timeout  36000s;
               client_max_body_size 0;
             '';
           };
         };
-      };
 
-      virtualHosts."_" = {
-        listen = [
-          {
-            addr = "0.0.0.0";
-            port = 8082;
-          }
-        ];
-        locations = {
-          "/" = {
-            proxyPass = "http://unix:/run/seahub/gunicorn.sock";
+        "filebrowser.azazak123.dedyn.io" = {
+          forceSSL = true;
+          useACMEHost = "azazak123.dedyn.io";
+
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:1212";
+            proxyWebsockets = true;
             extraConfig = ''
-              proxy_set_header   Host $host;
-              proxy_set_header   X-Real-IP $remote_addr;
-              proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header   X-Forwarded-Host $server_name;
-              proxy_set_header   X-Forwarded-Proto $scheme;
-              proxy_read_timeout  1200s;
               client_max_body_size 0;
             '';
           };
-
-          "/seafhttp/" = {
-            proxyPass = "http://unix:/run/seafile/server.sock";
-            extraConfig = ''
-              rewrite ^/seafhttp(.*)$ $1 break;
-              proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header   Host $host;
-              proxy_connect_timeout  36000s;
-              proxy_read_timeout  36000s;
-              proxy_send_timeout  36000s;
-              send_timeout  36000s;
-              client_max_body_size 0;
-            '';
-          };
-        };
+        };      
       };
     };
 
@@ -404,23 +358,15 @@ in
       mediaLocation = "/mnt/datavault/photo/immich";
     };
 
-    seafile = {
+    filebrowser = {
       enable = true;
-      adminEmail = "azazaka2002@gmail.com";
-      initialAdminPassword = "changeme";
-
-      ccnetSettings.General.SERVICE_URL = "https://seafile.azazak123.dedyn.io";
-      seafileSettings.fileserver.host = "unix:/run/seafile/server.sock";
-
-      seahubExtraConf = ''
-        CSRF_TRUSTED_ORIGINS = [ "http://192.168.0.106:8082", "seafile.azazak123.dedyn.io" ]
-      '';
-
-      dataDir = "/mnt/datavault/data/seafile";
-
-      gc = {
-        enable = true;
-        dates = [ "Sun 20:00:00" ];
+      openFirewall = true;
+      user = "nobody";
+      group = "nogroup";
+      settings = {
+        address = "0.0.0.0";
+        port = 1212;
+        root = "/mnt/datavault/vault";
       };
     };
 
@@ -522,7 +468,6 @@ in
 
   systemd.tmpfiles.rules = [
     "Z /mnt/datavault/photo/immich 0755 immich immich -"
-    "Z /mnt/datavault/data/seafile 0755 seafile seafile - -"
 
     "Z /mnt/datavault/vault 0777 nobody nogroup -"
     # "Z /mnt/datavault/vault/* 0777 nobody nogroup -"
