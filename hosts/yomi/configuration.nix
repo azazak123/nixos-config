@@ -255,13 +255,24 @@ in
             '';
           };
         };
+
+        "wishlist.azazak123.dedyn.io" = {
           forceSSL = true;
           useACMEHost = "azazak123.dedyn.io";
 
           locations."/" = {
             extraConfig = ''
+              proxy_pass http://127.0.0.1:3280;
+              proxy_redirect off;
+              proxy_set_header  Host $host;
+              proxy_set_header  X-Real-IP $remote_addr;
+              proxy_set_header  X-Forwarded-Proto https;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
               proxy_set_header   X-Forwarded-Proto $scheme;
               client_max_body_size 0;
+              proxy_buffer_size   128k;
+              proxy_buffers   4 256k;
+              proxy_busy_buffers_size   256k;
             '';
           };
         };
@@ -466,6 +477,21 @@ in
     };
   };
 
+  virtualisation.oci-containers.containers = {
+    wishlist = {
+      image = "ghcr.io/cmintey/wishlist:latest";
+      ports = ["3280:3280"];
+      volumes = [
+        "/home/azazak123/containers/wishlist/uploads:/usr/src/app/uploads"
+        "/home/azazak123/containers/wishlist/data:/usr/src/app/data"
+      ];
+      environment = {
+        ORIGIN = "https://wishlist.azazak123.dedyn.io";
+        DEFAULT_CURRENCY = "UAH";
+      };
+    };
+  };
+
   systemd.services.transmission.serviceConfig = {
     Restart = "always";
     RestartSec = 30;
@@ -486,6 +512,9 @@ in
 
     "Z /mnt/mediatank/media/arr/shows 0775 sonarr multimedia - -"
     "Z /mnt/mediatank/media/arr/movies 0775 radarr multimedia - -"
+    "Z /home/azazak123/containers/wishlist/uploads 0775 root - - -"
+    "Z /home/azazak123/containers/wishlist/data 0775 root - - -"
+
     "Z /var/lib/moonraker 0775 moonraker moonraker - -"
   ];
 
