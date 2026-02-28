@@ -99,6 +99,7 @@ in
     htop
     neofetch
     smartmontools
+    lazygit
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -274,6 +275,10 @@ in
             proxyWebsockets = true;
             extraConfig = ''
               client_max_body_size 0;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
             '';
           };
         };      
