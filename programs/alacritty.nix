@@ -63,7 +63,7 @@
     general.live_config_reload = true;
 
     window = {
-      opacity = 0.95;
+      opacity = 1.0;
 
       padding = {
         x = 10;
