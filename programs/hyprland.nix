@@ -11,6 +11,7 @@
 
     misc = {
       vrr = 1;
+      vfr = true;
     };
 
     xwayland = {
@@ -32,7 +33,7 @@
     decoration = {
       rounding = 5;
       blur = {
-        enabled = true;
+        enabled = false;
         size = 3;
         passes = 1;
         new_optimizations = "on";
@@ -42,6 +43,8 @@
         range = 4;
         render_power = 3;
       };
+      active_opacity = 1.0;
+      inactive_opacity = 1.0;
     };
 
     animations = {
