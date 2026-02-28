@@ -68,7 +68,13 @@
 
   fileSystems."/mnt/storage" = {
     device = "/dev/disk/by-label/storage";
-    fsType = "ntfs";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "noatime"
+      "nofail"
+      "x-systemd.device-timeout=5"
+    ];
   };
 
   swapDevices = [ { label = "nixos-swap"; } ];
