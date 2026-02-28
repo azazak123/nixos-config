@@ -60,17 +60,18 @@
       cpu = {
         format = "CPU:{usage}%";
         tooltip = false;
-        interval = 1;
+        interval = 10;
       };
 
       memory = {
         format = "RAM:{}%";
-        interval = 1;
+        interval = 10;
       };
 
       temperature = {
         format = "{temperatureC}°C {icon}";
         format-icons = [ "" ];
+        interval = 10;
       };
 
       backlight = {
@@ -144,8 +145,8 @@
     }
 
     window#waybar {
-        background: rgba(43, 48, 59, 0.5);
-        border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+        background: rgba(43, 48, 59, 1);
+        border-bottom: 3px solid rgba(100, 114, 125, 1);
         color: #FFFFFF;
     }
 
