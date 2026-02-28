@@ -23,7 +23,14 @@
   boot.kernelModules = [ "kvm-amd" "msi-ec" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.msi-ec ];
   boot.kernelParams = [
+    "amdgpu.gpu_recovery=1"
     "amd_pstate=guided"
+    "libata.force=noncq"
+    "mobile_lpm_policy=1"
+    "nmi_watchdog=0"
+    "nowatchdog"
+    "workqueue.power_efficient=Y"
+    "snd_hda_intel.power_save=1"
   ];
   boot.supportedFilesystems = [ "ntfs" ];
 
