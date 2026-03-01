@@ -68,6 +68,7 @@ in
 
           # Screenshots
           grimblast
+          hyprshot
 
           # Communication
           discord
