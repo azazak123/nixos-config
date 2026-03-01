@@ -405,6 +405,7 @@ in
 
     transmission = {
       enable = true;
+      package = pkgs.transmission_4;
       openFirewall = true;
       group = "multimedia";
       settings = {
