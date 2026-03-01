@@ -13,15 +13,14 @@
 let
   programs = ../../programs;
   services = ../../services;
+  users = ../../users;
 in
-
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
     # User configuration
-    ./home.nix
+    /${users}/azazak123.nix
   ];
 
   # Bootloader.

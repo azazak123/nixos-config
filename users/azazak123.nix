@@ -6,11 +6,10 @@
 }:
 
 let
-  programs = ../../programs;
-  services = ../../services;
-  configs = ../../configs;
+  programs = ../programs;
+  services = ../services;
+  configs = ../configs;
 in
-
 {
   users.users.azazak123 = {
     isNormalUser = true;
@@ -35,7 +34,6 @@ in
 
       systemd.user.sessionVariables = {
         NIXOS_OZONE_WL = "1";
-        SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
         XDG_SESSION_TYPE = "wayland";
       };
 
@@ -67,7 +65,6 @@ in
           wl-clip-persist
 
           # Screenshots
-          grimblast
           hyprshot
 
           # Communication
@@ -85,7 +82,6 @@ in
           kdePackages.okular
           obsidian
           onlyoffice-desktopeditors
-          orca-slicer
 
           # Media
           spotify
@@ -95,8 +91,11 @@ in
           # Games
           dolphin-emu
 
-          #Code
+          # Code
           podman-compose
+
+          # 3D Printing
+          orca-slicer
 
           # Other
           polkit_gnome
@@ -107,52 +106,59 @@ in
         ]
         ++ (with pkgs-unstable; [
           hyprland-per-window-layout
-
           lapce
-
           delfin
         ]);
 
       programs.home-manager.enable = true;
 
+      # Browsers
       programs.firefox.enable = true;
+      programs.floorp.enable = true;
 
-      programs.floorp = {
-        enable = true;
-      };
-
-      # Wayland
+      # Wayland / UI
       wayland.windowManager.hyprland = import /${programs}/hyprland.nix { inherit (pkgs) hyprland; };
-
       programs.fuzzel = import /${programs}/fuzzel.nix;
-
       programs.waybar = import /${programs}/waybar.nix { inherit pkgs-unstable; };
 
-      # Programming
+      # Terminal utilities
+      programs.yazi.enable = true;
+      programs.fzf.enable = true;
+      programs.zellij = import /${programs}/zellij.nix;
+      programs.alacritty = import /${programs}/alacritty.nix;
+      programs.fish.enable = true;
+
+      # Programming / Development
       programs.git = import /${programs}/git.nix;
+      programs.gitui = import /${programs}/gitui.nix;
       programs.gh.enable = true;
-
       programs.vscode = import /${programs}/vscode.nix { inherit pkgs pkgs-unstable vscodeExt; };
+      programs.helix = import /${programs}/helix.nix;
+      
+      programs.direnv.enable = true;
+      programs.direnv.nix-direnv.enable = true;
 
+      # SSH
+      programs.ssh = {
+        enable = true;
+        enableDefaultConfig = false;
+        matchBlocks."*" = {
+          addKeysToAgent = "yes";
+        };
+      };
+
+      services.ssh-agent.enable = true;
+      
+      # Emacs
       services.emacs.enable = true;
       programs.doom-emacs = {
         enable = true;
         doomDir = /${configs}/doom.d;
       };
 
-      programs.helix.enable = true;
-
-      programs.fish.enable = true;
-
-      programs.direnv.enable = true;
-      programs.direnv.nix-direnv.enable = true;
-
-      programs.alacritty = import /${programs}/alacritty.nix;
-
       # Services
-      # Enable warm light
       services.gammastep = {
-        enable = true;
+        enable = false;
         latitude = 50.0;
         longitude = 30.0;
         temperature = {
@@ -161,32 +167,17 @@ in
         };
       };
 
-      # Enable per-window-layout
       systemd.user.services.hyprland-per-window-layout =
         import /${services}/hyprland-per-window-layout.nix
           { inherit pkgs pkgs-unstable; };
 
-      # Start Authentication Agent
       systemd.user.services.polkit-gnome-authentication-agent-1 =
         import /${services}/gnome-authentication-agent.nix
           { inherit pkgs; };
 
-      # Enable ssh agent
-      services.gnome-keyring = {
-        enable = true;
-        components = [
-          "ssh"
-          "secrets"
-        ];
-      };
-
-      # Enable notifications
       services.dunst = import /${services}/dunst.nix;
 
-      # Enable clipboard manager
       services.clipman.enable = true;
-
-      # Enable clipboard persistence
       systemd.user.services.wl-clip-persist = import /${services}/wl-clip-persist.nix { inherit pkgs; };
 
       services.syncthing = {
@@ -199,14 +190,6 @@ in
 
       services.network-manager-applet.enable = true;
 
-      # This value determines the Home Manager release that your
-      # configuration is compatible with. This helps avoid breakage
-      # when a new Home Manager release introduces backwards
-      # incompatible changes.
-      #
-      # You can update Home Manager without changing this value. See
-      # the Home Manager release notes for a list of state version
-      # changes in each release.
       home.stateVersion = "23.05";
     };
 }
