@@ -24,6 +24,11 @@
     madness.url = "github:antithesishq/madness";
 
     stylix.url = "github:nix-community/stylix/release-25.11";
+
+    scroll = {
+      url = "github:AsahiRocks/scroll-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -36,6 +41,7 @@
       nix-doom-emacs-unstraightened,
       madness,
       stylix,
+      scroll
     }@inputs:
 
     let
@@ -64,6 +70,7 @@
           ./hosts/tomo/configuration.nix
           madness.nixosModules.madness
           stylix.nixosModules.stylix
+          scroll.nixosModules.default
         ];
       };
 

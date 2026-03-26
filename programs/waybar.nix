@@ -10,9 +10,8 @@
       height = 30;
       spacing = 10;
 
-      # Choose the order of the modules
-      modules-left = [ "hyprland/workspaces" ];
-      modules-center = [ "hyprland/window" ];
+      modules-left = [ "hyprland/workspaces" "sway/workspaces" ];
+      modules-center = [ "hyprland/window" "sway/window" ];
       modules-right = [
         "bluetooth"
         "pulseaudio"
@@ -60,33 +59,23 @@
       cpu = {
         format = "CPU:{usage}%";
         tooltip = false;
-        interval = 10;
+        interval = 30;
       };
 
       memory = {
         format = "RAM:{}%";
-        interval = 10;
+        interval = 30;
       };
 
       temperature = {
         format = "{temperatureC}°C {icon}";
         format-icons = [ "" ];
-        interval = 10;
+        interval = 30;
       };
 
       backlight = {
         format = "{percent}% {icon}";
-        format-icons = [
-          ""
-          ""
-          ""
-          ""
-          ""
-          ""
-          ""
-          ""
-          ""
-        ];
+        format-icons = [ "" "" "" "" "" "" "" "" "" ];
       };
 
       battery = {
@@ -98,13 +87,7 @@
         format-charging = "{capacity}% 󱐋";
         format-plugged = "{capacity}% ";
         format-alt = "{time} {icon}";
-        format-icons = [
-          ""
-          ""
-          ""
-          ""
-          ""
-        ];
+        format-icons = [ "" "" "" "" "" ];
       };
 
       network = {
@@ -125,11 +108,7 @@
         format-source-muted = "";
         format-icons = {
           headphone = "";
-          default = [
-            ""
-            ""
-            ""
-          ];
+          default = [ "" "" "" ];
         };
         on-click = "pavucontrol";
       };

@@ -23,6 +23,44 @@ in
     /${users}/azazak123.nix
   ];
 
+  programs.scroll = {
+    enable = true;
+    package = inputs.scroll.packages.${pkgs.stdenv.hostPlatform.system}.scroll-git;
+
+    extraSessionCommands = ''
+      # Tell QT, GDK and others to use the Wayland backend by default, X11 if not available
+      export QT_QPA_PLATFORM="wayland;xcb"
+      export GDK_BACKEND="wayland,x11"
+      export SDL_VIDEODRIVER=wayland
+      export CLUTTER_BACKEND=wayland
+
+      # XDG desktop variables to set scroll as the desktop
+      # export XDG_CURRENT_DESKTOP=scroll
+      export XDG_SESSION_TYPE=wayland
+      # export XDG_SESSION_DESKTOP=scroll
+      export XDG_CURRENT_DESKTOP=sway
+      export XDG_SESSION_DESKTOP=sway
+
+      # Configure Electron to use Wayland instead of X11
+      export ELECTRON_OZONE_PLATFORM_HINT=wayland
+    '';
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+
+    config = {
+      sway = {
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = "wlr";
+        "org.freedesktop.impl.portal.Inhibit" = "none";
+      };
+    };
+  };
+
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/material-palenight.yaml";
@@ -214,6 +252,7 @@ in
   services.printing.enable = true;
 
   # Games
+  programs.gamescope.enable = true;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play

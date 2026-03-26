@@ -30,7 +30,10 @@ in
   home-manager.users.azazak123 =
     { pkgs, ... }:
     {
-      imports = [ inputs.nix-doom-emacs-unstraightened.hmModule ];
+      imports = [
+        inputs.nix-doom-emacs-unstraightened.hmModule
+        /${programs}/scroll.nix
+      ];
 
       systemd.user.sessionVariables = {
         NIXOS_OZONE_WL = "1";
@@ -56,9 +59,12 @@ in
           wl-clipboard
           wtype
           wl-clip-persist
+          swaykbdd
 
           # Screenshots
           hyprshot
+          slurp
+          grim
 
           # Communication
           discord
