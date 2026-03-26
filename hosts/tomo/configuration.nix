@@ -52,6 +52,25 @@ in
     };
   };
 
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = [ "*" ];
+        settings = {
+          main = {
+            leftalt = "leftcontrol";
+            rightalt = "rightcontrol";
+            rightcontrol = "rightalt";
+
+            capslock = "overload(alt, esc)";
+            enter = "overload(alt, enter)";
+          };
+        };
+      };
+    };
+  };
+
   # Bootloader.
   boot.loader.grub = {
     enable = true;
@@ -73,8 +92,8 @@ in
     # Configure keymap in X11
     xkb = {
       layout = "us,ua";
-      variant = ",";
-      options = "grp:alt_shift_toggle";
+      variant = "colemak,";
+      options = "grp:menu_toggle";
     };
   };
 
@@ -89,6 +108,7 @@ in
     earlySetup = true;
     font = "ter-v32n";
     packages = with pkgs; [ terminus_font ];
+    useXkbConfig = true;
   };
 
   environment.xfce.excludePackages = with pkgs.xfce; [ xfce4-notifyd ];

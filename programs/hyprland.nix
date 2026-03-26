@@ -1,11 +1,26 @@
 { hyprland }:
+
+let
+  myLayout = "colemak";
+
+  k = if myLayout == "colemak" then {
+    left = "a"; down = "r"; up = "w"; right = "s";
+  } else {
+    left = "a"; down = "s"; up = "w"; right = "d";
+  };
+in
 {
   enable = true;
   package = hyprland;
   settings = {
+    env = [
+      "AQ_DRM_DEVICES,/dev/dri/card2:/dev/dri/card1"
+    ];
     monitor = [
-      "eDP-1, 1920x1080, 1920x0, 1.20"
-      "desc:ASR CL25FF 000000000000, highrr, 0x0, 1"
+      # "eDP-1, disable"
+      "eDP-1, 1920x1080, 1920x0, 1.2"
+      # "desc:ASR CL25FF 000000000000, highrr, 0x0, 1"
+      "desc:ASR CL25FF 000000000000, preferred, 0x0, 1, vrr, 1"
       ", preferred, auto, 1"
     ];
 
@@ -19,8 +34,9 @@
     };
 
     input = {
-      kb_layout = "us, ua";
-      kb_options = "grp:lalt_lshift_toggle";
+      kb_layout = "us,ua";
+      kb_variant = if myLayout == "colemak" then "colemak," else ",";
+      kb_options = "grp:menu_toggle";
     };
 
     general = {
@@ -81,10 +97,10 @@
       "CTRL_SHIFT, E, exec, BEMOJI_PICKER_CMD='fuzzel -d' bemoji -t"
 
       # Move focus with mainMod + arrow keys
-      "$mainMod&ALT, a, movefocus, l"
-      "$mainMod&ALT, d, movefocus, r"
-      "$mainMod&ALT, s, movefocus, d"
-      "$mainMod&ALT, w, movefocus, u"
+      "$mainMod&ALT, ${k.left}, movefocus, l"
+      "$mainMod&ALT, ${k.right}, movefocus, r"
+      "$mainMod&ALT, ${k.down}, movefocus, d"
+      "$mainMod&ALT, ${k.up}, movefocus, u"
 
       # Switch workspaces with mainMod + [0-9]
       "$mainMod, 1, workspace, 1"
@@ -111,8 +127,8 @@
       "$mainMod SHIFT, 0, movetoworkspace, 10"
 
       # Move through existing workspaces
-      "$mainMod, d, workspace, e+1"
-      "$mainMod, a, workspace, e-1"
+      "$mainMod, ${k.right}, workspace, e+1"
+      "$mainMod, ${k.left}, workspace, e-1"
 
       # Scroll through existing workspaces with mainMod + scroll
       "$mainMod, mouse_down, workspace, e+1"
