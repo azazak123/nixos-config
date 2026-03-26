@@ -150,11 +150,21 @@ in
       services.ssh-agent.enable = true;
       
       # Emacs
-      services.emacs.enable = true;
-      programs.doom-emacs = {
+      services.emacs.enable = false;
+      programs.emacs = {
         enable = true;
-        doomDir = /${configs}/doom.d;
+        package = pkgs.emacs-pgtk;
+        extraPackages = epkgs: [
+          epkgs.treesit-grammars.with-all-grammars
+        ];
       };
+      xdg.configFile."emacs/init.el".source = /${configs}/emacs/init.el;
+      xdg.configFile."emacs/early-init.el".source = /${configs}/emacs/early-init.el;
+      xdg.configFile."emacs/modules".source = /${configs}/emacs/modules;
+      # programs.doom-emacs = {
+      #   enable = true;
+      #   doomDir = /${configs}/doom.d;
+      # };
 
       # Services
       services.gammastep = {
