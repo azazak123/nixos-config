@@ -22,6 +22,8 @@
     nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
 
     madness.url = "github:antithesishq/madness";
+
+    stylix.url = "github:nix-community/stylix/release-25.11";
   };
 
   outputs =
@@ -33,6 +35,7 @@
       home-manager,
       nix-doom-emacs-unstraightened,
       madness,
+      stylix,
     }@inputs:
 
     let
@@ -60,6 +63,7 @@
           home-manager.nixosModules.home-manager
           ./hosts/tomo/configuration.nix
           madness.nixosModules.madness
+          stylix.nixosModules.stylix
         ];
       };
 

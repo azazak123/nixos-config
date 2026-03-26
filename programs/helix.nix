@@ -2,7 +2,6 @@
   enable = true;
   defaultEditor = true;
   settings = {
-    theme = "material_palenight";
     editor = {
       line-number = "relative";
       cursor-shape = {

@@ -23,6 +23,35 @@ in
     /${users}/azazak123.nix
   ];
 
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/material-palenight.yaml";
+ 
+    image = config.lib.stylix.pixel "base00";
+
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 24;
+    };
+
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.nerd-fonts.iosevka;
+        name = "Iosevka Nerd Font Propo";
+      };
+      sizes = {
+        applications = 14;
+        terminal = 16;
+        popups = 15;
+      };
+    };
+  };
+
   # Bootloader.
   boot.loader.grub = {
     enable = true;
@@ -58,28 +87,8 @@ in
 
   console = {
     earlySetup = true;
-
     font = "ter-v32n";
     packages = with pkgs; [ terminus_font ];
-
-    colors = [
-      "292D3E" 
-      "F07178" 
-      "C3E88D" 
-      "FFCB6B" 
-      "82AAFF" 
-      "C792EA" 
-      "89DDFF" 
-      "A6ACCD" 
-      "444267" 
-      "F07178" 
-      "C3E88D" 
-      "FFCB6B" 
-      "82AAFF" 
-      "C792EA" 
-      "89DDFF" 
-      "FFFFFF" 
-    ];
   };
 
   environment.xfce.excludePackages = with pkgs.xfce; [ xfce4-notifyd ];

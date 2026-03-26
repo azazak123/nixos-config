@@ -4,10 +4,9 @@
     global = {
       width = "(0, 500)";
       height = 300;
-      offset = "30x30";
+      offset = "(30, 30)";
       origin = "top-right";
-      background = "#2b303b";
-      font = "JetBrainsMono Nerd Font 13";
+      monitor = "keyboard";
       mouse_right_click = "do_action";
     };
   };

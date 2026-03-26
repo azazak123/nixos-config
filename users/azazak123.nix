@@ -40,13 +40,6 @@ in
       home.username = "azazak123";
       home.homeDirectory = "/home/azazak123";
 
-      home.pointerCursor = {
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Original-Ice";
-        size = 36;
-        gtk.enable = true;
-      };
-
       gtk.enable = true;
 
       nix.gc = {
@@ -158,6 +151,7 @@ in
           epkgs.treesit-grammars.with-all-grammars
         ];
       };
+      stylix.targets.emacs.enable = false;
       xdg.configFile."emacs/init.el".source = /${configs}/emacs/init.el;
       xdg.configFile."emacs/early-init.el".source = /${configs}/emacs/early-init.el;
       xdg.configFile."emacs/modules".source = /${configs}/emacs/modules;

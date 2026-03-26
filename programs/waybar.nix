@@ -135,35 +135,20 @@
       };
     };
   };
+
   style = ''
     * {
         border: none;
         border-radius: 0;
-        font-family: JetBrainsMono Nerd Font, EmojiOne Color;
-        font-size: 15px;
         min-height: 0;
-    }
-
-    window#waybar {
-        background: rgba(43, 48, 59, 1);
-        border-bottom: 3px solid rgba(100, 114, 125, 1);
-        color: #FFFFFF;
     }
 
     #window, #tray, #clock, #battery, #backlight, #temperature, #memory, #cpu, #network, #pulseaudio, #mpd, #bluetooth {
         padding: 0 10px;
     }
 
-    #workspaces button.active {
-        background: #64727D;
-        border-bottom: 3px solid #FFFFFF;
-    }
-
     #workspaces button {
         padding: 0 5px;
-        background: transparent;
-        color: #FFFFFF;
-        border-bottom: 3px solid transparent;
     }
   '';
 }
