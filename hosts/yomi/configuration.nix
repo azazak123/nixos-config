@@ -16,6 +16,7 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./compose/excalidraw.nix
   ];
 
   # Use the GRUB 2 boot loader.
@@ -274,6 +275,49 @@ in
           };
         };
 
+        "board.azazak123.dedyn.io" = {
+          forceSSL = true;
+          useACMEHost = "azazak123.dedyn.io";
+
+          locations."/" = {
+            extraConfig = ''
+              proxy_pass http://127.0.0.1:8080;
+              proxy_redirect off;
+              proxy_set_header  Host $host;
+              proxy_set_header  X-Real-IP $remote_addr;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header  X-Forwarded-Proto $scheme;
+
+              client_max_body_size 0;
+              proxy_buffer_size   128k;
+              proxy_buffers   4 256k;
+              proxy_busy_buffers_size   256k;
+            '';
+          };
+
+          locations."/socket.io/" = {
+            extraConfig = ''
+              proxy_pass http://127.0.0.1:8081;
+              proxy_redirect off;
+              proxy_set_header  Host $host;
+              proxy_set_header  X-Real-IP $remote_addr;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header  X-Forwarded-Proto $scheme;
+
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+
+              proxy_buffering off;
+
+              proxy_read_timeout 86400;
+              proxy_send_timeout 86400;
+
+              client_max_body_size 0;
+            '';
+          };
+        };
+
         "filebrowser.azazak123.dedyn.io" = {
           forceSSL = true;
           useACMEHost = "azazak123.dedyn.io";
@@ -289,7 +333,7 @@ in
               proxy_set_header X-Forwarded-Proto $scheme;
             '';
           };
-        };      
+        };
       };
     };
 
