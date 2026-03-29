@@ -499,17 +499,14 @@ in
     "Z /mnt/datavault/photo/immich 0755 immich immich -"
 
     "Z /mnt/datavault/vault 0777 nobody nogroup -"
-    # "Z /mnt/datavault/vault/* 0777 nobody nogroup -"
 
     "Z /mnt/mediatank/tmp 0777 nobody nogroup -"
-    # "Z /mnt/mediatank/tmp/* 0777 nobody nogroup -"
 
     "Z /mnt/mediatank/downloads/transmission 0775 transmission multimedia - -"
-    # "Z /mnt/mediatank/downloads/transmission/downloaded 0775 transmission multimedia - -"
-    # "Z /mnt/mediatank/downloads/transmission/.incomplete 0775 transmission multimedia - -"
 
     "Z /mnt/mediatank/media/arr/shows 0775 sonarr multimedia - -"
     "Z /mnt/mediatank/media/arr/movies 0775 radarr multimedia - -"
+
     "Z /home/azazak123/containers/wishlist/uploads 0775 root - - -"
     "Z /home/azazak123/containers/wishlist/data 0775 root - - -"
 
