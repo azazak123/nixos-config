@@ -8,7 +8,7 @@ let
   } else {
     left = "a"; down = "s"; up = "w"; right = "d";
   };
-  
+
   variant = if myLayout == "colemak" then "colemak," else ",";
 in
 {
@@ -22,10 +22,10 @@ in
     set $mod Mod4
 
     output * adaptive_sync on
-    
+
     output HDMI-A-1 resolution 1920x1080 position 0 0 scale 1
     output eDP-1 resolution 1920x1080 position 1920 0 scale 1.2
-    
+
     input * {
         xkb_layout "us,ua"
         xkb_variant "${variant}"
@@ -102,9 +102,9 @@ in
 
     bindsym Ctrl+F6 output HDMI-A-1 resolution 1920x1080@60Hz position 0 0 scale 1
     bindsym Ctrl+F7 output HDMI-A-1 resolution 1920x1080@100Hz position 0 0 scale 1
-    
+
     bindsym Ctrl+F8 output eDP-1 disable
-    
+
     bindsym Ctrl+F9 output eDP-1 enable, output eDP-1 resolution 1920x1080 position 1920 0 scale 1.2
 
     workspace 1 output HDMI-A-1

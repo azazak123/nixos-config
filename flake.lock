@@ -364,15 +364,15 @@
         "scroll-stable": "scroll-stable"
       },
       "locked": {
-        "lastModified": 1772762565,
-        "narHash": "sha256-/POLz4EvxPT8a0V6G8u8erjRHIvjB0goT4ll2Xo+2nk=",
-        "owner": "AsahiRocks",
+        "lastModified": 1774553553,
+        "narHash": "sha256-Jvf1cM8uxivZEBtu4A4TDKxaVTzcoqcooXu1dajN4qM=",
+        "owner": "Diax170",
         "repo": "scroll-flake",
-        "rev": "279e4e92714ab26c08f3be9c8e7448a7eb7d1b28",
+        "rev": "fd55836c47f8977716c14a914e510e47c3701ce5",
         "type": "github"
       },
       "original": {
-        "owner": "AsahiRocks",
+        "owner": "Diax170",
         "repo": "scroll-flake",
         "type": "github"
       }
@@ -380,11 +380,11 @@
     "scroll-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1772754877,
-        "narHash": "sha256-gI6RexGe98xsThqRHPgQBrc+k3Q7UR1N6CktY9qW0rk=",
+        "lastModified": 1774518505,
+        "narHash": "sha256-9V6bEiDimLfdXBG7Yugza5FsuoIiBilg8TkOUolMBaE=",
         "ref": "master",
-        "rev": "1c2720b0c0f8821680713e78ab4e75cbb559495b",
-        "revCount": 8198,
+        "rev": "d1744307c779df6ab0e381b2dca8f8e421d48d83",
+        "revCount": 8259,
         "type": "git",
         "url": "https://github.com/dawsers/scroll"
       },
@@ -397,16 +397,16 @@
     "scroll-stable": {
       "flake": false,
       "locked": {
-        "lastModified": 1771347627,
-        "narHash": "sha256-fhNC5i9ZHvXWKQY+zDRHr7QovmquU0eLI8/QY3euBnc=",
-        "ref": "refs/tags/1.12.5",
-        "rev": "f265ef29ef3752299f2ef19c154ef1b908515914",
-        "revCount": 8164,
+        "lastModified": 1774099486,
+        "narHash": "sha256-XcHE8QKmpHLYBOY+Jlz9zNeLYnMIJ5Aw/dCGVRUAzWE=",
+        "ref": "refs/tags/1.12.8",
+        "rev": "c18bc40bf4475b9c78b2cedd2ab3a7ab9d89413c",
+        "revCount": 8253,
         "type": "git",
         "url": "https://github.com/dawsers/scroll"
       },
       "original": {
-        "ref": "refs/tags/1.12.5",
+        "ref": "refs/tags/1.12.8",
         "type": "git",
         "url": "https://github.com/dawsers/scroll"
       }
