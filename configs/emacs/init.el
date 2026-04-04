@@ -48,18 +48,23 @@
 (setq select-enable-clipboard t)
 ;; credit: yorickvP on Github
 (setq wl-copy-process nil)
+
 (defun wl-copy (text)
-  (setq wl-copy-process (make-process :name "wl-copy"
-                                      :buffer nil
-                                      :command '("wl-copy" "-f" "-n")
-                                      :connection-type 'pipe
-                                      :noquery t))
-  (process-send-string wl-copy-process text)
-  (process-send-eof wl-copy-process))
+  (let ((default-directory "~/"))
+    (setq wl-copy-process (make-process :name "wl-copy"
+                                        :buffer nil
+                                        :command '("wl-copy" "-f" "-n")
+                                        :connection-type 'pipe
+                                        :noquery t))
+    (process-send-string wl-copy-process text)
+    (process-send-eof wl-copy-process)))
+
 (defun wl-paste ()
-  (if (and wl-copy-process (process-live-p wl-copy-process))
-      nil ; should return nil if we're the current paste owner
-      (shell-command-to-string "wl-paste -n | tr -d \r")))
+  (let ((default-directory "~/"))
+    (if (and wl-copy-process (process-live-p wl-copy-process))
+        nil ; should return nil if we're the current paste owner
+      (shell-command-to-string "wl-paste -n | tr -d \r"))))
+
 (setq interprogram-cut-function 'wl-copy)
 (setq interprogram-paste-function 'wl-paste)
 
@@ -129,7 +134,6 @@ If the new path's directories does not exist, create them."
 (use-package dtrt-indent
   :ensure t
   :config
-  ;; Вмикаємо цю магію глобально для всіх файлів
   (dtrt-indent-global-mode 1))
 
 ;; Misc. UI tweaks
