@@ -1,21 +1,25 @@
+{ ... }:
+
 {
-  enable = true;
-  settings = {
-    general.live_config_reload = true;
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      general.live_config_reload = true;
 
-    window = {
-      opacity = 1.0;
+      window = {
+        opacity = 1.0;
 
-      padding = {
-        x = 10;
-        y = 10;
+        padding = {
+          x = 10;
+          y = 10;
+        };
+
+        decorations = "None";
       };
 
-      decorations = "None";
-    };
-
-    terminal.shell = {
-      program = "fish";
+      terminal.shell = {
+        program = "fish";
+      };
     };
   };
 }

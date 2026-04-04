@@ -1,9 +1,13 @@
+{ ... }:
+
 {
-  enable = true;
-  settings = {
-    main = {
-      layer = "overlay";
-      width = 50;
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        layer = "overlay";
+        width = 50;
+      };
     };
   };
 }

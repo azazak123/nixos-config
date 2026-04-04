@@ -5,11 +5,6 @@
   ...
 }:
 
-let
-  programs = ../programs;
-  services = ../services;
-  dotfiles = ../dotfiles;
-in
 {
   users.users.azazak123 = {
     isNormalUser = true;
@@ -26,13 +21,42 @@ in
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { 
+    inherit pkgs-unstable vscodeExt inputs;
+  };
 
   home-manager.users.azazak123 =
-    { pkgs, ... }:
+    { pkgs, pkgs-unstable, ... }:
     {
       imports = [
+        # External inputs
         inputs.nix-doom-emacs-unstraightened.hmModule
-        /${programs}/scroll.nix
+
+        # Desktop environment
+        ../programs/hyprland.nix
+        ../programs/scroll.nix
+        ../programs/waybar.nix
+        ../programs/fuzzel.nix
+
+        # Terminal
+        ../programs/alacritty.nix
+        ../programs/zellij.nix
+
+        # Browsers
+        ../programs/firefox.nix
+        ../programs/floorp.nix
+
+        # Development
+        ../programs/vscode.nix
+        ../programs/helix.nix
+        ../programs/emacs.nix
+        ../programs/git.nix
+
+        # Services
+        ../services/dunst.nix
+        ../services/gnome-authentication-agent.nix
+        ../services/hyprland-per-window-layout.nix
+        ../services/wl-clip-persist.nix
       ];
 
       systemd.user.sessionVariables = {
@@ -97,101 +121,22 @@ in
           orca-slicer
 
           # Other
-          polkit_gnome
           gnome-boxes
           bemoji
           distrobox
           openscad-unstable
-        ]
-        ++ (with pkgs-unstable; [
-          hyprland-per-window-layout
-          lapce
-          delfin
-        ]);
+        ];
 
       programs.home-manager.enable = true;
-
-      # Browsers
-      stylix.targets.firefox.profileNames = [ "azazak123" ];
-      stylix.targets.floorp.profileNames = [ "azazak123" ];
-
-      programs.floorp = {
-        enable = true;
-        profiles.azazak123 = {
-          isDefault = true;
-          settings = {
-            "browser.startup.page" = 3;
-            "browser.sessionstore.interval" = 600000;
-            "browser.download.useDownloadDir" = false;
-            "browser.tabs.closeWindowWithLastTab" = false;
-            "signon.rememberSignons" = false;
-            "privacy.donottrackheader.enabled" = true;
-            "network.dns.disablePrefetch" = true;
-            "network.prefetch-next" = false;
-            "network.http.speculative-parallel-limit" = 0;
-            "toolkit.telemetry.enabled" = false;
-            "toolkit.telemetry.unified" = false;
-            "browser.ping-centre.telemetry" = false;
-            "experiments.supported" = false;
-            "network.allow-experiments" = false;
-            "privacy.userContext.enabled" = true;
-            "privacy.userContext.ui.enabled" = true;
-            "media.ffmpeg.vaapi.enabled" = true;
-          };
-        };
-      };
-
-      programs.firefox = {
-        enable = true;
-        profiles.azazak123 = {
-          isDefault = true;
-          settings = {
-            "browser.startup.page" = 3;
-            "browser.sessionstore.interval" = 600000;
-            "browser.download.useDownloadDir" = false;
-            "browser.tabs.closeWindowWithLastTab" = false;
-            "signon.rememberSignons" = false;
-            "privacy.donottrackheader.enabled" = true;
-            "network.dns.disablePrefetch" = true;
-            "network.prefetch-next" = false;
-            "network.http.speculative-parallel-limit" = 0;
-            "toolkit.telemetry.enabled" = false;
-            "toolkit.telemetry.unified" = false;
-            "browser.ping-centre.telemetry" = false;
-            "experiments.supported" = false;
-            "network.allow-experiments" = false;
-            "privacy.userContext.enabled" = true;
-            "privacy.userContext.ui.enabled" = true;
-            "media.ffmpeg.vaapi.enabled" = true;
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          };
-
-          userChrome = ''
-            #TabsToolbar {
-              visibility: collapse !important;
-            }
-          '';
-        };
-      };
-
-      # Wayland / UI
-      wayland.windowManager.hyprland = import /${programs}/hyprland.nix { inherit (pkgs) hyprland; };
-      programs.fuzzel = import /${programs}/fuzzel.nix;
-      programs.waybar = import /${programs}/waybar.nix { inherit pkgs-unstable; };
 
       # Terminal utilities
       programs.yazi.enable = true;
       programs.fzf.enable = true;
-      programs.zellij = import /${programs}/zellij.nix;
-      programs.alacritty = import /${programs}/alacritty.nix;
       programs.fish.enable = true;
 
       # Programming / Development
-      programs.git = import /${programs}/git.nix;
-      programs.gitui = import /${programs}/gitui.nix;
+      programs.gitui.enable = true;
       programs.gh.enable = true;
-      programs.vscode = import /${programs}/vscode.nix { inherit pkgs pkgs-unstable vscodeExt; };
-      programs.helix = import /${programs}/helix.nix;
       
       programs.direnv.enable = true;
       programs.direnv.nix-direnv.enable = true;
@@ -207,47 +152,8 @@ in
 
       services.ssh-agent.enable = true;
 
-      # Emacs
-      services.emacs.enable = false;
-      programs.emacs = {
-        enable = true;
-        package = pkgs.emacs-pgtk;
-        extraPackages = epkgs: [
-          epkgs.treesit-grammars.with-all-grammars
-        ];
-      };
-      stylix.targets.emacs.enable = false;
-      xdg.configFile."emacs/init.el".source = /${dotfiles}/emacs/init.el;
-      xdg.configFile."emacs/early-init.el".source = /${dotfiles}/emacs/early-init.el;
-      xdg.configFile."emacs/modules".source = /${dotfiles}/emacs/modules;
-      # programs.doom-emacs = {
-      #   enable = true;
-      #   doomDir = /${dotfiles}/doom.d;
-      # };
-
       # Services
-      services.gammastep = {
-        enable = false;
-        latitude = 50.0;
-        longitude = 30.0;
-        temperature = {
-          day = 4000;
-          night = 4000;
-        };
-      };
-
-      systemd.user.services.hyprland-per-window-layout =
-        import /${services}/hyprland-per-window-layout.nix
-          { inherit pkgs pkgs-unstable; };
-
-      systemd.user.services.polkit-gnome-authentication-agent-1 =
-        import /${services}/gnome-authentication-agent.nix
-          { inherit pkgs; };
-
-      services.dunst = import /${services}/dunst.nix;
-
       services.clipman.enable = true;
-      systemd.user.services.wl-clip-persist = import /${services}/wl-clip-persist.nix { inherit pkgs; };
 
       services.syncthing = {
         enable = true;
