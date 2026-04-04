@@ -221,7 +221,6 @@
   :ensure t
   :defer t
   :init
-  (puni-global-mode)
   (add-hook 'term-mode-hook #'puni-disable-puni-mode)
   :bind (
          ("C-c e s" . puni-slurp-forward)
@@ -262,6 +261,11 @@
          ("C-<"         . mc/mark-previous-like-this)
          ("C-c C-<"     . mc/mark-all-like-this)))
 
+(use-package ws-butler
+  :ensure t
+  :config
+  (ws-butler-global-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Environment
@@ -271,6 +275,11 @@
 (use-package envrc
   :hook (after-init . envrc-global-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;   Posframe
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package vertico-posframe
   :ensure t
