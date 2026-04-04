@@ -8,7 +8,7 @@
 let
   programs = ../programs;
   services = ../services;
-  configs = ../configs;
+  dotfiles = ../dotfiles;
 in
 {
   users.users.azazak123 = {
@@ -217,12 +217,12 @@ in
         ];
       };
       stylix.targets.emacs.enable = false;
-      xdg.configFile."emacs/init.el".source = /${configs}/emacs/init.el;
-      xdg.configFile."emacs/early-init.el".source = /${configs}/emacs/early-init.el;
-      xdg.configFile."emacs/modules".source = /${configs}/emacs/modules;
+      xdg.configFile."emacs/init.el".source = /${dotfiles}/emacs/init.el;
+      xdg.configFile."emacs/early-init.el".source = /${dotfiles}/emacs/early-init.el;
+      xdg.configFile."emacs/modules".source = /${dotfiles}/emacs/modules;
       # programs.doom-emacs = {
       #   enable = true;
-      #   doomDir = /${configs}/doom.d;
+      #   doomDir = /${dotfiles}/doom.d;
       # };
 
       # Services

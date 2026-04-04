@@ -81,6 +81,8 @@
           home-manager.nixosModules.home-manager
           ./hosts/sakaki/configuration.nix
           madness.nixosModules.madness
+          stylix.nixosModules.stylix
+          scroll.nixosModules.default
         ];
       };
 

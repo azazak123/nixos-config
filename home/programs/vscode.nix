@@ -157,16 +157,16 @@ in
   profiles.default.userSettings = {
     "extensions.autoUpdate" = false;
     "extensions.autoCheckUpdates" = false;
-    "editor.fontSize" = 18;
+    # "editor.fontSize" = 18;
     "editor.formatOnSave" = true;
-    "workbench.colorTheme" = "Palenight Theme";
+    # "workbench.colorTheme" = "Palenight Theme";
     "workbench.iconTheme" = "material-icon-theme";
     "terminal.integrated.defaultProfile.linux" = "fish";
     "files.autoSave" = "afterDelay";
     "window.titleBarStyle" = "custom";
     "editor.rulers" = [ 80 ];
-    "editor.fontFamily" =
-      "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
+    # "editor.fontFamily" =
+      # "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'EmojiOne Color'";
     "python.analysis.inlayHints.functionReturnTypes" = true;
     "python.analysis.inlayHints.variableTypes" = true;
     "python.analysis.typeCheckingMode" = "strict";
