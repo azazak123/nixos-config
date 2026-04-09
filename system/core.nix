@@ -32,6 +32,9 @@
     bluetui
     ncdu
     yazi
+    zip
+    unzip
+    ripgrep
   ];
 
   madness.enable = true;
