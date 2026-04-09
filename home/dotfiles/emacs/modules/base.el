@@ -44,6 +44,8 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+(setq set-mark-command-repeat-pop t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Power-ups: Embark and Consult
@@ -302,6 +304,14 @@
 
   (add-hook 'after-load-theme-hook #'my/update-whitespace-faces)
   (my/update-whitespace-faces))
+
+;; Kill ring and clipboard behavior
+(setq save-interprogram-paste-before-kill t)
+(setq kill-do-not-save-duplicates t)
+
+;; Regex builder
+(setq reb-re-syntax 'string)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Environment

@@ -39,8 +39,24 @@
 (setopt auto-revert-check-vc-info t)
 (global-auto-revert-mode)
 
-;; Save history of minibuffer
-(savehist-mode)
+(use-package savehist
+  :ensure nil
+  :init
+  (setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
+  (savehist-mode)
+  :config
+  ;; Strip properties from kill-ring before saving to keep savehist file clean
+  (add-hook 'savehist-save-hook
+            (lambda ()
+              (setq kill-ring
+                    (mapcar #'substring-no-properties
+                            (cl-remove-if-not #'stringp kill-ring))))))
+
+(save-place-mode 1)
+
+(advice-add 'save-place-find-file-hook :after
+            (lambda (&rest _)
+              (when buffer-file-name (ignore-errors (recenter)))))
 
 ;; Fix archaic defaults
 (setopt sentence-end-double-space nil)
@@ -153,6 +169,10 @@ If the new path's directories does not exist, create them."
 ;; Modes to highlight the current line with
 (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
+
+(setq-default cursor-in-non-selected-windows nil)
+(setq highlight-nonselected-windows nil)
+(setq window-combination-resize t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
