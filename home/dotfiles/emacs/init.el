@@ -120,7 +120,6 @@ If the new path's directories does not exist, create them."
 (setopt x-underline-at-descent-line nil)           ; Prettier underlines
 (setopt switch-to-buffer-obey-display-actions t)   ; Make switching buffers more consistent
 
-(setopt show-trailing-whitespace t)      ; Underline trailing spaces
 (setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
 
 ;; Enable horizontal scrolling

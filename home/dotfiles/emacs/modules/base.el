@@ -266,6 +266,42 @@
   :config
   (ws-butler-global-mode))
 
+(use-package whitespace
+  :ensure nil
+  :hook ((prog-mode . whitespace-mode)
+         (text-mode . whitespace-mode)
+         (conf-mode . whitespace-mode))
+  :init
+  (setq-default fill-column 80)
+  (setq-default whitespace-style '(face
+                                   tabs
+                                   trailing
+                                   space-before-tab
+                                   empty
+                                   space-mark
+                                   tab-mark
+                                   spaces
+                                   lines-tail))
+  (setq-default whitespace-display-mappings
+                '((space-mark   ?\     [?·]     [?.])
+                  (tab-mark     ?\t    [?→ ?\t] [?\\ ?\t])))
+
+  :config
+  (defun my/update-whitespace-faces ()
+    (let* ((bg-color (or (face-background 'default nil t) "#292d3e"))
+           (is-dark  (eq (frame-parameter nil 'background-mode) 'dark))
+           (ws-color (if is-dark
+                         (color-lighten-name bg-color 50)
+                       (color-darken-name bg-color 50))))
+      (custom-set-faces
+       `(whitespace-space     ((t (:foreground ,ws-color))))
+       `(whitespace-tab       ((t (:foreground ,ws-color))))
+       '(whitespace-trailing         ((t (:inherit error :underline nil))))
+       '(whitespace-space-before-tab ((t (:inherit warning))))
+       '(whitespace-empty            ((t (:inherit warning :underline t)))))))
+
+  (add-hook 'after-load-theme-hook #'my/update-whitespace-faces)
+  (my/update-whitespace-faces))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Environment
