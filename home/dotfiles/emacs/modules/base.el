@@ -331,3 +331,46 @@
   :ensure t
   :config
   (transient-posframe-mode 1))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;   TRAMP (Remote Editing Performance)
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package tramp
+  :ensure nil
+  :config
+  ;; Network and performance optimizations
+  (setq remote-file-name-inhibit-locks t
+        tramp-use-scp-direct-remote-copying t
+        remote-file-name-inhibit-auto-save-visited t)
+
+  (setq tramp-copy-size-limit (* 1024 1024)
+        tramp-verbose 2)
+
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
+  ;; Async processes for LSP and Magit
+  (connection-local-set-profile-variables
+   'remote-direct-async-process
+   '((tramp-direct-async-process . t)))
+
+  (connection-local-set-profiles
+   '(:application tramp :protocol "scp")
+   'remote-direct-async-process)
+
+  ;; Fixes for Magit and SSH compilation
+  (setq magit-tramp-pipe-stty-settings 'pty)
+  (with-eval-after-load 'compile
+    (remove-hook 'compilation-mode-hook #'tramp-compile-disable-ssh-controlmaster-options))
+
+  ;; Eat terminal remote fallback
+  (connection-local-set-profile-variables
+   'remote-eat-shell-profile
+   '((explicit-shell-file-name . "/bin/bash")
+     (eat-shell                  . "/bin/bash")))
+
+  (connection-local-set-profiles
+   '(:application tramp)
+   'remote-eat-shell-profile))
