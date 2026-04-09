@@ -327,20 +327,24 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package vertico-posframe
-  :ensure t
-  :config
-  (vertico-posframe-mode 1))
+;; https://www.reddit.com/r/emacs/comments/1pwur1u/childframe_graphical_bug_content_not_rendered/
+;; (use-package vertico-posframe
+;;   :if (display-graphic-p)
+;;   :ensure t
+;;   :config
+;;   (vertico-posframe-mode 1))
 
-(use-package which-key-posframe
-  :ensure t
-  :config
-  (which-key-posframe-mode 1))
+;; (use-package which-key-posframe
+;;   :if (display-graphic-p)
+;;   :ensure t
+;;   :config
+;;   (which-key-posframe-mode 1))
 
-(use-package transient-posframe
-  :ensure t
-  :config
-  (transient-posframe-mode 1))
+;; (use-package transient-posframe
+;;   :if (display-graphic-p)
+;;   :ensure t
+;;   :config
+;;   (transient-posframe-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
