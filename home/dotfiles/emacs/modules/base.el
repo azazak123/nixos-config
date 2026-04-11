@@ -252,7 +252,10 @@
 
 (use-package treesit-auto
   :ensure t
+  :custom
+  (treesit-auto-install nil)
   :config
+  (setq treesit-auto-langs (delq 'clojure treesit-auto-langs))
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
 

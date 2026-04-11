@@ -164,15 +164,8 @@
   :config
   (setq erlang-compile-use-rebar t))
 
-(use-package clojure-ts-mode
-  :ensure t
-  :mode (("\\.clj\\'" . clojure-ts-mode)
-         ("\\.cljs\\'" . clojurescript-ts-mode)
-         ("\\.cljc\\'" . clojurec-ts-mode)
-         ("\\.edn\\'"  . clojure-ts-mode))
-  :hook ((clojure-ts-mode . eglot-ensure)
-         (clojurescript-ts-mode . eglot-ensure)
-         (clojurec-ts-mode . eglot-ensure)))
+(use-package clojure-mode
+  :ensure t)
 
 (use-package cider
   :ensure t
