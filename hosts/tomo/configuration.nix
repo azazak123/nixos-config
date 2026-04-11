@@ -34,6 +34,13 @@
     efiSupport = true;
     useOSProber = true;
   };
+  boot.initrd.systemd.enable = true;
+
+  boot.zswap = {
+    enable = true;
+    compressor = "lz4";
+    maxPoolPercent = 20;
+  };
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
