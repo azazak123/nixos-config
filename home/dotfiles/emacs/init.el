@@ -37,7 +37,7 @@
 ;; https://todo.sr.ht/~ashton314/emacs-bedrock/11
 (setopt auto-revert-interval 5)
 (setopt auto-revert-check-vc-info t)
-(global-auto-revert-mode)
+(global-auto-revert-mode -1)
 
 (use-package savehist
   :ensure nil
