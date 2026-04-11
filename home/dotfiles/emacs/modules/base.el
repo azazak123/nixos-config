@@ -352,6 +352,16 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun memoize-remote (key cache orig-fn &rest args)
+  "Memoize a value if the key is a remote path."
+  (if (and key (file-remote-p key))
+      (if-let ((current (assoc key (symbol-value cache))))
+          (cdr current)
+        (let ((current (apply orig-fn args)))
+          (set cache (cons (cons key current) (symbol-value cache)))
+          current))
+    (apply orig-fn args)))
+
 (use-package tramp
   :ensure nil
   :config
@@ -374,20 +384,56 @@
    '(:application tramp :protocol "scp")
    'remote-direct-async-process)
 
+  (connection-local-set-profiles
+   '(:application tramp)
+   'remote-eat-shell-profile)
+
   ;; Fixes for Magit and SSH compilation
-  (setq magit-tramp-pipe-stty-settings 'pty)
   (with-eval-after-load 'compile
     (remove-hook 'compilation-mode-hook #'tramp-compile-disable-ssh-controlmaster-options))
 
-  ;; Eat terminal remote fallback
-  (connection-local-set-profile-variables
-   'remote-eat-shell-profile
-   '((explicit-shell-file-name . "/bin/bash")
-     (eat-shell                  . "/bin/bash")))
+  (defun memoize-remote (key cache orig-fn &rest args)
+    "Memoize a value if the key is a remote path."
+    (if (and key (file-remote-p key))
+        (if-let ((current (assoc key (symbol-value cache))))
+            (cdr current)
+          (let ((current (apply orig-fn args)))
+            (set cache (cons (cons key current) (symbol-value cache)))
+            current))
+      (apply orig-fn args)))
 
+  (defvar project-current-cache nil)
+  (defun memoize-project-current (orig &optional prompt directory)
+    (memoize-remote (or directory project-current-directory-override default-directory)
+                    'project-current-cache orig prompt directory))
+  (advice-add 'project-current :around #'memoize-project-current)
+
+  (defvar vc-git-root-cache nil)
+  (defun memoize-vc-git-root (orig file)
+    (let ((value (memoize-remote (file-name-directory file) 'vc-git-root-cache orig file)))
+      (when (null (cdr (car vc-git-root-cache)))
+        (setq vc-git-root-cache (cdr vc-git-root-cache)))
+      value))
+  (advice-add 'vc-git-root :around #'memoize-vc-git-root)
+
+  (setq vc-ignore-dir-regexp
+        (format "\\(%s\\)\\|\\(%s\\)"
+                vc-ignore-dir-regexp
+                tramp-file-name-regexp))
+
+  (connection-local-set-profile-variables
+   'remote-dired-profile
+   '((dired-check-symlinks . nil)))
   (connection-local-set-profiles
    '(:application tramp)
-   'remote-eat-shell-profile))
+   'remote-dired-profile)
+  )
+
+(use-package tramp-hlo
+    :ensure t
+    :config
+    (tramp-hlo-setup)
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

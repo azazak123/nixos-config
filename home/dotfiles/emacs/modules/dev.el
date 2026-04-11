@@ -60,7 +60,19 @@
 ;; Magit: best Git client to ever exist
 (use-package magit
   :ensure t
-  :bind (("C-x g" . magit-status)))
+  :bind (("C-x g" . magit-status))
+  :config
+  (setq magit-tramp-pipe-stty-settings 'pty)
+  (setq magit-commit-show-diff nil)
+  (setq magit-branch-direct-configure nil)
+  (setq magit-refresh-status-buffer nil)
+
+  (defvar magit-toplevel-cache nil)
+  (defun memoize-magit-toplevel (orig &optional directory)
+    (memoize-remote (or directory default-directory)
+                    'magit-toplevel-cache orig directory))
+  (advice-add 'magit-toplevel :around #'memoize-magit-toplevel))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
