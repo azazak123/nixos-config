@@ -388,3 +388,17 @@
   (connection-local-set-profiles
    '(:application tramp)
    'remote-eat-shell-profile))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;   Terminal
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Enable Kitty Keyboard Protocol for advanced terminal keybindings
+(use-package kkp
+  :ensure t
+  :hook (tty-setup . global-kkp-mode)
+  :config
+  ;; (setq kkp-alt-modifier 'alt)
+  )

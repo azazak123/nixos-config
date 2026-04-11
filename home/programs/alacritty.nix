@@ -6,6 +6,13 @@
     settings = {
       general.live_config_reload = true;
 
+      keyboard.bindings = [
+        { key = "Minus"; mods = "Control"; action = "ReceiveChar"; }
+        { key = "Equals"; mods = "Control"; action = "ReceiveChar"; }
+        { key = "Plus"; mods = "Control"; action = "ReceiveChar"; }
+        { key = "Key0"; mods = "Control"; action = "ReceiveChar"; }
+      ];
+
       window = {
         opacity = 1.0;
 
