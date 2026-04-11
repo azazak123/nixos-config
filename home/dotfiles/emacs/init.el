@@ -236,6 +236,7 @@ If the new path's directories does not exist, create them."
 (load-file (expand-file-name "modules/base.el" user-emacs-directory)) 
 (load-file (expand-file-name "modules/dev.el" user-emacs-directory)) 
 (load-file (expand-file-name "modules/org.el" user-emacs-directory))
+(load-file (expand-file-name "modules/writer.el" user-emacs-directory))
 (load-file (expand-file-name "modules/meow-keys.el" user-emacs-directory)) 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

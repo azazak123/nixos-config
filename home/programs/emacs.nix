@@ -14,6 +14,7 @@
     package = pkgs.emacs-pgtk;
     extraPackages = epkgs: [
       epkgs.treesit-grammars.with-all-grammars
+      epkgs.jinx
     ];
   };
 

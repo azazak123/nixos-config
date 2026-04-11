@@ -102,6 +102,7 @@
           hunspell
           hunspellDicts.uk_UA
           hunspellDicts.en_US
+          enchant
           kdePackages.okular
           obsidian
           onlyoffice-desktopeditors
