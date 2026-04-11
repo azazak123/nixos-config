@@ -154,6 +154,11 @@
         settings = {
           "*" = {
             AddKeysToAgent = "yes";
+            controlMaster = "auto";
+            controlPath = "~/.ssh/%r@%h:%p";
+            controlPersist = "10m";
+            ServerAliveInterval = "30";
+            ServerAliveCountMax = "3";
           };
         };
       };
