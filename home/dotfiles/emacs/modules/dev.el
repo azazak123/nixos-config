@@ -73,6 +73,28 @@
                     'magit-toplevel-cache orig directory))
   (advice-add 'magit-toplevel :around #'memoize-magit-toplevel))
 
+(use-package smerge-mode
+  :ensure nil
+  :bind (:map smerge-mode-map
+         ("M-n" . smerge-next)
+         ("M-p" . smerge-prev)
+         ("C-c s c" . smerge-keep-current)
+         ("C-c s u" . smerge-keep-upper)
+         ("C-c s l" . smerge-keep-lower)
+         ("C-c s a" . smerge-keep-all)))
+
+(use-package difftastic
+  :defer t)
+
+(use-package difftastic-bindings
+  :ensure difftastic
+  :config (difftastic-bindings-mode))
+
+(use-package majutsu
+  :vc (:url "https://github.com/0WD0/majutsu"))
+
+(use-package vc-jj
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
