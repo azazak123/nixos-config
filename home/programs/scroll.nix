@@ -66,7 +66,7 @@ in
     bindsym --to-code $mod+Mod1+${k.up} focus up
     bindsym --to-code $mod+Mod1+${k.right} focus right
 
-    bindsym --to-code --no-repeat $mod+tab scale_workspace overview; jump
+    bindsym --to-code --no-repeat $mod+tab jump all all
 
     bindsym --to-code $mod+1 workspace number 1
     bindsym --to-code $mod+2 workspace number 2
@@ -90,8 +90,10 @@ in
     bindsym --to-code $mod+Shift+9 move container to workspace number 9
     bindsym --to-code $mod+Shift+0 move container to workspace number 10
 
-    bindsym --to-code $mod+${k.right} workspace next
-    bindsym --to-code $mod+${k.left} workspace prev
+    bindsym --to-code $mod+${k.up} workspace prev
+    bindsym --to-code $mod+${k.down} workspace next
+    bindsym --to-code $mod+${k.left} focus left
+    bindsym --to-code $mod+${k.right} focus right
 
     bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
     bindsym XF86MonBrightnessUp exec brightnessctl s 5%+
