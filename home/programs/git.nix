@@ -7,6 +7,9 @@
       name = "Volodymyr Antonov";
       email = "azazaka2002@gmail.com";
     };
+    extraConfig = {
+      github.user = "azazak123";
+    };
   };
 
   programs.jujutsu = {

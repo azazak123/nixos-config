@@ -96,6 +96,10 @@
 (use-package vc-jj
   :ensure t)
 
+(use-package forge
+  :ensure t
+  :after magit)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Common file types
