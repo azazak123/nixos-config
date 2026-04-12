@@ -9,14 +9,13 @@
   inputs,
   ...
 }:
-let
-  programs = ../../programs;
-in
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./compose/excalidraw.nix
+
+    ../../system/nix.nix
   ];
 
   # Use the GRUB 2 boot loader.
@@ -562,8 +561,6 @@ in
     git.enable = true;
     direnv.enable = true;
   };
-
-  nix = import /${programs}/nix-config.nix { inherit inputs lib config; };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
