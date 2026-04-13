@@ -114,6 +114,13 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  sops = {
+    defaultSopsFile = ../../secrets/yomi.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets = {
+      "ddclient/password" = {};
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -340,6 +347,7 @@
       enable = true;
       username = "azazak123.dedyn.io";
       server = "update.dedyn.io";
+      passwordFile = config.sops.secrets."ddclient/password".path;
       domains = [
         "azazak123.dedyn.io"
       ];

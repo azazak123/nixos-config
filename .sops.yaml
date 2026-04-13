@@ -1,0 +1,9 @@
+keys:
+  - &main age1qcqpgl4ncpucukglu5hkgvkkms4m5aak4mjc262euyjfp8uhkepskr52pu
+  - &yomi age13008tt0z25yvu0dkhzjs60lmg3ymwfds90p7vjlealgc3a4zp5xscl4hvx
+creation_rules:
+  - path_regex: secrets/yomi.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+        - *main
+        - *yomi

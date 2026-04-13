@@ -29,6 +29,11 @@
       url = "github:Diax170/scroll-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -41,7 +46,8 @@
       nix-doom-emacs-unstraightened,
       madness,
       stylix,
-      scroll
+      scroll,
+      sops-nix
     }@inputs:
 
     let
@@ -92,6 +98,7 @@
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/yomi/configuration.nix
+          sops-nix.nixosModules.sops
         ];
       };
 
