@@ -469,8 +469,8 @@
       openFirewall = true;
       group = "multimedia";
       settings = {
-        download-dir = "/mnt/mediatank/downloads/transmission/downloaded";
-        incomplete-dir = "/mnt/mediatank/downloads/transmission/.incomplete";
+        download-dir = "/mnt/mediatank/data/downloads/transmission/downloaded";
+        incomplete-dir = "/mnt/mediatank/data/downloads/transmission/.incomplete";
         umask = 2;
       };
     };
@@ -560,22 +560,17 @@
 
   systemd.tmpfiles.rules = [
     "d /mnt/datavault/photo/immich 0755 immich immich -"
-
     "d /mnt/datavault/vault 0777 nobody nogroup -"
-
     "d /mnt/mediatank/tmp 0777 nobody nogroup -"
 
-    "d /mnt/mediatank/downloads/transmission 0775 transmission multimedia - -"
-
-    "d /mnt/mediatank/media/arr/shows 0775 sonarr multimedia - -"
-    "d /mnt/mediatank/media/arr/movies 0775 radarr multimedia - -"
+    "d /mnt/mediatank/data/downloads/transmission 0775 transmission multimedia - -"
+    "d /mnt/mediatank/data/media/arr/shows 0775 sonarr multimedia - -"
+    "d /mnt/mediatank/data/media/arr/movies 0775 radarr multimedia - -"
 
     "d /home/azazak123/containers/wishlist/uploads 0775 root - - -"
     "d /home/azazak123/containers/wishlist/data 0775 root - - -"
-
     "d /var/lib/moonraker 0775 moonraker moonraker - -"
   ];
-
 
   programs = {
     fish.enable = true;
