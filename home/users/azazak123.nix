@@ -111,6 +111,7 @@
           spotify
           spotube
           mpv
+          delfin
 
           # Games
           dolphin-emu
