@@ -114,6 +114,7 @@
 
           # Games
           dolphin-emu
+          heroic
 
           # Code
           podman-compose
