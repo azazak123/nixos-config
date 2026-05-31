@@ -1,11 +1,13 @@
-{ lib, inputs, config, ... }:
+{ lib, inputs, config, pkgs, ... }:
 
 {
   nix = {
-    # Use the same nixpkgs for nix flake commands 
+    package = pkgs.lixPackageSets.stable.lix;
+
+    # Use the same nixpkgs for nix flake commands
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
-    # Use the same nixpkgs for nix non flake commands 
+    # Use the same nixpkgs for nix non flake commands
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
@@ -18,7 +20,7 @@
       trusted-substituters = [ "https://devenv.cachix.org" ];
     };
 
-    # Enable auto garbage collecting 
+    # Enable auto garbage collecting
     gc = {
       automatic = true;
       dates = "weekly";
