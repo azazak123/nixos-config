@@ -100,6 +100,9 @@ If the new path's directories does not exist, create them."
 (with-eval-after-load 'flymake
   (setq flymake-no-changes-timeout 0.5))
 
+(require 'ansi-color)
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Discovery aids
