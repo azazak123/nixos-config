@@ -310,6 +310,10 @@ Understands numeric prefixes (e.g., M-3 M-w will copy 3 lines)."
   (interactive)
   (scroll-down-command (/ (window-body-height) 3)))
 
+(defun open-terminal ()
+  (interactive)
+  (start-process "my-term" nil "alacritty"))
+
 (keymap-global-set "C-S-n" #'my/select-line-and-move-down)
 
 (keymap-global-set "<remap> <kill-region>" #'my/kill-region-or-line)
