@@ -98,7 +98,7 @@ in
     wget
     helix
     htop
-    neofetch
+    fastfetch
     smartmontools
     lazygit
   ];

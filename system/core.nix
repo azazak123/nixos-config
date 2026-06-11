@@ -23,7 +23,7 @@
   # Shared packages
   environment.systemPackages = with pkgs; [
     vim
-    neofetch
+    fastfetch
     cpufrequtils
     htop
     ncpamixer

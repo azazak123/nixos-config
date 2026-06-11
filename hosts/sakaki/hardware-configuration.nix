@@ -24,8 +24,8 @@ let
       src = fetchFromGitHub {
         owner = "fofajardo";
         repo = "rtl8851bu";
-        rev = "1f1a14492fdac757c64a7efb7846be6374984d09"; # Фіксована версія для стабільності
-        sha256 = "sha256-DohgeyAz3Op7Al5rHHMs4ZAQuTVJxOFRLx6BqzYwE7I=";
+        rev = "master";
+        hash = "sha256-6OarKdVpeVANP0l09+V3SW9GiCoDgcUdNRl7dlyKlAg=";
       };
 
       nativeBuildInputs = [ bc ];

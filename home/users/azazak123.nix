@@ -133,14 +133,17 @@
       programs.home-manager.enable = true;
 
       # Terminal utilities
-      programs.yazi.enable = true;
+      programs.yazi = {
+        enable = true;
+        shellWrapperName = "y";
+      };
       programs.fzf.enable = true;
       programs.fish.enable = true;
 
       # Programming / Development
       programs.gitui.enable = true;
       programs.gh.enable = true;
-      
+
       programs.direnv.enable = true;
       programs.direnv.nix-direnv.enable = true;
 
@@ -148,8 +151,10 @@
       programs.ssh = {
         enable = true;
         enableDefaultConfig = false;
-        matchBlocks."*" = {
-          addKeysToAgent = "yes";
+        settings = {
+          "*" = {
+            AddKeysToAgent = "yes";
+          };
         };
       };
 

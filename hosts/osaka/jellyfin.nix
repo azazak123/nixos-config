@@ -84,7 +84,7 @@ in
     pkgs.vim
     pkgs.jellyfin-web
     pkgs.jellyfin-ffmpeg
-    pkgs.neofetch
+    pkgs.fastfetch
     pkgs.ncdu
   ];
 

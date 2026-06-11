@@ -34,6 +34,7 @@
     efiSupport = true;
     useOSProber = true;
   };
+  boot.zfs.forceImportRoot = false;
 
   # Desktop environment
   services.xserver = {
@@ -56,6 +57,11 @@
     openFirewall = true;
     autoStart = false;
   };
+
+  networking.networkmanager.unmanaged = [
+    "ap0"
+    "wlp19s0f4u1i2"
+  ];
 
   system.stateVersion = "23.05";
 }

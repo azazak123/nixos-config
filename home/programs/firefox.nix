@@ -1,10 +1,11 @@
-{ ... }:
+{ config, ... }:
 
 {
   stylix.targets.firefox.profileNames = [ "azazak123" ];
 
   programs.firefox = {
     enable = true;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     profiles.azazak123 = {
       isDefault = true;
       settings = {

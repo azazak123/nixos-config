@@ -167,7 +167,7 @@ in
 
   environment.systemPackages = [
     pkgs.vim
-    pkgs.neofetch
+    pkgs.fastfetch
   ];
 
   programs.fish.enable = true;
