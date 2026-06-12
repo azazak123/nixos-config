@@ -1,4 +1,4 @@
-{ ... }:
+{ config, pkgs, ... }:
 
 let
   myLayout = "colemak";
@@ -11,9 +11,12 @@ let
 
   variant = if myLayout == "colemak" then "colemak," else ",";
 in
-{
+  {
+  home.packages = [ pkgs.swaybg ];
   xdg.configFile."scroll/config".text = ''
     include /etc/scroll/config.d/*
+
+    output * bg ${config.stylix.image} fill
 
     exec swaykbdd
 
