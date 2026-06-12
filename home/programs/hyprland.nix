@@ -1,3 +1,4 @@
+# TODO: Migrate to Sway
 { pkgs, ... }:
 
 let
@@ -13,7 +14,7 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
-    configType = "lua";
+    configType = "hyprlang";
     settings = {
       monitor = [
         "eDP-1, 1920x1080, 1920x0, 1.2"
