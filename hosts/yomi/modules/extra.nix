@@ -35,6 +35,7 @@
     "d /mnt/mediatank/data/downloads/transmission 0775 transmission multimedia - -"
     "d /mnt/mediatank/data/media/arr/shows 0775 sonarr multimedia - -"
     "d /mnt/mediatank/data/media/arr/movies 0775 radarr multimedia - -"
+    "d /mnt/mediatank/data/books 0777 nobody nogroup -"
     "d /home/azazak123/containers/wishlist/uploads 0775 root - - -"
     "d /home/azazak123/containers/wishlist/data 0775 root - - -"
     "d /var/lib/moonraker 0775 moonraker moonraker - -"

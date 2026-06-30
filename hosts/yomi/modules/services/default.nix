@@ -8,5 +8,6 @@
     ./klipper.nix
     ./tlp.nix
     ./acme.nix
+    ./kavita.nix
   ];
 }

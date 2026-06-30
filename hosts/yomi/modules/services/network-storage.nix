@@ -35,6 +35,12 @@
         browseable = "yes";
         "guest ok" = "yes";
       };
+      books = {
+        path = "/mnt/mediatank/data/books";
+        writable = "true";
+        browseable = "yes";
+        "guest ok" = "yes";
+      };
     };
   };
 
