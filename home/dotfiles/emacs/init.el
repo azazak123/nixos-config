@@ -62,27 +62,37 @@
 (setopt sentence-end-double-space nil)
 ;; Clipboard
 (setq select-enable-clipboard t)
-;; credit: yorickvP on Github
-(setq wl-copy-process nil)
 
-(defun wl-copy (text)
-  (let ((default-directory "~/"))
-    (setq wl-copy-process (make-process :name "wl-copy"
-                                        :buffer nil
-                                        :command '("wl-copy" "-f" "-n")
-                                        :connection-type 'pipe
-                                        :noquery t))
-    (process-send-string wl-copy-process text)
-    (process-send-eof wl-copy-process)))
+(when (eq system-type 'gnu/linux)
+  ;; credit: yorickvP on Github
+  (setq wl-copy-process nil)
 
-(defun wl-paste ()
-  (let ((default-directory "~/"))
-    (if (and wl-copy-process (process-live-p wl-copy-process))
-        nil ; should return nil if we're the current paste owner
-      (shell-command-to-string "wl-paste -n | tr -d \r"))))
+  (defun wl-copy (text)
+    (let ((default-directory "~/"))
+      (setq wl-copy-process (make-process :name "wl-copy"
+                                          :buffer nil
+                                          :command '("wl-copy" "-f" "-n")
+                                          :connection-type 'pipe
+                                          :noquery t))
+      (process-send-string wl-copy-process text)
+      (process-send-eof wl-copy-process)))
 
-(setq interprogram-cut-function 'wl-copy)
-(setq interprogram-paste-function 'wl-paste)
+  (defun wl-paste ()
+    (let ((default-directory "~/"))
+      (if (and wl-copy-process (process-live-p wl-copy-process))
+          nil ; should return nil if we're the current paste owner
+        (shell-command-to-string "wl-paste -n | tr -d \r"))))
+
+  (setq interprogram-cut-function 'wl-copy)
+  (setq interprogram-paste-function 'wl-paste))
+
+;; Add Nix to PATH and exec-path
+(setenv "PATH" (concat "/run/current-system/sw/bin:" (getenv "PATH")))
+(add-to-list 'exec-path "/run/current-system/sw/bin")
+
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'meta)
+  (setq mac-right-option-modifier 'meta))
 
 (defun bedrock--backup-file-name (fpath)
   "Return a new file path of a given file path.
@@ -230,7 +240,7 @@ If the new path's directories does not exist, create them."
 
 (set-face-attribute 'default nil 
                     :family "JetBrainsMono Nerd Font" 
-                    :height 160 
+                    :height (if (eq system-type 'darwin) 200 160)
                     :weight 'regular)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

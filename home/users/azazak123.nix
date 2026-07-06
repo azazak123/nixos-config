@@ -1,14 +1,20 @@
 {
+  config,
+  pkgs,
+  lib,
   pkgs-unstable,
   vscodeExt,
   inputs,
+  currentSystem,
   ...
 }:
 
 {
   users.users.azazak123 = {
-    isNormalUser = true;
     description = "Volodymyr Antonov";
+      home = if currentSystem == "x86_64-linux" then "/home/azazak123" else "/Users/azazak123";
+  } // lib.optionalAttrs (currentSystem == "x86_64-linux") {
+    isNormalUser = true;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -22,21 +28,15 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { 
-    inherit pkgs-unstable vscodeExt inputs;
+    inherit pkgs-unstable vscodeExt inputs currentSystem;
   };
 
   home-manager.users.azazak123 =
-    { pkgs, pkgs-unstable, ... }:
+    { pkgs, currentSystem, ... }:
     {
       imports = [
         # External inputs
         inputs.nix-doom-emacs-unstraightened.hmModule
-
-        # Desktop environment
-        ../programs/hyprland.nix
-        ../programs/scroll.nix
-        ../programs/waybar.nix
-        ../programs/fuzzel.nix
 
         # Terminal
         ../programs/alacritty.nix
@@ -51,25 +51,34 @@
         ../programs/helix.nix
         ../programs/emacs.nix
         ../programs/git.nix
-
-        # Services
+        ] ++ lib.optionals (currentSystem == "x86_64-linux") [
+        # Desktop environment & Linux-only modules
+        ../programs/hyprland.nix
+        ../programs/waybar.nix
+        ../programs/fuzzel.nix
         ../services/dunst.nix
         ../services/gnome-authentication-agent.nix
         ../services/hyprland-per-window-layout.nix
         ../services/wl-clip-persist.nix
+        ../programs/scroll.nix
+
       ];
 
-      systemd.user.sessionVariables = {
-        NIXOS_OZONE_WL = "1";
-        XDG_SESSION_TYPE = "wayland";
+      systemd = lib.mkIf (currentSystem == "x86_64-linux") {
+        user.sessionVariables = {
+          NIXOS_OZONE_WL = "1";
+          XDG_SESSION_TYPE = "wayland";
+        };
       };
 
       home.username = "azazak123";
-      home.homeDirectory = "/home/azazak123";
+      home.homeDirectory = if currentSystem == "x86_64-linux" then "/home/azazak123" else "/Users/azazak123";
+      
+      home.stateVersion = "25.11";
 
-      gtk.enable = true;
+      gtk.enable = lib.mkForce (currentSystem == "x86_64-linux");
 
-      nix.gc = {
+      nix.gc = lib.mkIf (currentSystem == "x86_64-linux") {
         automatic = true;
         dates = "weekly";
         options = "--delete-older-than 30d";
@@ -78,7 +87,38 @@
       home.packages =
         with pkgs;
         [
-          # Wayland
+          # Communication
+          discord
+          telegram-desktop
+          element-desktop
+          zoom-us
+
+          # Office
+          hunspell
+          hunspellDicts.uk_UA
+          hunspellDicts.en_US
+          enchant
+          obsidian
+
+          # Media
+          spotify
+          spotube
+          mpv
+
+          # Games
+          dolphin-emu
+
+          # Code
+          podman-compose
+
+          # 3D Printing & Other
+
+      ] ++ lib.optionals (currentSystem == "aarch64-darwin") [
+          # macOS-only packages
+          alt-tab-macos
+          ghostty-bin
+      ] ++ lib.optionals (currentSystem == "x86_64-linux") [
+          # Wayland & Linux specific tools
           wlogout
           wl-clipboard
           wtype
@@ -90,43 +130,27 @@
           slurp
           grim
 
-          # Communication
-          discord
+          # Linux-only communication & tools
           teams-for-linux
-          telegram-desktop
-          element-desktop
-          zoom-us
+          distrobox
 
-          # Office
-          libreoffice
-          hunspell
-          hunspellDicts.uk_UA
-          hunspellDicts.en_US
-          enchant
-          kdePackages.okular
-          obsidian
-          onlyoffice-desktopeditors
-
-          # Media
-          spotify
-          spotube
-          mpv
+          # Linux-only media
           delfin
 
-          # Games
-          dolphin-emu
+          # Linux-only gaming
           heroic
 
-          # Code
-          podman-compose
+          # Linux-only office & utilities
+          libreoffice
+          kdePackages.okular
+          onlyoffice-desktopeditors
+
+          # Desktop
+          gnome-boxes
+          bemoji
 
           # 3D Printing
           orca-slicer
-
-          # Other
-          gnome-boxes
-          bemoji
-          distrobox
           openscad-unstable
         ];
 
@@ -163,21 +187,17 @@
         };
       };
 
-      services.ssh-agent.enable = true;
-
-      # Services
-      services.clipman.enable = true;
+      # Linux-only services
+      services.ssh-agent.enable = currentSystem == "x86_64-linux";
+      services.clipman.enable = currentSystem == "x86_64-linux";
+      services.network-manager-applet.enable = currentSystem == "x86_64-linux";
 
       services.syncthing = {
-        enable = true;
+        enable = false;
         tray = {
-          enable = true;
+          enable = false;
           command = "syncthingtray --wait";
         };
       };
-
-      services.network-manager-applet.enable = true;
-
-      home.stateVersion = "23.05";
     };
 }

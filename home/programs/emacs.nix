@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, currentSystem, ... }:
 
 {
 
   services.emacs = {
-    enable = true;
+    enable = currentSystem == "x86_64-linux";
     startWithUserSession = "graphical";
   };
 
@@ -11,7 +11,7 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-pgtk;
+    package = if currentSystem == "x86_64-linux" then pkgs.emacs-pgtk else pkgs.emacs-macport;
     extraPackages = epkgs: [
       epkgs.treesit-grammars.with-all-grammars
       epkgs.jinx

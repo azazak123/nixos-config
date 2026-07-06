@@ -34,6 +34,9 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
   };
 
   outputs =
@@ -47,11 +50,13 @@
       madness,
       stylix,
       scroll,
-      sops-nix
+      sops-nix,
+      nix-darwin,
     }@inputs:
 
     let
       system = "x86_64-linux";
+      darwinSystem = "aarch64-darwin";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -66,11 +71,25 @@
         config.allowUnfree = true;
       };
       vscodeExt = nix-vscode-extensions.extensions.${system};
+      pkgs-unstable-darwin = import nixpkgs-unstable {
+        system = darwinSystem;
+        config.allowUnfree = true;
+      };
+      vscodeExtDarwin = nix-vscode-extensions.extensions.${darwinSystem};
+      darwinPkgs = import nixpkgs {
+        system = darwinSystem;
+        config.allowUnfree = true;
+        overlays = [
+          (final: prev: {
+            tlp = pkgs-unstable.tlp;
+          })
+        ];
+      };
     in
     {
       nixosConfigurations.tomo = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; currentSystem = system; };
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/tomo/configuration.nix
@@ -82,7 +101,7 @@
 
       nixosConfigurations.sakaki = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; currentSystem = system; };
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/sakaki/configuration.nix
@@ -94,11 +113,26 @@
 
       nixosConfigurations.yomi = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; currentSystem = system; };
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/yomi/configuration.nix
           sops-nix.nixosModules.sops
+        ];
+      };
+
+      darwinConfigurations.kimura = nix-darwin.lib.darwinSystem {
+        system = darwinSystem;
+        specialArgs = {
+          pkgs-unstable = pkgs-unstable-darwin;
+          vscodeExt = vscodeExtDarwin;
+          inherit inputs;
+          currentSystem = darwinSystem;
+        };
+        modules = [
+          stylix.darwinModules.stylix
+          home-manager.darwinModules.home-manager
+          ./hosts/kimura/configuration.nix
         ];
       };
 
@@ -113,7 +147,7 @@
 
       nixosConfigurations.osaka-nginx = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; currentSystem = system; };
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/osaka/nginx.nix
@@ -122,7 +156,7 @@
 
       nixosConfigurations.osaka-servarr = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; currentSystem = system; };
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/osaka/servarr.nix
@@ -131,7 +165,7 @@
 
       nixosConfigurations.osaka-navidrome = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs-unstable vscodeExt inputs; };
+        specialArgs = { inherit pkgs-unstable vscodeExt inputs; currentSystem = system; };
         modules = [
           home-manager.nixosModules.home-manager
           ./hosts/osaka/navidrome.nix
@@ -145,6 +179,15 @@
         ];
       };
 
+      devShell.${darwinSystem} = darwinPkgs.mkShell {
+        packages = with darwinPkgs; [
+          nixfmt-rfc-style
+          nixd
+        ];
+      };
+
       formatter.${system} = pkgs.nixfmt-rfc-style;
+      formatter.${darwinSystem} = pkgs.nixfmt-rfc-style;
+
     };
 }

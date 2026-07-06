@@ -1,4 +1,5 @@
-{ lib, inputs, config, pkgs, ... }:
+{ pkgs, lib, inputs, config, currentSystem, ... }:
+
 
 {
   nix = {
@@ -20,11 +21,15 @@
       trusted-substituters = [ "https://devenv.cachix.org" ];
     };
 
+
     # Enable auto garbage collecting
     gc = {
       automatic = true;
-      dates = "weekly";
       options = "--delete-older-than 30d";
-    };
+    } // (if currentSystem == "x86_64-linux" then {
+      dates = "weekly";
+    } else {
+      interval = { Weekday = 0; Hour = 0; Minute = 0; };
+    });
   };
 }
