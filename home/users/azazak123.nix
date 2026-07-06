@@ -199,5 +199,42 @@
           command = "syncthingtray --wait";
         };
       };
+
+      programs.tmux = {
+        enable = true;
+        shortcut = "x";        # Change prefix to C-x (like Emacs)
+        keyMode = "emacs";     # Navigation in tmux (copy/search) like Emacs
+
+        # Required for Emacs: remove delay after ESC press
+        escapeTime = 0;
+
+        baseIndex = 1;         # Start window numbering from 1
+        mouse = true;          # Mouse support (scroll, pane selection)
+
+        extraConfig = ''
+          # Run fish as default shell
+          set -g default-shell ${pkgs.fish}/bin/fish
+
+          # Allow sending C-x to Emacs by pressing C-x twice (C-x x)
+          bind x send-prefix
+
+          # Proper color transmission for Emacs themes
+          set -g default-terminal "tmux-256color"
+          set -ag terminal-overrides ",xterm-256color:RGB"
+
+          # Pane splitting (like Emacs)
+          # C-x 3 (split horizontally), C-x 2 (split vertically)
+          bind 3 split-window -h -c "#{pane_current_path}"
+          bind 2 split-window -v -c "#{pane_current_path}"
+          unbind '"'
+          unbind %
+
+          # Quick pane switching via Alt + arrows (no prefix)
+          bind -n M-Left select-pane -L
+          bind -n M-Right select-pane -R
+          bind -n M-Up select-pane -U
+          bind -n M-Down select-pane -D
+        '';
+      };
     };
 }
