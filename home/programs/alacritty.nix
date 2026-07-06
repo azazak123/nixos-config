@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.alacritty = {
@@ -22,10 +22,17 @@
         };
 
         decorations = "None";
+
+        dimensions = {
+          columns = 0;
+          lines = 0;
+        };
+        startup_mode = "Maximized";
       };
 
       terminal.shell = {
-        program = "fish";
+        program = "${pkgs.fish}/bin/fish";
+        args = [ "--login" ];
       };
     };
   };
