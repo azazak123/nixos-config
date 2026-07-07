@@ -90,6 +90,12 @@
   :ensure difftastic
   :config (difftastic-bindings-mode))
 
+(use-package magit-difftastic
+  :after magit
+  :vc (:url "https://github.com/rschmukler/magit-difftastic")
+  :config
+  (magit-difftastic-mode 1))
+
 (use-package majutsu
   :vc (:url "https://github.com/0WD0/majutsu"))
 
