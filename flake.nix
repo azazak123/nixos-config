@@ -174,20 +174,20 @@
 
       devShell.${system} = pkgs.mkShell {
         packages = with pkgs; [
-          nixfmt-rfc-style
+          nixfmt
           nixd
         ];
       };
 
       devShell.${darwinSystem} = darwinPkgs.mkShell {
         packages = with darwinPkgs; [
-          nixfmt-rfc-style
+          nixfmt
           nixd
         ];
       };
 
-      formatter.${system} = pkgs.nixfmt-rfc-style;
-      formatter.${darwinSystem} = pkgs.nixfmt-rfc-style;
+      formatter.${system} = pkgs.nixfmt;
+      formatter.${darwinSystem} = pkgs.nixfmt;
 
     };
 }
