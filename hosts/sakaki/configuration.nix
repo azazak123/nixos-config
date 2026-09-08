@@ -36,6 +36,15 @@
   };
   boot.zfs.forceImportRoot = false;
 
+  boot.kernelParams = [ "zfs.zfs_arc_max=8589934592" ];
+
+  zramSwap = {
+    enable = true;
+    priority = 100;
+    memoryPercent = 50;
+    algorithm = "zstd";
+  };
+
   # Desktop environment
   services.xserver = {
     enable = true;
@@ -56,6 +65,19 @@
     capSysAdmin = true;
     openFirewall = true;
     autoStart = false;
+  };
+
+  # Power button handled by logind, not Jovian's powerbuttond
+  services.logind.settings.Login.HandlePowerKey = lib.mkOverride 90 "suspend";
+
+  jovian = {
+    steam = {
+      enable = true;
+      user = "azazak123";
+    };
+    hardware.has.amd.gpu = true;
+
+    steamos.useSteamOSConfig = false;
   };
 
   networking.networkmanager.unmanaged = [

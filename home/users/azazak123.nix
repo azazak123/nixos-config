@@ -12,8 +12,9 @@
 {
   users.users.azazak123 = {
     description = "Volodymyr Antonov";
-      home = if currentSystem == "x86_64-linux" then "/home/azazak123" else "/Users/azazak123";
-  } // lib.optionalAttrs (currentSystem == "x86_64-linux") {
+    home = if currentSystem == "x86_64-linux" then "/home/azazak123" else "/Users/azazak123";
+  }
+  // lib.optionalAttrs (currentSystem == "x86_64-linux") {
     isNormalUser = true;
     extraGroups = [
       "networkmanager"
@@ -27,8 +28,13 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { 
-    inherit pkgs-unstable vscodeExt inputs currentSystem;
+  home-manager.extraSpecialArgs = {
+    inherit
+      pkgs-unstable
+      vscodeExt
+      inputs
+      currentSystem
+      ;
   };
 
   home-manager.users.azazak123 =
@@ -51,7 +57,8 @@
         ../programs/helix.nix
         ../programs/emacs.nix
         ../programs/git.nix
-        ] ++ lib.optionals (currentSystem == "x86_64-linux") [
+      ]
+      ++ lib.optionals (currentSystem == "x86_64-linux") [
         # Desktop environment & Linux-only modules
         ../programs/hyprland.nix
         ../programs/waybar.nix
@@ -61,7 +68,7 @@
         ../services/hyprland-per-window-layout.nix
         ../services/wl-clip-persist.nix
         ../programs/scroll.nix
-
+        ../programs/emulators.nix
       ];
 
       systemd = lib.mkIf (currentSystem == "x86_64-linux") {
@@ -72,8 +79,9 @@
       };
 
       home.username = "azazak123";
-      home.homeDirectory = if currentSystem == "x86_64-linux" then "/home/azazak123" else "/Users/azazak123";
-      
+      home.homeDirectory =
+        if currentSystem == "x86_64-linux" then "/home/azazak123" else "/Users/azazak123";
+
       home.stateVersion = "25.11";
 
       gtk.enable = lib.mkForce (currentSystem == "x86_64-linux");
@@ -113,11 +121,13 @@
 
           # 3D Printing & Other
 
-      ] ++ lib.optionals (currentSystem == "aarch64-darwin") [
+        ]
+        ++ lib.optionals (currentSystem == "aarch64-darwin") [
           # macOS-only packages
           alt-tab-macos
           ghostty-bin
-      ] ++ lib.optionals (currentSystem == "x86_64-linux") [
+        ]
+        ++ lib.optionals (currentSystem == "x86_64-linux") [
           # Wayland & Linux specific tools
           wlogout
           wl-clipboard
@@ -139,6 +149,7 @@
 
           # Linux-only gaming
           heroic
+          steam-rom-manager
 
           # Linux-only office & utilities
           libreoffice
@@ -202,14 +213,14 @@
 
       programs.tmux = {
         enable = true;
-        shortcut = "x";        # Change prefix to C-x (like Emacs)
-        keyMode = "emacs";     # Navigation in tmux (copy/search) like Emacs
+        shortcut = "x"; # Change prefix to C-x (like Emacs)
+        keyMode = "emacs"; # Navigation in tmux (copy/search) like Emacs
 
         # Required for Emacs: remove delay after ESC press
         escapeTime = 0;
 
-        baseIndex = 1;         # Start window numbering from 1
-        mouse = true;          # Mouse support (scroll, pane selection)
+        baseIndex = 1; # Start window numbering from 1
+        mouse = true; # Mouse support (scroll, pane selection)
 
         extraConfig = ''
           # Run fish as default shell
