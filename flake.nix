@@ -36,6 +36,18 @@
     };
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    jovian = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    rtl8851bu = {
+      url = "github:fofajardo/rtl8851bu/b50a91d7567af7184d762a87f3f4f9d7aa79a545";
+      flake = false;
+    };
+    duckstation = {
+      url = "https://github.com/stenzek/duckstation/releases/download/latest/DuckStation-x64.AppImage";
+      flake = false;
+    };
 
   };
 
@@ -52,6 +64,9 @@
       scroll,
       sops-nix,
       nix-darwin,
+      jovian,
+      rtl8851bu,
+      duckstation,
     }@inputs:
 
     let
@@ -63,6 +78,17 @@
         overlays = [
           (final: prev: {
             tlp = pkgs-unstable.tlp;
+          })
+          # Jovian vendors gamescope (Valve 3.16.25) on top of prev.gamescope,
+          # keeping the base patch set; give it an unstable base so patches match.
+          (final: prev: {
+            gamescope = pkgs-unstable.gamescope;
+          })
+          (final: prev: {
+            duckstation = final.callPackage ./packages/duckstation { src = inputs.duckstation; };
+            linuxPackages = prev.linuxPackages.extend (lpFinal: lpPrev: {
+              rtl8851bu = lpPrev.callPackage ./packages/rtl8851bu { src = inputs.rtl8851bu; };
+            });
           })
         ];
       };
@@ -108,6 +134,7 @@
           madness.nixosModules.madness
           stylix.nixosModules.stylix
           scroll.nixosModules.default
+          jovian.nixosModules.default
         ];
       };
 
